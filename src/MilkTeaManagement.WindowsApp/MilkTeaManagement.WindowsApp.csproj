@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MilkTeaManagement.Infrastructure\MilkTeaManagement.Infrastructure.csproj" />
     <ProjectReference Include="..\MilkTeaManagement.Application\MilkTeaManagement.Application.csproj" />
     <ProjectReference Include="..\MilkTeaManagement.Domain\MilkTeaManagement.Domain.csproj" />
   </ItemGroup>
