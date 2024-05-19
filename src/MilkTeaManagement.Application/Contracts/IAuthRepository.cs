@@ -1,6 +1,6 @@
 ﻿namespace MilkTeaManagement.Application.Contracts
 {
-    public interface IOrderRepository
+    public interface IAuthRepository
     {
     }
 }

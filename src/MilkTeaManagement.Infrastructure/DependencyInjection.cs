@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MilkTeaManagement.Application.Common.SeedWork;
+using MilkTeaManagement.Application.Contracts;
 using MilkTeaManagement.Infrastructure.Common;
 using MilkTeaManagement.Infrastructure.Data;
 
@@ -17,9 +18,14 @@ namespace MilkTeaManagement.Infrastructure
                     builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));
             });
 
+
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IUsersRepository, UsersRespository>();
+
             services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
 
             return services;
         }
 
     }
+}
