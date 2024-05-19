@@ -4,8 +4,43 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{42BE2F92-61F4-4140-89A1-18A5FAB38174}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		LICENSE.txt = LICENSE.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MilkTeaManagement.WindowsApp", "src\MilkTeaManagement.WindowsApp\MilkTeaManagement.WindowsApp.csproj", "{34B02B48-7F36-4AAF-983A-5164EFFEC0E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MilkTeaManagement.Application", "src\MilkTeaManagement.Application\MilkTeaManagement.Application.csproj", "{23E7E8FD-9FD8-45E7-803A-E87B8B163203}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MilkTeaManagement.Domain", "src\MilkTeaManagement.Domain\MilkTeaManagement.Domain.csproj", "{CE940E8F-2E9A-4DDD-AE97-190A68AB00B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MilkTeaManagement.Infrastructure", "MilkTeaManagement.Infrastructure\MilkTeaManagement.Infrastructure.csproj", "{001F1B21-949B-45DE-9218-C3B6D6926345}"
 EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34B02B48-7F36-4AAF-983A-5164EFFEC0E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34B02B48-7F36-4AAF-983A-5164EFFEC0E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34B02B48-7F36-4AAF-983A-5164EFFEC0E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34B02B48-7F36-4AAF-983A-5164EFFEC0E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23E7E8FD-9FD8-45E7-803A-E87B8B163203}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23E7E8FD-9FD8-45E7-803A-E87B8B163203}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23E7E8FD-9FD8-45E7-803A-E87B8B163203}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23E7E8FD-9FD8-45E7-803A-E87B8B163203}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE940E8F-2E9A-4DDD-AE97-190A68AB00B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE940E8F-2E9A-4DDD-AE97-190A68AB00B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE940E8F-2E9A-4DDD-AE97-190A68AB00B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE940E8F-2E9A-4DDD-AE97-190A68AB00B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{001F1B21-949B-45DE-9218-C3B6D6926345}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{001F1B21-949B-45DE-9218-C3B6D6926345}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{001F1B21-949B-45DE-9218-C3B6D6926345}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{001F1B21-949B-45DE-9218-C3B6D6926345}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
