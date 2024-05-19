@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MilkTeaManagement.Domain.Common.Interfaces;
+using MilkTeaManagement.Domain.Entities;
 using System.Reflection;
 
 namespace MilkTeaManagement.Infrastructure.Data
@@ -43,7 +44,7 @@ namespace MilkTeaManagement.Infrastructure.Data
                         Entry(item.Entity).Property("Id").IsModified = false;
                         if (item.Entity is IDateTracking modifiedEntity)
                         {
-                            modifiedEntity.LastModifiedDate = DateTime.UtcNow;
+                            modifiedEntity.UpdatedDate = DateTime.UtcNow;
                             item.State = EntityState.Modified;
                         }
                         break;
@@ -52,6 +53,8 @@ namespace MilkTeaManagement.Infrastructure.Data
 
             return base.SaveChangesAsync(cancellationToken);
         }
+
+        public DbSet<User> Users { get; set; }
     }
 
 }

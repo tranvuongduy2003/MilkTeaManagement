@@ -4,6 +4,6 @@
     {
         public DateTimeOffset CreatedDate { get; set; }
 
-        public DateTimeOffset? LastModifiedDate { get; set; }
+        public DateTimeOffset? UpdatedDate { get; set; }
     }
 }
