@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MilkTeaManagement.Application;
 using MilkTeaManagement.Infrastructure;
-using MilkTeaManagement.WindowsApp.Extensions;
 using MilkTeaManagement.WindowsApp.Pages.Auth;
 
 namespace MilkTeaManagement.WindowsApp
@@ -31,9 +30,9 @@ namespace MilkTeaManagement.WindowsApp
 
             builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-            builder.Services.AddInfrastructureServices(builder.Configuration);
-
             builder.Services.AddConfigurationSettings(builder.Configuration);
+
+            builder.Services.AddInfrastructureServices(builder.Configuration);
 
             builder.Services.AddApplicationServices();
 

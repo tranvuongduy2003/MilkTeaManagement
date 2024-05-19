@@ -3,9 +3,9 @@ using MilkTeaManagement.Domain.Entities;
 
 namespace MilkTeaManagement.Application.Contracts
 {
-    public interface IUsersRepository : IRepositoryBase<User, long>
+    public interface IUsersRepository : IRepositoryBase<User, string>
     {
-        Task<IEnumerable<User>> GetUsersByUserNameAsync(string userName);
+        Task<User> GetUserByUserNameAsync(string userName);
 
         Task<User> CreateUserAsync(User user);
 

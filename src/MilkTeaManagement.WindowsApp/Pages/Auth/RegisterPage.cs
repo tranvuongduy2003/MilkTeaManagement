@@ -1,5 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using MilkTeaManagement.Application.Common.Models.Auth;
 using MilkTeaManagement.Application.Contracts;
+using MilkTeaManagement.Domain.ValueObjetcs;
 
 namespace MilkTeaManagement.WindowsApp.Pages.Auth
 {
@@ -31,69 +34,65 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
 
         private async void registerButton_ClickAsync(object sender, EventArgs e)
         {
-            //var fullName = fullNameTextBox.Text;
-            //var userName = userNameTextBox.Text;
-            //var email = emailTextBox.Text;
-            //var password = passwordTextBox.Text;
-            //var confirmPassword = confirmPasswordTextBox.Text;
+            var fullName = fullNameTextBox.Text;
+            var userName = userNameTextBox.Text;
+            var email = emailTextBox.Text;
+            var password = passwordTextBox.Text;
+            var confirmPassword = confirmPasswordTextBox.Text;
 
-            //string error = "";
+            string error = "";
 
-            //if (fullName.IsNullOrEmpty())
-            //    error += "**Full name is required\n\n";
-            //if (userName.IsNullOrEmpty())
-            //    error += "**User name is required\n\n";
-            //if (email.IsNullOrEmpty())
-            //    error += "**Email is required\n\n";
-            //if (password.IsNullOrEmpty())
-            //    error += "**Password is required\n\n";
-            //if (confirmPassword.IsNullOrEmpty())
-            //    error += "**Confirm password is required\n\n";
-            //if (AvatarFileName.IsNullOrEmpty())
-            //    error += "**Avatar is required\n\n";
-            //if (confirmPassword != password)
-            //    error += "**Confirm password does not match with password!\n\n";
+            if (fullName.IsNullOrEmpty())
+                error += "**Full name is required\n\n";
+            if (userName.IsNullOrEmpty())
+                error += "**User name is required\n\n";
+            if (email.IsNullOrEmpty())
+                error += "**Email is required\n\n";
+            if (password.IsNullOrEmpty())
+                error += "**Password is required\n\n";
+            if (confirmPassword.IsNullOrEmpty())
+                error += "**Confirm password is required\n\n";
+            if (AvatarFileName.IsNullOrEmpty())
+                error += "**Avatar is required\n\n";
+            if (confirmPassword != password)
+                error += "**Confirm password does not match with password!\n\n";
 
-            //if (!error.IsNullOrEmpty())
-            //{
-            //    MessageBox.Show(error, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return;
-            //}
+            if (!error.IsNullOrEmpty())
+            {
+                MessageBox.Show(error, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            //var payload = new RegisterRequest
-            //{
-            //    UserName = userName,
-            //    Password = password,
-            //    Email = email,
-            //    AvatarFileName = AvatarFileName,
-            //    FullName = fullName
-            //};
+            var payload = new RegisterRequest
+            {
+                UserName = userName,
+                Password = password,
+                Email = email,
+                AvatarFilePath = AvatarFileName,
+                FullName = fullName
+            };
 
-            //var errorMessage = await _authRepository.RegisterAsync(payload);
+            var errorMessage = await _authRepository.RegisterAsync(payload);
 
-            //if (!errorMessage.IsNullOrEmpty())
-            //{
-            //    //TODO: Notify error
-            //    MessageBox.Show(errorMessage);
-            //    return;
-            //}
-            //else
-            //{
-            //    var user = _usersRepository.GetByUserName(userName);
+            if (!errorMessage.IsNullOrEmpty())
+            {
+                //TODO: Notify error
+                MessageBox.Show(errorMessage);
+                return;
+            }
+            else
+            {
+                var user = await _usersRepository.GetUserByUserNameAsync(userName);
 
-            //    UserIdentity.UserName = user.UserName;
-            //    UserIdentity.Avatar = user.Avatar;
-            //    UserIdentity.FullName = user.FullName;
-            //    UserIdentity.Email = user.Email;
-            //    UserIdentity.Id = user.Id;
+                UserIdentity.Set(user);
 
-            //    //TODO: Notify login successfully -> Hidden Login form -> Show Main form
-            //    MessageBox.Show("Register successfully!");
-            //    this.Hide();
-            //    Main main = new Main();
-            //    main.Show();
-            //    return;
-            //}
+                //TODO: Notify login successfully -> Hidden Login form -> Show Main form
+                MessageBox.Show("Register successfully!");
+                this.Hide();
+                Main main = new Main();
+                main.Show();
+                return;
+            }
         }
 
         private void avatarUpload_Click(object sender, EventArgs e)

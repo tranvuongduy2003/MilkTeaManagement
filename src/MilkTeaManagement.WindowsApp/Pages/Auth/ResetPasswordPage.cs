@@ -34,12 +34,12 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
 
         private async void resetPasswordButton_ClickAsync(object sender, EventArgs e)
         {
-            //var email = emailTextBox.Text;
+            var email = emailTextBox.Text;
 
-            //await _authRepository.ResetPasswordAsync(email);
+            await _authRepository.ResetPasswordAsync(email);
 
-            //MessageBox.Show("The new password was sent to your email!");
-            //return;
+            MessageBox.Show("The new password was sent to your email!");
+            return;
         }
     }
 }

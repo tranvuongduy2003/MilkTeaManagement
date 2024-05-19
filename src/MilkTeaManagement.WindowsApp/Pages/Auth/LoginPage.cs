@@ -1,5 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using MilkTeaManagement.Application.Common.Models;
 using MilkTeaManagement.Application.Contracts;
+using MilkTeaManagement.Domain.ValueObjetcs;
 
 namespace MilkTeaManagement.WindowsApp.Pages.Auth
 {
@@ -27,42 +30,38 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
             registerForm.Show();
         }
 
-        private void loginButton_Click(object sender, EventArgs e)
+        private async void loginButton_ClickAsync(object sender, EventArgs e)
         {
-            //var userName = userNameTextBox.Text;
-            //var password = passwordTextBox.Text;
+            var userName = userNameTextBox.Text;
+            var password = passwordTextBox.Text;
 
-            //var payload = new LoginRequest
-            //{
-            //    UserName = userName,
-            //    Password = password,
-            //};
+            var payload = new LoginRequest
+            {
+                UserName = userName,
+                Password = password,
+            };
 
-            //var errorMessage = _authRepository.Login(payload);
+            var errorMessage = await _authRepository.LoginAsync(payload);
 
-            //if (!errorMessage.IsNullOrEmpty())
-            //{
-            //    //TODO: Notify error
-            //    MessageBox.Show(errorMessage);
-            //    return;
-            //}
-            //else
-            //{
-            //    var user = _usersRepository.GetByUserName(userName);
+            if (!errorMessage.IsNullOrEmpty())
+            {
+                //TODO: Notify error
+                MessageBox.Show(errorMessage);
+                return;
+            }
+            else
+            {
+                var user = await _usersRepository.GetUserByUserNameAsync(userName);
 
-            //    UserIdentity.UserName = user.UserName;
-            //    UserIdentity.Avatar = user.Avatar;
-            //    UserIdentity.FullName = user.FullName;
-            //    UserIdentity.Email = user.Email;
-            //    UserIdentity.Id = user.Id;
+                UserIdentity.Set(user);
 
-            //    //TODO: Notify login successfully -> Hidden Login form -> Show Main form
-            //    MessageBox.Show("Login successfully!");
-            //    this.Hide();
-            //    MainForm mainForm = new MainForm();
-            //    mainForm.Show();
-            //    return;
-            //}
+                //TODO: Notify login successfully -> Hidden Login form -> Show Main form
+                MessageBox.Show("Login successfully!");
+                this.Hide();
+                Main main = new Main();
+                main.Show();
+                return;
+            }
         }
 
         private void label5_Click(object sender, EventArgs e)

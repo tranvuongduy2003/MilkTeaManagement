@@ -1,19 +1,17 @@
 ﻿using Infrastructure.Common;
 using Microsoft.EntityFrameworkCore;
 using MilkTeaManagement.Application.Common.SeedWork;
+using MilkTeaManagement.Application.Contracts;
 using MilkTeaManagement.Domain.Entities;
 using MilkTeaManagement.Infrastructure.Data;
 
-namespace MilkTeaManagement.Application.Contracts
+namespace MilkTeaManagement.Infrastructure.Repositories
 {
-    public class UsersRespository : RepositoryBase<User, long, ApplicationDbContext>, IUsersRepository
+    public class UsersRespository : RepositoryBase<User, string, ApplicationDbContext>, IUsersRepository
     {
         public UsersRespository(ApplicationDbContext dbContext, IUnitOfWork<ApplicationDbContext> unitOfWork) : base(dbContext, unitOfWork)
         {
         }
-
-        public async Task<IEnumerable<User>> GetUsersByUserNameAsync(string userName) =>
-            await FindByCondition(x => x.UserName.Equals(userName)).ToListAsync();
 
         public async Task<User> CreateUserAsync(User user)
         {
@@ -26,5 +24,8 @@ namespace MilkTeaManagement.Application.Contracts
             await UpdateAsync(user);
             return user;
         }
+
+        public async Task<User> GetUserByUserNameAsync(string userName) =>
+            await FindByCondition(x => x.UserName.Equals(userName)).FirstOrDefaultAsync();
     }
 }
