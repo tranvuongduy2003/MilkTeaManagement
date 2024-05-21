@@ -4,6 +4,10 @@ using Microsoft.Extensions.Hosting;
 using MilkTeaManagement.Application;
 using MilkTeaManagement.Infrastructure;
 using MilkTeaManagement.WindowsApp.Pages.Auth;
+using MilkTeaManagement.WindowsApp.Pages.Categories;
+using MilkTeaManagement.WindowsApp.Pages.Employees;
+using MilkTeaManagement.WindowsApp.Pages.Home;
+using MilkTeaManagement.WindowsApp.Pages.Products;
 
 namespace MilkTeaManagement.WindowsApp
 {
@@ -21,14 +25,16 @@ namespace MilkTeaManagement.WindowsApp
             var host = CreateHostBuilder().Build();
             ServiceProvider = host.Services;
 
-            System.Windows.Forms.Application.Run(ServiceProvider.GetRequiredService<LoginPage>());
+            System.Windows.Forms.Application.Run(ServiceProvider.GetRequiredService<Main>());
         }
 
         static HostApplicationBuilder CreateHostBuilder()
         {
             var builder = Host.CreateApplicationBuilder();
 
-            builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            builder.Configuration
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables();
 
             builder.Services.AddConfigurationSettings(builder.Configuration);
 
@@ -41,6 +47,12 @@ namespace MilkTeaManagement.WindowsApp
             builder.Services.AddSingleton<LoginPage>();
             builder.Services.AddSingleton<RegisterPage>();
             builder.Services.AddSingleton<ResetPasswordPage>();
+
+            //Pages
+            builder.Services.AddSingleton<HomePage>();
+            builder.Services.AddSingleton<CategoriesPage>();
+            builder.Services.AddSingleton<ProductsPage>();
+            builder.Services.AddSingleton<EmployeesPage>();
 
             return builder;
         }

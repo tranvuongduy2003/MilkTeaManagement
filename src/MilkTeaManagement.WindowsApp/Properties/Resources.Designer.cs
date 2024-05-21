@@ -133,6 +133,16 @@ namespace MilkTeaManagement.WindowsApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cutlery {
+            get {
+                object obj = ResourceManager.GetObject("cutlery", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap emo {
             get {
                 object obj = ResourceManager.GetObject("emo", resourceCulture);
@@ -246,6 +256,16 @@ namespace MilkTeaManagement.WindowsApp.Properties {
         internal static System.Drawing.Bitmap film {
             get {
                 object obj = ResourceManager.GetObject("film", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap home {
+            get {
+                object obj = ResourceManager.GetObject("home", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -683,6 +703,16 @@ namespace MilkTeaManagement.WindowsApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap options_lines {
+            get {
+                object obj = ResourceManager.GetObject("options-lines", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap register_background {
             get {
                 object obj = ResourceManager.GetObject("register_background", resourceCulture);
@@ -806,6 +836,16 @@ namespace MilkTeaManagement.WindowsApp.Properties {
         internal static System.Drawing.Bitmap upload_image1 {
             get {
                 object obj = ResourceManager.GetObject("upload-image1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap user {
+            get {
+                object obj = ResourceManager.GetObject("user", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
