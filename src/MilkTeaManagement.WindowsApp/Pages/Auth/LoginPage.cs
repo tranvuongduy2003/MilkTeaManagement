@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using MilkTeaManagement.Application.Common.Models;
+using MilkTeaManagement.Application.Common.Models.Auth;
 using MilkTeaManagement.Application.Contracts;
 using MilkTeaManagement.Domain.ValueObjetcs;
 
