@@ -1,8 +1,10 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MilkTeaManagement.Application;
 using MilkTeaManagement.Infrastructure;
+using MilkTeaManagement.Infrastructure.Data;
 using MilkTeaManagement.WindowsApp.Pages.Auth;
 using MilkTeaManagement.WindowsApp.Pages.Categories;
 using MilkTeaManagement.WindowsApp.Pages.Employees;
@@ -25,6 +27,23 @@ namespace MilkTeaManagement.WindowsApp
             var host = CreateHostBuilder().Build();
             ServiceProvider = host.Services;
 
+            using (var scope = ServiceProvider.CreateScope())
+            {
+                var context = ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+                try
+                {
+                    if (context.Database.GetPendingMigrations().Count() > 0)
+                        context.Database.Migrate();
+                    var seeder = ServiceProvider.GetService<ApplicationDbContextSeed>();
+                    seeder?.SeedAsync().Wait();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
             System.Windows.Forms.Application.Run(ServiceProvider.GetRequiredService<Main>());
         }
 
@@ -43,16 +62,16 @@ namespace MilkTeaManagement.WindowsApp
             builder.Services.AddApplicationServices();
 
             // Main form
-            builder.Services.AddSingleton<Main>();
-            builder.Services.AddSingleton<LoginPage>();
-            builder.Services.AddSingleton<RegisterPage>();
-            builder.Services.AddSingleton<ResetPasswordPage>();
+            builder.Services.AddTransient<Main>();
+            builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<RegisterPage>();
+            builder.Services.AddTransient<ResetPasswordPage>();
 
             //Pages
-            builder.Services.AddSingleton<HomePage>();
-            builder.Services.AddSingleton<CategoriesPage>();
-            builder.Services.AddSingleton<ProductsPage>();
-            builder.Services.AddSingleton<EmployeesPage>();
+            builder.Services.AddTransient<HomePage>();
+            builder.Services.AddTransient<CategoriesPage>();
+            builder.Services.AddTransient<ProductsPage>();
+            builder.Services.AddTransient<EmployeesPage>();
 
             return builder;
         }
