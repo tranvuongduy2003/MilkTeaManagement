@@ -98,7 +98,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
         private void avatarUpload_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;";
+            openFileDialog.Filter = "CategoryImage Files|*.jpg;*.jpeg;*.png;";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 avatarUpload.BackgroundImage = new Bitmap(openFileDialog.FileName);
