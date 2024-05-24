@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace MilkTeaManagement.WindowsApp.Extensions
+namespace MilkTeaManagement.WindowsApp.Helpers
 {
     public static class ConvertCurrency
     {
