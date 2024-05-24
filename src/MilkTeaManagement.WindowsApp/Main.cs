@@ -16,6 +16,13 @@ namespace MilkTeaManagement.WindowsApp
             home.pictureBox1.BackgroundImage = Properties.Resources.home;
             home.label1.Text = "Home";
 
+            // Load Home Page
+            SetItemSelected(home);
+            contentPanel.Controls.Clear();
+            HomePage homePage = Program.ServiceProvider.GetRequiredService<HomePage>();
+            homePage.OnLoad();
+            contentPanel.Controls.Add(homePage);
+
             category.pictureBox1.BackgroundImage = Properties.Resources.options_lines;
             category.label1.Text = "Categories";
 
@@ -31,6 +38,7 @@ namespace MilkTeaManagement.WindowsApp
             SetItemSelected(sender);
             contentPanel.Controls.Clear();
             HomePage homePage = Program.ServiceProvider.GetRequiredService<HomePage>();
+            homePage.OnLoad();
             contentPanel.Controls.Add(homePage);
         }
 

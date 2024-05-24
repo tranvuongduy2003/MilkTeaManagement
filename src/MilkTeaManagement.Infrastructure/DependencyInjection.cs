@@ -29,7 +29,7 @@ namespace MilkTeaManagement.Infrastructure
         {
             var emailSettings = configuration.GetSection(nameof(EmailSettings))
                 .Get<EmailSettings>();
-            services.AddSingleton(emailSettings);
+            services.AddSingleton(typeof(IEmailSettings), emailSettings);
 
             return services;
         }
@@ -43,13 +43,14 @@ namespace MilkTeaManagement.Infrastructure
                     builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));
             });
 
-            services.AddSingleton<EmailService>();
-
-            services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<IUsersRepository, UsersRespository>();
-
+            services.AddScoped<ApplicationDbContextSeed>();
             services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
             services.AddScoped(typeof(IEmailService), typeof(EmailService));
+
+            services.AddTransient<IAuthRepository, AuthRepository>();
+            services.AddTransient<IUsersRepository, UsersRespository>();
+            services.AddTransient<ICategoriesRepository, CategoriesRepository>();
+            services.AddTransient<IProductsRepository, ProductsRepository>();
 
             return services;
         }

@@ -1,18 +1,20 @@
 ﻿using MailKit.Net.Smtp;
 using MailKit.Security;
+using Microsoft.Extensions.Options;
 using MilkTeaManagement.Application.Common.Interfaces;
 using MilkTeaManagement.Application.Common.Models.Systems;
+using MilkTeaManagement.Infrastructure.Configurations;
 using MimeKit;
 
 namespace MilkTeaManagement.Infrastructure.Services
 {
     public class EmailService : IEmailService
     {
-        private readonly IEmailSettings _settings;
+        private readonly EmailSettings _settings;
 
-        public EmailService(IEmailSettings settings)
+        public EmailService(IOptions<EmailSettings> settings)
         {
-            _settings = settings ?? throw new ArgumentNullException(nameof(settings));
+            _settings = settings.Value ?? throw new ArgumentNullException(nameof(settings));
         }
 
         public async Task SendMail(MailContent mailContent)

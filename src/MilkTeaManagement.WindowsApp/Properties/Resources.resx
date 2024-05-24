@@ -133,8 +133,8 @@
   <data name="emo2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\emo2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="send-icon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\send-icon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="insert-picture-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\insert-picture-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="search-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\search-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -142,8 +142,8 @@
   <data name="chat-logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\chat-logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="send-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\send-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon35" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon35.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -151,8 +151,11 @@
   <data name="icon20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="emo5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\emo5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon31" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Left Content" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Left Content.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -163,8 +166,14 @@
   <data name="send-icon2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\send-icon2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="bin2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bin2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon18" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon18.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="close" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -175,6 +184,9 @@
   <data name="icon28" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon28.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="coke" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\coke.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -183,6 +195,9 @@
   </data>
   <data name="clapperboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\clapperboard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="upload-image (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\upload-image (1).jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -217,6 +232,9 @@
   <data name="icon9" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="bin1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bin1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon6" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -241,6 +259,9 @@
   <data name="icon10" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon10.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="user" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="4957136" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\4957136.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -250,14 +271,8 @@
   <data name="upload-file" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\upload-file.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="smile-face" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\smile-face.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="chat-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\chat-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="send-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\send-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="insert_picture_icon_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\insert-picture-icon-white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -271,8 +286,11 @@
   <data name="chat-logo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\chat-logo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Left Content" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Left Content.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="home" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\home.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="smile-face" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\smile-face.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon23" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon23.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -280,14 +298,11 @@
   <data name="icon14" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon14.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon17" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon17.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icon7" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon31" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="product-image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\product-image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -295,14 +310,17 @@
   <data name="twitter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\twitter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="close" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="send-icon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\send-icon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon25" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon25.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="emo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\emo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="emo5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\emo5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon26" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon26.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -316,6 +334,9 @@
   <data name="icon2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="cutlery" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cutlery.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon11" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -328,14 +349,23 @@
   <data name="emo7" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\emo7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="bin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="emo4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\emo4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="insert-picture-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\insert-picture-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="options-lines" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\options-lines.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon17" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon17.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\avatar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -343,16 +373,7 @@
   <data name="icon19" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon19.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cutlery" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cutlery.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="home" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\home.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="options-lines" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\options-lines.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="user" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\user.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="product-image1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\product-image1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
