@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             MainPanel = new Panel();
-            flowLayoutPanel1 = new FlowLayoutPanel();
+            ProductsPanel = new FlowLayoutPanel();
             ResultQuantity = new Label();
             CategoryName = new Label();
             CategoriesPanel = new FlowLayoutPanel();
@@ -37,29 +37,29 @@
             label2 = new Label();
             label1 = new Label();
             CheckoutPanel = new Panel();
+            CheckoutButton = new Button();
+            panel1 = new Panel();
             flowLayoutPanel2 = new FlowLayoutPanel();
             label12 = new Label();
             label7 = new Label();
-            label11 = new Label();
-            label9 = new Label();
-            label10 = new Label();
+            Total = new Label();
+            Discount = new Label();
+            SubTotal = new Label();
             label8 = new Label();
             label6 = new Label();
             label5 = new Label();
-            label4 = new Label();
-            label3 = new Label();
-            pictureBox1 = new PictureBox();
-            panel1 = new Panel();
-            button1 = new Button();
+            FullName = new Label();
+            Role = new Label();
+            Avatar = new PictureBox();
             MainPanel.SuspendLayout();
             CheckoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Avatar).BeginInit();
             SuspendLayout();
             // 
             // MainPanel
             // 
             MainPanel.BackColor = Color.FromArgb(64, 64, 64);
-            MainPanel.Controls.Add(flowLayoutPanel1);
+            MainPanel.Controls.Add(ProductsPanel);
             MainPanel.Controls.Add(ResultQuantity);
             MainPanel.Controls.Add(CategoryName);
             MainPanel.Controls.Add(CategoriesPanel);
@@ -72,14 +72,14 @@
             MainPanel.Size = new Size(1220, 1050);
             MainPanel.TabIndex = 0;
             // 
-            // flowLayoutPanel1
+            // ProductsPanel
             // 
-            flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.Location = new Point(30, 433);
-            flowLayoutPanel1.Margin = new Padding(0);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(1160, 590);
-            flowLayoutPanel1.TabIndex = 5;
+            ProductsPanel.AutoScroll = true;
+            ProductsPanel.Location = new Point(30, 433);
+            ProductsPanel.Margin = new Padding(0);
+            ProductsPanel.Name = "ProductsPanel";
+            ProductsPanel.Size = new Size(1160, 590);
+            ProductsPanel.TabIndex = 5;
             // 
             // ResultQuantity
             // 
@@ -127,7 +127,8 @@
             SearchTextBox.Name = "SearchTextBox";
             SearchTextBox.PlaceholderText = "   Enter food or drink";
             SearchTextBox.Size = new Size(533, 55);
-            SearchTextBox.TabIndex = 2;
+            SearchTextBox.TabIndex = 10;
+            SearchTextBox.TextChanged += SearchTextBox_TextChanged;
             // 
             // label2
             // 
@@ -158,25 +159,46 @@
             // CheckoutPanel
             // 
             CheckoutPanel.BackColor = Color.DimGray;
-            CheckoutPanel.Controls.Add(button1);
+            CheckoutPanel.Controls.Add(CheckoutButton);
             CheckoutPanel.Controls.Add(panel1);
             CheckoutPanel.Controls.Add(flowLayoutPanel2);
             CheckoutPanel.Controls.Add(label12);
             CheckoutPanel.Controls.Add(label7);
-            CheckoutPanel.Controls.Add(label11);
-            CheckoutPanel.Controls.Add(label9);
-            CheckoutPanel.Controls.Add(label10);
+            CheckoutPanel.Controls.Add(Total);
+            CheckoutPanel.Controls.Add(Discount);
+            CheckoutPanel.Controls.Add(SubTotal);
             CheckoutPanel.Controls.Add(label8);
             CheckoutPanel.Controls.Add(label6);
             CheckoutPanel.Controls.Add(label5);
-            CheckoutPanel.Controls.Add(label4);
-            CheckoutPanel.Controls.Add(label3);
-            CheckoutPanel.Controls.Add(pictureBox1);
+            CheckoutPanel.Controls.Add(FullName);
+            CheckoutPanel.Controls.Add(Role);
+            CheckoutPanel.Controls.Add(Avatar);
             CheckoutPanel.Location = new Point(1220, 0);
             CheckoutPanel.Margin = new Padding(0);
             CheckoutPanel.Name = "CheckoutPanel";
             CheckoutPanel.Size = new Size(600, 1050);
             CheckoutPanel.TabIndex = 1;
+            // 
+            // CheckoutButton
+            // 
+            CheckoutButton.BackColor = Color.Coral;
+            CheckoutButton.Font = new Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            CheckoutButton.ForeColor = Color.White;
+            CheckoutButton.Location = new Point(20, 957);
+            CheckoutButton.Margin = new Padding(0);
+            CheckoutButton.Name = "CheckoutButton";
+            CheckoutButton.Size = new Size(560, 66);
+            CheckoutButton.TabIndex = 5;
+            CheckoutButton.Text = "Checkout";
+            CheckoutButton.UseVisualStyleBackColor = false;
+            // 
+            // panel1
+            // 
+            panel1.Location = new Point(20, 889);
+            panel1.Margin = new Padding(0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(560, 2);
+            panel1.TabIndex = 4;
             // 
             // flowLayoutPanel2
             // 
@@ -209,41 +231,41 @@
             label7.TabIndex = 2;
             label7.Text = "Discount";
             // 
-            // label11
+            // Total
             // 
-            label11.Font = new Font("Poppins", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label11.ForeColor = Color.White;
-            label11.Location = new Point(148, 900);
-            label11.Margin = new Padding(0);
-            label11.Name = "label11";
-            label11.Size = new Size(432, 42);
-            label11.TabIndex = 2;
-            label11.Text = "2,000,000 VNĐ";
-            label11.TextAlign = ContentAlignment.TopRight;
+            Total.Font = new Font("Poppins", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Total.ForeColor = Color.White;
+            Total.Location = new Point(148, 900);
+            Total.Margin = new Padding(0);
+            Total.Name = "Total";
+            Total.Size = new Size(432, 42);
+            Total.TabIndex = 2;
+            Total.Text = "2,000,000 VNĐ";
+            Total.TextAlign = ContentAlignment.TopRight;
             // 
-            // label9
+            // Discount
             // 
-            label9.Font = new Font("Poppins", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label9.ForeColor = Color.White;
-            label9.Location = new Point(148, 843);
-            label9.Margin = new Padding(0);
-            label9.Name = "label9";
-            label9.Size = new Size(432, 42);
-            label9.TabIndex = 2;
-            label9.Text = "10,000,000 VNĐ";
-            label9.TextAlign = ContentAlignment.TopRight;
+            Discount.Font = new Font("Poppins", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Discount.ForeColor = Color.White;
+            Discount.Location = new Point(148, 843);
+            Discount.Margin = new Padding(0);
+            Discount.Name = "Discount";
+            Discount.Size = new Size(432, 42);
+            Discount.TabIndex = 2;
+            Discount.Text = "10,000,000 VNĐ";
+            Discount.TextAlign = ContentAlignment.TopRight;
             // 
-            // label10
+            // SubTotal
             // 
-            label10.Font = new Font("Poppins", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label10.ForeColor = Color.White;
-            label10.Location = new Point(148, 797);
-            label10.Margin = new Padding(0);
-            label10.Name = "label10";
-            label10.Size = new Size(432, 42);
-            label10.TabIndex = 2;
-            label10.Text = "12,000,000 VNĐ";
-            label10.TextAlign = ContentAlignment.TopRight;
+            SubTotal.Font = new Font("Poppins", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            SubTotal.ForeColor = Color.White;
+            SubTotal.Location = new Point(148, 797);
+            SubTotal.Margin = new Padding(0);
+            SubTotal.Name = "SubTotal";
+            SubTotal.Size = new Size(432, 42);
+            SubTotal.TabIndex = 2;
+            SubTotal.Text = "12,000,000 VNĐ";
+            SubTotal.TextAlign = ContentAlignment.TopRight;
             // 
             // label8
             // 
@@ -280,61 +302,40 @@
             label5.TabIndex = 2;
             label5.Text = "Bill";
             // 
-            // label4
+            // FullName
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Poppins", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.White;
-            label4.Location = new Point(115, 59);
-            label4.Margin = new Padding(0);
-            label4.Name = "label4";
-            label4.Size = new Size(142, 36);
-            label4.TabIndex = 1;
-            label4.Text = "Sheilla Poetri";
+            FullName.AutoSize = true;
+            FullName.Font = new Font("Poppins", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            FullName.ForeColor = Color.White;
+            FullName.Location = new Point(115, 59);
+            FullName.Margin = new Padding(0);
+            FullName.Name = "FullName";
+            FullName.Size = new Size(142, 36);
+            FullName.TabIndex = 1;
+            FullName.Text = "Sheilla Poetri";
             // 
-            // label3
+            // Role
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Poppins", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.Gainsboro;
-            label3.Location = new Point(115, 20);
-            label3.Margin = new Padding(0);
-            label3.Name = "label3";
-            label3.Size = new Size(81, 36);
-            label3.TabIndex = 1;
-            label3.Text = "Admin";
+            Role.AutoSize = true;
+            Role.Font = new Font("Poppins", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Role.ForeColor = Color.Gainsboro;
+            Role.Location = new Point(115, 20);
+            Role.Margin = new Padding(0);
+            Role.Name = "Role";
+            Role.Size = new Size(81, 36);
+            Role.TabIndex = 1;
+            Role.Text = "Admin";
             // 
-            // pictureBox1
+            // Avatar
             // 
-            pictureBox1.BackgroundImage = Properties.Resources.avatar;
-            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox1.Location = new Point(20, 20);
-            pictureBox1.Margin = new Padding(0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(75, 75);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            // 
-            // panel1
-            // 
-            panel1.Location = new Point(20, 889);
-            panel1.Margin = new Padding(0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(560, 2);
-            panel1.TabIndex = 4;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.Coral;
-            button1.Font = new Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(20, 957);
-            button1.Margin = new Padding(0);
-            button1.Name = "button1";
-            button1.Size = new Size(560, 66);
-            button1.TabIndex = 5;
-            button1.Text = "Checkout";
-            button1.UseVisualStyleBackColor = false;
+            Avatar.BackgroundImage = Properties.Resources.avatar;
+            Avatar.BackgroundImageLayout = ImageLayout.Stretch;
+            Avatar.Location = new Point(20, 20);
+            Avatar.Margin = new Padding(0);
+            Avatar.Name = "Avatar";
+            Avatar.Size = new Size(75, 75);
+            Avatar.TabIndex = 0;
+            Avatar.TabStop = false;
             // 
             // HomePage
             // 
@@ -350,7 +351,7 @@
             MainPanel.PerformLayout();
             CheckoutPanel.ResumeLayout(false);
             CheckoutPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Avatar).EndInit();
             ResumeLayout(false);
         }
 
@@ -364,20 +365,20 @@
         private Label CategoryName;
         private FlowLayoutPanel CategoriesPanel;
         private Label ResultQuantity;
-        private FlowLayoutPanel flowLayoutPanel1;
-        private Label label3;
-        private PictureBox pictureBox1;
+        private FlowLayoutPanel ProductsPanel;
+        private Label Role;
+        private PictureBox Avatar;
         private Label label5;
-        private Label label4;
+        private Label FullName;
         private FlowLayoutPanel flowLayoutPanel2;
         private Label label7;
-        private Label label9;
-        private Label label10;
+        private Label Discount;
+        private Label SubTotal;
         private Label label8;
         private Label label6;
         private Label label12;
-        private Label label11;
+        private Label Total;
         private Panel panel1;
-        private Button button1;
+        private Button CheckoutButton;
     }
 }

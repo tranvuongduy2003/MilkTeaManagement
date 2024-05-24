@@ -49,6 +49,8 @@ namespace MilkTeaManagement.Infrastructure
 
             services.AddTransient<IAuthRepository, AuthRepository>();
             services.AddTransient<IUsersRepository, UsersRespository>();
+            services.AddTransient<ICategoriesRepository, CategoriesRepository>();
+            services.AddTransient<IProductsRepository, ProductsRepository>();
 
             return services;
         }

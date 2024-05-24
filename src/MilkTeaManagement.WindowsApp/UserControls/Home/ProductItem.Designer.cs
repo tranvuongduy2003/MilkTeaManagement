@@ -28,99 +28,99 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pictureBox1 = new PictureBox();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            button1 = new Button();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ProductImage = new PictureBox();
+            ProductName = new Label();
+            ProductDescription = new Label();
+            ProductPrice = new Label();
+            AddToBillButton = new Button();
+            ((System.ComponentModel.ISupportInitialize)ProductImage).BeginInit();
             SuspendLayout();
             // 
-            // pictureBox1
+            // ProductImage
             // 
-            pictureBox1.BackgroundImage = Properties.Resources.product_image;
-            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox1.Location = new Point(10, 10);
-            pictureBox1.Margin = new Padding(0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(180, 260);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            ProductImage.BackgroundImage = Properties.Resources.product_image;
+            ProductImage.BackgroundImageLayout = ImageLayout.Stretch;
+            ProductImage.Location = new Point(10, 10);
+            ProductImage.Margin = new Padding(0);
+            ProductImage.Name = "ProductImage";
+            ProductImage.Size = new Size(180, 260);
+            ProductImage.TabIndex = 0;
+            ProductImage.TabStop = false;
             // 
-            // label1
+            // ProductName
             // 
-            label1.AllowDrop = true;
-            label1.Font = new Font("Poppins Medium", 11F, FontStyle.Bold);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(200, 10);
-            label1.Margin = new Padding(0);
-            label1.Name = "label1";
-            label1.Size = new Size(340, 76);
-            label1.TabIndex = 1;
-            label1.Text = "Macchiato Peper\nChocochip";
+            ProductName.AllowDrop = true;
+            ProductName.Font = new Font("Poppins Medium", 11F, FontStyle.Bold);
+            ProductName.ForeColor = Color.White;
+            ProductName.Location = new Point(200, 10);
+            ProductName.Margin = new Padding(0);
+            ProductName.Name = "ProductName";
+            ProductName.Size = new Size(340, 76);
+            ProductName.TabIndex = 1;
+            ProductName.Text = "Macchiato Peper\nChocochip";
             // 
-            // label2
+            // ProductDescription
             // 
-            label2.AllowDrop = true;
-            label2.Font = new Font("Poppins", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.ForeColor = SystemColors.AppWorkspace;
-            label2.Location = new Point(200, 86);
-            label2.Margin = new Padding(0);
-            label2.Name = "label2";
-            label2.Size = new Size(340, 72);
-            label2.TabIndex = 1;
-            label2.Text = "Hot coffee with extract\nchocochip";
+            ProductDescription.AllowDrop = true;
+            ProductDescription.Font = new Font("Poppins", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ProductDescription.ForeColor = SystemColors.AppWorkspace;
+            ProductDescription.Location = new Point(200, 86);
+            ProductDescription.Margin = new Padding(0);
+            ProductDescription.Name = "ProductDescription";
+            ProductDescription.Size = new Size(340, 72);
+            ProductDescription.TabIndex = 1;
+            ProductDescription.Text = "Hot coffee with extract\nchocochip";
             // 
-            // label3
+            // ProductPrice
             // 
-            label3.AllowDrop = true;
-            label3.AutoSize = true;
-            label3.Font = new Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(200, 158);
-            label3.Margin = new Padding(0);
-            label3.Name = "label3";
-            label3.Size = new Size(174, 42);
-            label3.TabIndex = 1;
-            label3.Text = "100,000 VNĐ";
+            ProductPrice.AllowDrop = true;
+            ProductPrice.AutoSize = true;
+            ProductPrice.Font = new Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ProductPrice.ForeColor = Color.White;
+            ProductPrice.Location = new Point(200, 158);
+            ProductPrice.Margin = new Padding(0);
+            ProductPrice.Name = "ProductPrice";
+            ProductPrice.Size = new Size(174, 42);
+            ProductPrice.TabIndex = 1;
+            ProductPrice.Text = "100,000 VNĐ";
             // 
-            // button1
+            // AddToBillButton
             // 
-            button1.BackColor = SystemColors.AppWorkspace;
-            button1.Font = new Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(200, 203);
-            button1.Margin = new Padding(0);
-            button1.Name = "button1";
-            button1.Size = new Size(340, 67);
-            button1.TabIndex = 2;
-            button1.Text = "Add to bill";
-            button1.UseVisualStyleBackColor = false;
+            AddToBillButton.BackColor = SystemColors.AppWorkspace;
+            AddToBillButton.Font = new Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            AddToBillButton.ForeColor = Color.White;
+            AddToBillButton.Location = new Point(200, 203);
+            AddToBillButton.Margin = new Padding(0);
+            AddToBillButton.Name = "AddToBillButton";
+            AddToBillButton.Size = new Size(340, 67);
+            AddToBillButton.TabIndex = 2;
+            AddToBillButton.Text = "Add to bill";
+            AddToBillButton.UseVisualStyleBackColor = false;
             // 
             // ProductItem
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlDarkDark;
-            Controls.Add(button1);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(pictureBox1);
+            Controls.Add(AddToBillButton);
+            Controls.Add(ProductPrice);
+            Controls.Add(ProductDescription);
+            Controls.Add(ProductName);
+            Controls.Add(ProductImage);
             Margin = new Padding(0, 0, 15, 15);
             Name = "ProductItem";
             Size = new Size(550, 280);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ProductImage).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private PictureBox pictureBox1;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Button button1;
+        private PictureBox ProductImage;
+        private Label ProductName;
+        private Label ProductDescription;
+        private Label ProductPrice;
+        private Button AddToBillButton;
     }
 }
