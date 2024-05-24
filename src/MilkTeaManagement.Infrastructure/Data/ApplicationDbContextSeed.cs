@@ -49,7 +49,7 @@ namespace MilkTeaManagement.Infrastructure.Data
                 var fakerUser = new Faker<User>()
                     .RuleFor(c => c.Id, _ => Guid.NewGuid().ToString())
                     .RuleFor(c => c.Status, _ => EUserStatus.ACTIVE)
-                    .RuleFor(c => c.Avatar, f => f.Person.Avatar)
+                    .RuleFor(c => c.Avatar, _ => "https://i.pravatar.cc/300")
                     .RuleFor(c => c.DOB, f => f.Person.DateOfBirth)
                     .RuleFor(c => c.Email, _ => "tranvuongduy2003@gmail.com")
                     .RuleFor(c => c.FullName, _ => "Trần Vương Duy")
@@ -71,7 +71,7 @@ namespace MilkTeaManagement.Infrastructure.Data
 
                 var fakerCategory = new Faker<Category>()
                     .RuleFor(c => c.Id, _ => Guid.NewGuid().ToString())
-                    .RuleFor(c => c.Poster, f => f.Image.Food())
+                    .RuleFor(c => c.Poster, _ => "https://picsum.photos/200")
                     .RuleFor(c => c.Name, f => f.Commerce.Categories(1).FirstOrDefault())
                     .RuleFor(c => c.CreatorId, _ => user.Id)
                     .RuleFor(c => c.CreatedDate, _ => DateTimeOffset.UtcNow)
@@ -89,7 +89,7 @@ namespace MilkTeaManagement.Infrastructure.Data
 
                 var fakerProduct = new Faker<Product>()
                     .RuleFor(c => c.Id, _ => Guid.NewGuid().ToString())
-                    .RuleFor(c => c.Poster, f => f.Image.Food())
+                    .RuleFor(c => c.Poster, _ => "https://picsum.photos/180/260")
                     .RuleFor(c => c.Name, f => f.Commerce.ProductName())
                     .RuleFor(c => c.Price, f => decimal.Parse(f.Commerce.Price(10000, 1000000, 0)))
                     .RuleFor(c => c.Status, f => f.PickRandom<EProductStatus>())
