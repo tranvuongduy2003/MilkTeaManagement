@@ -1,5 +1,5 @@
 ﻿using MilkTeaManagement.Domain.Entities;
-using MilkTeaManagement.WindowsApp.Extensions;
+using MilkTeaManagement.WindowsApp.Helpers;
 
 namespace MilkTeaManagement.WindowsApp.UserControls.Home
 {
