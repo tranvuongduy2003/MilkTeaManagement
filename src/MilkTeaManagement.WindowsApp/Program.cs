@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using MilkTeaManagement.Application;
 using MilkTeaManagement.Infrastructure;
 using MilkTeaManagement.Infrastructure.Data;
+using MilkTeaManagement.WindowsApp.Forms;
 using MilkTeaManagement.WindowsApp.Pages.Auth;
 using MilkTeaManagement.WindowsApp.Pages.Categories;
 using MilkTeaManagement.WindowsApp.Pages.Employees;
@@ -72,6 +73,8 @@ namespace MilkTeaManagement.WindowsApp
             builder.Services.AddTransient<CategoriesPage>();
             builder.Services.AddTransient<ProductsPage>();
             builder.Services.AddTransient<EmployeesPage>();
+
+            builder.Services.AddScoped<CreateProductForm>();
 
             return builder;
         }

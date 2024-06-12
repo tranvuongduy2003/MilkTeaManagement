@@ -135,8 +135,7 @@
             // 
             // Main
             // 
-            AutoScaleDimensions = new SizeF(144F, 144F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(1920, 1080);
             Controls.Add(sidebarPanel);
             Controls.Add(contentPanel);
