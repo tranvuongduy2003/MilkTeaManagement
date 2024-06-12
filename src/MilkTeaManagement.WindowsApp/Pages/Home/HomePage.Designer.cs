@@ -339,8 +339,8 @@
             // 
             // HomePage
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(144F, 144F);
+            AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = SystemColors.Control;
             Controls.Add(CheckoutPanel);
             Controls.Add(MainPanel);

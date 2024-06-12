@@ -56,8 +56,6 @@ namespace MilkTeaManagement.WindowsApp
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddEnvironmentVariables();
 
-            builder.Services.AddConfigurationSettings(builder.Configuration);
-
             builder.Services.AddInfrastructureServices(builder.Configuration);
 
             builder.Services.AddApplicationServices();
