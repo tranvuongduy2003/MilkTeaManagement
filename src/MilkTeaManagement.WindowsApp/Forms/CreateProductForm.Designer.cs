@@ -1,4 +1,4 @@
-﻿namespace MilkTeaManagement.WindowsApp.Forms
+namespace MilkTeaManagement.WindowsApp.Forms
 {
     partial class CreateProductForm
     {
