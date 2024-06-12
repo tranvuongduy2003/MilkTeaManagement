@@ -15,7 +15,7 @@ namespace MilkTeaManagement.Infrastructure.Repositories
         {
         }
 
-        public async Task<IEnumerable<Product>> FindAllProductsByFilter(Filter filter)
+        public async Task<List<Product>> FindAllProductsByFilter(Filter filter)
         {
             var products = new List<Product>();
 

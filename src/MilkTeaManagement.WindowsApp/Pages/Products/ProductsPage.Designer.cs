@@ -28,16 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductsPage));
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle21 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle23 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle24 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle25 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle26 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle27 = new DataGridViewCellStyle();
             label1 = new Label();
             SearchTextBox = new TextBox();
             CategoriesComboBox = new ComboBox();
@@ -50,6 +49,7 @@
             CreatedAt = new DataGridViewTextBoxColumn();
             Creator = new DataGridViewTextBoxColumn();
             Action = new DataGridViewTextBoxColumn();
+            create = new Button();
             ((System.ComponentModel.ISupportInitialize)ProductsTable).BeginInit();
             SuspendLayout();
             // 
@@ -77,6 +77,7 @@
             SearchTextBox.PlaceholderText = "   Search food";
             SearchTextBox.Size = new Size(533, 49);
             SearchTextBox.TabIndex = 11;
+            SearchTextBox.TextChanged += SearchTextBox_TextChanged;
             // 
             // CategoriesComboBox
             // 
@@ -88,6 +89,7 @@
             CategoriesComboBox.Size = new Size(182, 50);
             CategoriesComboBox.TabIndex = 12;
             CategoriesComboBox.Text = "  Category";
+            CategoriesComboBox.SelectedIndexChanged += CategoriesComboBox_SelectedIndexChanged;
             // 
             // ProductsTable
             // 
@@ -96,14 +98,14 @@
             ProductsTable.AllowUserToResizeColumns = false;
             ProductsTable.AllowUserToResizeRows = false;
             ProductsTable.BackgroundColor = SystemColors.Control;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Poppins Medium", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            ProductsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = SystemColors.Control;
+            dataGridViewCellStyle19.Font = new Font("Poppins Medium", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle19.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle19.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = DataGridViewTriState.True;
+            ProductsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
             ProductsTable.ColumnHeadersHeight = 50;
             ProductsTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             ProductsTable.Columns.AddRange(new DataGridViewColumn[] { Poster, ProductName, Status, Category, Price, CreatedAt, Creator, Action });
@@ -117,10 +119,10 @@
             // 
             // Poster
             // 
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Font = new Font("Poppins", 20F);
-            dataGridViewCellStyle2.NullValue = resources.GetObject("dataGridViewCellStyle2.NullValue");
-            Poster.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle20.Font = new Font("Poppins", 20F);
+            dataGridViewCellStyle20.NullValue = null;
+            Poster.DefaultCellStyle = dataGridViewCellStyle20;
             Poster.HeaderText = "Product";
             Poster.MinimumWidth = 8;
             Poster.Name = "Poster";
@@ -131,17 +133,17 @@
             // ProductName
             // 
             ProductName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.Font = new Font("Poppins", 9F);
-            ProductName.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle21.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.Font = new Font("Poppins", 9F);
+            ProductName.DefaultCellStyle = dataGridViewCellStyle21;
             ProductName.HeaderText = "Name";
             ProductName.MinimumWidth = 8;
             ProductName.Name = "ProductName";
             // 
             // Status
             // 
-            dataGridViewCellStyle4.Font = new Font("Poppins", 9F);
-            Status.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle22.Font = new Font("Poppins", 9F);
+            Status.DefaultCellStyle = dataGridViewCellStyle22;
             Status.HeaderText = "Status";
             Status.MinimumWidth = 8;
             Status.Name = "Status";
@@ -149,9 +151,9 @@
             // 
             // Category
             // 
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.Font = new Font("Poppins", 9F);
-            Category.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle23.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.Font = new Font("Poppins", 9F);
+            Category.DefaultCellStyle = dataGridViewCellStyle23;
             Category.HeaderText = "Category";
             Category.MinimumWidth = 8;
             Category.Name = "Category";
@@ -159,9 +161,9 @@
             // 
             // Price
             // 
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Font = new Font("Poppins", 9F);
-            Price.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle24.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle24.Font = new Font("Poppins", 9F);
+            Price.DefaultCellStyle = dataGridViewCellStyle24;
             Price.HeaderText = "Price";
             Price.MinimumWidth = 8;
             Price.Name = "Price";
@@ -169,9 +171,9 @@
             // 
             // CreatedAt
             // 
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.Font = new Font("Poppins", 9F);
-            CreatedAt.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle25.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle25.Font = new Font("Poppins", 9F);
+            CreatedAt.DefaultCellStyle = dataGridViewCellStyle25;
             CreatedAt.HeaderText = "Created At";
             CreatedAt.MinimumWidth = 8;
             CreatedAt.Name = "CreatedAt";
@@ -179,9 +181,9 @@
             // 
             // Creator
             // 
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.Font = new Font("Poppins", 9F);
-            Creator.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle26.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.Font = new Font("Poppins", 9F);
+            Creator.DefaultCellStyle = dataGridViewCellStyle26;
             Creator.HeaderText = "Creator";
             Creator.MinimumWidth = 8;
             Creator.Name = "Creator";
@@ -189,19 +191,34 @@
             // 
             // Action
             // 
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.Font = new Font("Poppins", 9F);
-            Action.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle27.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle27.Font = new Font("Poppins", 9F);
+            Action.DefaultCellStyle = dataGridViewCellStyle27;
             Action.HeaderText = "Action";
             Action.MinimumWidth = 8;
             Action.Name = "Action";
             Action.Width = 150;
+            // 
+            // create
+            // 
+            create.BackColor = Color.CornflowerBlue;
+            create.Font = new Font("Poppins", 12F);
+            create.ForeColor = Color.White;
+            create.Location = new Point(1438, 117);
+            create.Margin = new Padding(0);
+            create.Name = "create";
+            create.Size = new Size(352, 49);
+            create.TabIndex = 14;
+            create.Text = "Create new product";
+            create.UseVisualStyleBackColor = false;
+            create.Click += create_Click;
             // 
             // ProductsPage
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
+            Controls.Add(create);
             Controls.Add(ProductsTable);
             Controls.Add(CategoriesComboBox);
             Controls.Add(SearchTextBox);
@@ -228,5 +245,6 @@
         private DataGridViewTextBoxColumn CreatedAt;
         private DataGridViewTextBoxColumn Creator;
         private DataGridViewTextBoxColumn Action;
+        private Button create;
     }
 }
