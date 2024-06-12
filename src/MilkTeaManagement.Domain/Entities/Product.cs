@@ -7,13 +7,13 @@ namespace MilkTeaManagement.Domain.Entities
     [Table("Products")]
     public class Product : EntityAuditBase<string>
     {
-        public string Name { get; set; }
+        public string Poster { get; set; }
 
-        public string Description { get; set; }
+        public string Name { get; set; }
 
         public decimal Price { get; set; }
 
-        public string Poster { get; set; }
+        public string Description { get; set; }
 
         public EProductStatus Status { get; set; }
 
