@@ -6,7 +6,7 @@ namespace MilkTeaManagement.Application.Contracts
 {
     public interface IProductsRepository : IRepositoryBase<Product, string>
     {
-        Task<List<Product>> FindAllProductsByFilter(Filter filter);
+        Task<List<Product>> FindAllProductsByFilter(Filter? filter);
 
         Task<Product> CreateProductAsync(Product product);
 

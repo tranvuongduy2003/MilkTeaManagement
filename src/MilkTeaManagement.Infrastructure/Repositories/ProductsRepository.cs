@@ -1,5 +1,4 @@
 ﻿using Infrastructure.Common;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MilkTeaManagement.Application.Common.Models.Filter;
 using MilkTeaManagement.Application.Common.SeedWork;
@@ -15,21 +14,59 @@ namespace MilkTeaManagement.Infrastructure.Repositories
         {
         }
 
-        public async Task<List<Product>> FindAllProductsByFilter(Filter filter)
+        public async Task<List<Product>> FindAllProductsByFilter(Filter? filter)
         {
             var products = new List<Product>();
 
-            if (!filter.Search.IsNullOrEmpty() && !filter.CategoryId.IsNullOrEmpty())
+            if (filter == null)
             {
-                products = await FindByCondition(x => x.Name.ToLower().Contains(filter.Search.ToLower()) && x.CategoryId.Equals(filter.CategoryId)).ToListAsync();
+                products = FindAll()
+                    .ToList()
+                    .Join(_dbContext.Categories.ToList(), p => p.CategoryId, c => c.Id, (_product, _category) =>
+                    {
+                        _product.Category = _category;
+                        return _product;
+                    })
+                    .OrderByDescending(p => p.CreatedDate)
+                    .ToList();
+            }
+            else if (!filter.Search.IsNullOrEmpty() && !filter.CategoryId.IsNullOrEmpty())
+            {
+                products = FindByCondition(x => x.Name.ToLower()
+                    .Contains(filter.Search.ToLower()) && x.CategoryId.Equals(filter.CategoryId))
+                    .ToList()
+                    .Join(_dbContext.Categories.ToList(), p => p.CategoryId, c => c.Id, (_product, _category) =>
+                    {
+                        _product.Category = _category;
+                        return _product;
+                    })
+                    .OrderByDescending(p => p.CreatedDate)
+                    .ToList();
             }
             else if (!filter.Search.IsNullOrEmpty())
             {
-                products = await FindByCondition(x => x.Name.ToLower().Contains(filter.Search.ToLower())).ToListAsync();
+                products = FindByCondition(x => x.Name.ToLower()
+                    .Contains(filter.Search.ToLower()))
+                    .ToList()
+                    .Join(_dbContext.Categories.ToList(), p => p.CategoryId, c => c.Id, (_product, _category) =>
+                    {
+                        _product.Category = _category;
+                        return _product;
+                    })
+                    .OrderByDescending(p => p.CreatedDate)
+                    .ToList();
             }
             else if (!filter.CategoryId.IsNullOrEmpty())
             {
-                products = await FindByCondition(x => x.CategoryId.Equals(filter.CategoryId)).ToListAsync();
+                products = FindByCondition(x => x.CategoryId.Equals(filter.CategoryId))
+                    .ToList()
+                    .Join(_dbContext.Categories.ToList(), p => p.CategoryId, c => c.Id, (_product, _category) =>
+                    {
+                        _product.Category = _category;
+                        return _product;
+                    })
+                    .OrderByDescending(p => p.CreatedDate)
+                    .ToList();
             }
 
             return products;

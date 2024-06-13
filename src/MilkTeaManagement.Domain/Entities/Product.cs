@@ -17,12 +17,7 @@ namespace MilkTeaManagement.Domain.Entities
 
         public EProductStatus Status { get; set; }
 
-        public string CreatorId { get; set; }
-
         public string CategoryId { get; set; }
-
-        [ForeignKey("CreatorId")]
-        public virtual User Creator { get; set; }
 
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }

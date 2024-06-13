@@ -95,7 +95,6 @@ namespace MilkTeaManagement.Infrastructure.Data
                     .RuleFor(c => c.Status, f => f.PickRandom<EProductStatus>())
                     .RuleFor(c => c.CategoryId, f => f.PickRandom(categories).Id)
                     .RuleFor(c => c.Description, f => f.Commerce.ProductDescription())
-                    .RuleFor(c => c.CreatorId, _ => user.Id)
                     .RuleFor(c => c.CreatedDate, _ => DateTimeOffset.UtcNow)
                     .RuleFor(c => c.UpdatedDate, _ => DateTimeOffset.UtcNow);
 

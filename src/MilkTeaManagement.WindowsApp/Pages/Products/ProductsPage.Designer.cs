@@ -34,22 +34,23 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             label1 = new Label();
             SearchTextBox = new TextBox();
             CategoriesComboBox = new ComboBox();
             ProductsTable = new DataGridView();
-            Poster = new DataGridViewImageColumn();
+            Id = new DataGridViewTextBoxColumn();
+            ProductPrice = new DataGridViewTextBoxColumn();
+            Description = new DataGridViewTextBoxColumn();
+            ProductCategoryId = new DataGridViewTextBoxColumn();
+            Poster = new DataGridViewTextBoxColumn();
             ProductName = new DataGridViewTextBoxColumn();
             Status = new DataGridViewTextBoxColumn();
             Category = new DataGridViewTextBoxColumn();
             Price = new DataGridViewTextBoxColumn();
             CreatedAt = new DataGridViewTextBoxColumn();
-            Creator = new DataGridViewTextBoxColumn();
-            Action = new DataGridViewTextBoxColumn();
             create = new Button();
+            update = new Button();
+            delete = new Button();
             ((System.ComponentModel.ISupportInitialize)ProductsTable).BeginInit();
             SuspendLayout();
             // 
@@ -108,116 +109,164 @@
             ProductsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             ProductsTable.ColumnHeadersHeight = 50;
             ProductsTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            ProductsTable.Columns.AddRange(new DataGridViewColumn[] { Poster, ProductName, Status, Category, Price, CreatedAt, Creator, Action });
+            ProductsTable.Columns.AddRange(new DataGridViewColumn[] { Id, ProductPrice, Description, ProductCategoryId, Poster, ProductName, Status, Category, Price, CreatedAt });
             ProductsTable.Location = new Point(30, 186);
             ProductsTable.Margin = new Padding(0);
             ProductsTable.Name = "ProductsTable";
+            ProductsTable.ReadOnly = true;
             ProductsTable.RowHeadersWidth = 62;
             ProductsTable.RowTemplate.Height = 100;
             ProductsTable.Size = new Size(1760, 835);
             ProductsTable.TabIndex = 13;
             // 
+            // Id
+            // 
+            Id.HeaderText = "Id";
+            Id.MinimumWidth = 8;
+            Id.Name = "Id";
+            Id.ReadOnly = true;
+            Id.Visible = false;
+            Id.Width = 8;
+            // 
+            // ProductPrice
+            // 
+            ProductPrice.HeaderText = "ProductPrice";
+            ProductPrice.MinimumWidth = 8;
+            ProductPrice.Name = "ProductPrice";
+            ProductPrice.ReadOnly = true;
+            ProductPrice.Visible = false;
+            ProductPrice.Width = 150;
+            // 
+            // Description
+            // 
+            Description.HeaderText = "Description";
+            Description.MinimumWidth = 8;
+            Description.Name = "Description";
+            Description.ReadOnly = true;
+            Description.Visible = false;
+            Description.Width = 150;
+            // 
+            // ProductCategoryId
+            // 
+            ProductCategoryId.HeaderText = "ProductCategoryId";
+            ProductCategoryId.MinimumWidth = 8;
+            ProductCategoryId.Name = "ProductCategoryId";
+            ProductCategoryId.ReadOnly = true;
+            ProductCategoryId.Visible = false;
+            ProductCategoryId.Width = 150;
+            // 
             // Poster
             // 
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Font = new Font("Poppins", 20F);
-            dataGridViewCellStyle2.NullValue = null;
-            Poster.DefaultCellStyle = dataGridViewCellStyle2;
-            Poster.HeaderText = "Product";
+            Poster.HeaderText = "Poster";
             Poster.MinimumWidth = 8;
             Poster.Name = "Poster";
-            Poster.Resizable = DataGridViewTriState.True;
-            Poster.SortMode = DataGridViewColumnSortMode.Automatic;
-            Poster.Width = 300;
+            Poster.ReadOnly = true;
+            Poster.Visible = false;
+            Poster.Width = 150;
             // 
             // ProductName
             // 
             ProductName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.Font = new Font("Poppins", 9F);
-            ProductName.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Font = new Font("Poppins", 9F);
+            ProductName.DefaultCellStyle = dataGridViewCellStyle2;
             ProductName.HeaderText = "Name";
             ProductName.MinimumWidth = 8;
             ProductName.Name = "ProductName";
+            ProductName.ReadOnly = true;
             // 
             // Status
             // 
-            dataGridViewCellStyle4.Font = new Font("Poppins", 9F);
-            Status.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle3.Font = new Font("Poppins", 9F);
+            Status.DefaultCellStyle = dataGridViewCellStyle3;
             Status.HeaderText = "Status";
             Status.MinimumWidth = 8;
             Status.Name = "Status";
-            Status.Width = 150;
+            Status.ReadOnly = true;
+            Status.Width = 200;
             // 
             // Category
             // 
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.Font = new Font("Poppins", 9F);
-            Category.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.Font = new Font("Poppins", 9F);
+            Category.DefaultCellStyle = dataGridViewCellStyle4;
             Category.HeaderText = "Category";
             Category.MinimumWidth = 8;
             Category.Name = "Category";
-            Category.Width = 200;
+            Category.ReadOnly = true;
+            Category.Width = 250;
             // 
             // Price
             // 
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Font = new Font("Poppins", 9F);
-            Price.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Font = new Font("Poppins", 9F);
+            Price.DefaultCellStyle = dataGridViewCellStyle5;
             Price.HeaderText = "Price";
             Price.MinimumWidth = 8;
             Price.Name = "Price";
+            Price.ReadOnly = true;
             Price.Width = 200;
             // 
             // CreatedAt
             // 
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.Font = new Font("Poppins", 9F);
-            CreatedAt.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.Font = new Font("Poppins", 9F);
+            CreatedAt.DefaultCellStyle = dataGridViewCellStyle6;
             CreatedAt.HeaderText = "Created At";
             CreatedAt.MinimumWidth = 8;
             CreatedAt.Name = "CreatedAt";
-            CreatedAt.Width = 150;
-            // 
-            // Creator
-            // 
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.Font = new Font("Poppins", 9F);
-            Creator.DefaultCellStyle = dataGridViewCellStyle8;
-            Creator.HeaderText = "Creator";
-            Creator.MinimumWidth = 8;
-            Creator.Name = "Creator";
-            Creator.Width = 200;
-            // 
-            // Action
-            // 
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.Font = new Font("Poppins", 9F);
-            Action.DefaultCellStyle = dataGridViewCellStyle9;
-            Action.HeaderText = "Action";
-            Action.MinimumWidth = 8;
-            Action.Name = "Action";
-            Action.Width = 150;
+            CreatedAt.ReadOnly = true;
+            CreatedAt.Width = 350;
             // 
             // create
             // 
             create.BackColor = Color.CornflowerBlue;
             create.Font = new Font("Poppins", 12F);
             create.ForeColor = Color.White;
-            create.Location = new Point(1438, 117);
+            create.Location = new Point(1636, 117);
             create.Margin = new Padding(0);
             create.Name = "create";
-            create.Size = new Size(352, 49);
+            create.Size = new Size(160, 49);
             create.TabIndex = 14;
-            create.Text = "Create new product";
+            create.Text = "Create";
             create.UseVisualStyleBackColor = false;
             create.Click += create_Click;
+            // 
+            // update
+            // 
+            update.BackColor = Color.FromArgb(192, 192, 0);
+            update.Font = new Font("Poppins", 12F);
+            update.ForeColor = Color.White;
+            update.Location = new Point(1467, 117);
+            update.Margin = new Padding(0);
+            update.Name = "update";
+            update.Size = new Size(160, 49);
+            update.TabIndex = 15;
+            update.Text = "Update";
+            update.UseVisualStyleBackColor = false;
+            update.Click += update_Click;
+            // 
+            // delete
+            // 
+            delete.BackColor = Color.Crimson;
+            delete.Font = new Font("Poppins", 12F);
+            delete.ForeColor = Color.White;
+            delete.Location = new Point(1296, 117);
+            delete.Margin = new Padding(0);
+            delete.Name = "delete";
+            delete.Size = new Size(160, 49);
+            delete.TabIndex = 16;
+            delete.Text = "Delete";
+            delete.UseVisualStyleBackColor = false;
+            delete.Click += delete_Click;
             // 
             // ProductsPage
             // 
             AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(64, 64, 64);
+            Controls.Add(delete);
+            Controls.Add(update);
             Controls.Add(create);
             Controls.Add(ProductsTable);
             Controls.Add(CategoriesComboBox);
@@ -237,14 +286,18 @@
         private TextBox SearchTextBox;
         private ComboBox CategoriesComboBox;
         private DataGridView ProductsTable;
-        private DataGridViewImageColumn Poster;
+        private Button create;
+        private Button update;
+        private Button delete;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn ProductPrice;
+        private DataGridViewTextBoxColumn Description;
+        private DataGridViewTextBoxColumn ProductCategoryId;
+        private DataGridViewTextBoxColumn Poster;
         private DataGridViewTextBoxColumn ProductName;
         private DataGridViewTextBoxColumn Status;
         private DataGridViewTextBoxColumn Category;
         private DataGridViewTextBoxColumn Price;
         private DataGridViewTextBoxColumn CreatedAt;
-        private DataGridViewTextBoxColumn Creator;
-        private DataGridViewTextBoxColumn Action;
-        private Button create;
     }
 }
