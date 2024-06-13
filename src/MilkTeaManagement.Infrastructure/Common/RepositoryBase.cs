@@ -8,8 +8,8 @@ namespace Infrastructure.Common
 {
     public class RepositoryBase<T, K, TContext> : RepositoryQueryBase<T, K, TContext>, IRepositoryBase<T, K, TContext> where T : EntityBase<K> where TContext : DbContext
     {
-        private readonly TContext _dbContext;
-        private readonly IUnitOfWork<TContext> _unitOfWork;
+        protected readonly TContext _dbContext;
+        protected readonly IUnitOfWork<TContext> _unitOfWork;
 
         public RepositoryBase(TContext dbContext, IUnitOfWork<TContext> unitOfWork) : base(dbContext)
         {

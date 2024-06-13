@@ -33,20 +33,21 @@ namespace MilkTeaManagement.WindowsApp.Forms
             flowLayoutPanel1 = new FlowLayoutPanel();
             close = new PictureBox();
             label1 = new Label();
-            pictureBox1 = new PictureBox();
+            Poster = new PictureBox();
             label2 = new Label();
-            SearchTextBox = new TextBox();
-            textBox1 = new TextBox();
+            NameTextbox = new TextBox();
+            PriceTextbox = new TextBox();
             label3 = new Label();
             label4 = new Label();
             CategoriesComboBox = new ComboBox();
             label5 = new Label();
-            richTextBox1 = new RichTextBox();
+            DescriptionTextbox = new RichTextBox();
             label6 = new Label();
+            Create = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)close).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Poster).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -106,13 +107,17 @@ namespace MilkTeaManagement.WindowsApp.Forms
             label1.TabIndex = 2;
             label1.Text = "Poster:";
             // 
-            // pictureBox1
+            // Poster
             // 
-            pictureBox1.Location = new Point(36, 208);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(324, 461);
-            pictureBox1.TabIndex = 3;
-            pictureBox1.TabStop = false;
+            Poster.BackColor = Color.White;
+            Poster.BackgroundImage = Properties.Resources.upload_image1;
+            Poster.BackgroundImageLayout = ImageLayout.Zoom;
+            Poster.Location = new Point(36, 208);
+            Poster.Name = "Poster";
+            Poster.Size = new Size(324, 461);
+            Poster.TabIndex = 3;
+            Poster.TabStop = false;
+            Poster.Click += poster_Click;
             // 
             // label2
             // 
@@ -126,29 +131,29 @@ namespace MilkTeaManagement.WindowsApp.Forms
             label2.TabIndex = 4;
             label2.Text = "Name:";
             // 
-            // SearchTextBox
+            // NameTextbox
             // 
-            SearchTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            SearchTextBox.BorderStyle = BorderStyle.FixedSingle;
-            SearchTextBox.Font = new Font("Poppins", 11F);
-            SearchTextBox.Location = new Point(398, 195);
-            SearchTextBox.Margin = new Padding(0);
-            SearchTextBox.Name = "SearchTextBox";
-            SearchTextBox.PlaceholderText = "   Product name";
-            SearchTextBox.Size = new Size(587, 40);
-            SearchTextBox.TabIndex = 12;
+            NameTextbox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            NameTextbox.BorderStyle = BorderStyle.FixedSingle;
+            NameTextbox.Font = new Font("Poppins", 11F);
+            NameTextbox.Location = new Point(398, 195);
+            NameTextbox.Margin = new Padding(0);
+            NameTextbox.Name = "NameTextbox";
+            NameTextbox.PlaceholderText = "   Product name";
+            NameTextbox.Size = new Size(587, 40);
+            NameTextbox.TabIndex = 12;
             // 
-            // textBox1
+            // PriceTextbox
             // 
-            textBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Font = new Font("Poppins", 11F);
-            textBox1.Location = new Point(398, 295);
-            textBox1.Margin = new Padding(0);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "   Product price";
-            textBox1.Size = new Size(587, 40);
-            textBox1.TabIndex = 14;
+            PriceTextbox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            PriceTextbox.BorderStyle = BorderStyle.FixedSingle;
+            PriceTextbox.Font = new Font("Poppins", 11F);
+            PriceTextbox.Location = new Point(398, 295);
+            PriceTextbox.Margin = new Padding(0);
+            PriceTextbox.Name = "PriceTextbox";
+            PriceTextbox.PlaceholderText = "   Product price";
+            PriceTextbox.Size = new Size(587, 40);
+            PriceTextbox.TabIndex = 14;
             // 
             // label3
             // 
@@ -184,6 +189,7 @@ namespace MilkTeaManagement.WindowsApp.Forms
             CategoriesComboBox.Size = new Size(587, 44);
             CategoriesComboBox.TabIndex = 16;
             CategoriesComboBox.Text = "  Category";
+            CategoriesComboBox.SelectedIndexChanged += CategoriesComboBox_SelectedIndexChanged;
             // 
             // label5
             // 
@@ -197,15 +203,15 @@ namespace MilkTeaManagement.WindowsApp.Forms
             label5.TabIndex = 17;
             label5.Text = "Description:";
             // 
-            // richTextBox1
+            // DescriptionTextbox
             // 
-            richTextBox1.Font = new Font("Poppins", 10F);
-            richTextBox1.Location = new Point(398, 498);
-            richTextBox1.Margin = new Padding(0);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(587, 171);
-            richTextBox1.TabIndex = 18;
-            richTextBox1.Text = "";
+            DescriptionTextbox.Font = new Font("Poppins", 10F);
+            DescriptionTextbox.Location = new Point(398, 498);
+            DescriptionTextbox.Margin = new Padding(0);
+            DescriptionTextbox.Name = "DescriptionTextbox";
+            DescriptionTextbox.Size = new Size(587, 171);
+            DescriptionTextbox.TabIndex = 18;
+            DescriptionTextbox.Text = "";
             // 
             // label6
             // 
@@ -220,21 +226,38 @@ namespace MilkTeaManagement.WindowsApp.Forms
             label6.Text = "Create New Product";
             label6.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // Create
+            // 
+            Create.AutoSize = true;
+            Create.BackColor = Color.SteelBlue;
+            Create.Font = new Font("Poppins", 12F);
+            Create.ForeColor = Color.White;
+            Create.Location = new Point(322, 700);
+            Create.Margin = new Padding(0);
+            Create.Name = "Create";
+            Create.Size = new Size(380, 52);
+            Create.TabIndex = 20;
+            Create.Text = "Create";
+            Create.UseVisualStyleBackColor = false;
+            Create.Click += create_Click;
+            // 
             // CreateProductForm
             // 
-            AutoScaleMode = AutoScaleMode.None;
+            AutoScaleDimensions = new SizeF(144F, 144F);
+            AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(1024, 709);
+            ClientSize = new Size(1024, 788);
+            Controls.Add(Create);
             Controls.Add(label6);
-            Controls.Add(richTextBox1);
+            Controls.Add(DescriptionTextbox);
             Controls.Add(label5);
             Controls.Add(CategoriesComboBox);
             Controls.Add(label4);
-            Controls.Add(textBox1);
+            Controls.Add(PriceTextbox);
             Controls.Add(label3);
-            Controls.Add(SearchTextBox);
+            Controls.Add(NameTextbox);
             Controls.Add(label2);
-            Controls.Add(pictureBox1);
+            Controls.Add(Poster);
             Controls.Add(label1);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
@@ -244,7 +267,7 @@ namespace MilkTeaManagement.WindowsApp.Forms
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)closeButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)close).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Poster).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -256,15 +279,16 @@ namespace MilkTeaManagement.WindowsApp.Forms
         private PictureBox close;
         private PictureBox closeButton;
         private Label label1;
-        private PictureBox pictureBox1;
+        private PictureBox Poster;
         private Label label2;
-        private TextBox SearchTextBox;
-        private TextBox textBox1;
+        private TextBox NameTextbox;
+        private TextBox PriceTextbox;
         private Label label3;
         private Label label4;
         private ComboBox CategoriesComboBox;
         private Label label5;
-        private RichTextBox richTextBox1;
+        private RichTextBox DescriptionTextbox;
         private Label label6;
+        private Button Create;
     }
 }

@@ -6,6 +6,7 @@ using MilkTeaManagement.Application;
 using MilkTeaManagement.Infrastructure;
 using MilkTeaManagement.Infrastructure.Data;
 using MilkTeaManagement.WindowsApp.Forms;
+using MilkTeaManagement.WindowsApp.Forms.Products;
 using MilkTeaManagement.WindowsApp.Pages.Auth;
 using MilkTeaManagement.WindowsApp.Pages.Categories;
 using MilkTeaManagement.WindowsApp.Pages.Employees;
@@ -56,7 +57,7 @@ namespace MilkTeaManagement.WindowsApp
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddEnvironmentVariables();
 
-            builder.Services.AddInfrastructureServices(builder.Configuration);
+            builder.Services.AddInfrastructure(builder.Configuration);
 
             builder.Services.AddApplicationServices();
 
@@ -73,6 +74,7 @@ namespace MilkTeaManagement.WindowsApp
             builder.Services.AddTransient<EmployeesPage>();
 
             builder.Services.AddScoped<CreateProductForm>();
+            builder.Services.AddScoped<UpdateProductForm>();
 
             return builder;
         }
