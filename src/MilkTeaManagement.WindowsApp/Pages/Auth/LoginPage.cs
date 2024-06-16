@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using MilkTeaManagement.Application.Common.Models.Auth;
 using MilkTeaManagement.Application.Contracts;
+using MilkTeaManagement.Domain.Entities;
 using MilkTeaManagement.Domain.ValueObjetcs;
 
 namespace MilkTeaManagement.WindowsApp.Pages.Auth
@@ -9,13 +11,13 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
     public partial class LoginPage : Form
     {
         private readonly IAuthRepository _authRepository;
-        private readonly IUsersRepository _usersRepository;
+        private readonly UserManager<User> _userManager;
 
-        public LoginPage(IAuthRepository authRepository, IUsersRepository usersRepository)
+        public LoginPage(IAuthRepository authRepository, UserManager<User> userManager)
         {
             InitializeComponent();
             _authRepository = authRepository;
-            _usersRepository = usersRepository;
+            _userManager = userManager;
         }
 
         private void pictureBox4_Click(object sender, EventArgs e)
@@ -51,7 +53,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
             }
             else
             {
-                var user = await _usersRepository.GetUserByUserNameAsync(userName);
+                var user = await _userManager.FindByNameAsync(userName);
 
                 UserIdentity.Set(user);
 

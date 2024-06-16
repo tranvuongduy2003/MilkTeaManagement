@@ -121,5 +121,28 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
             var categoryName = ((ComboBox)sender).Text;
             CategoryId = Categories.FirstOrDefault(c => c.Name.Equals(categoryName))?.Id ?? "";
         }
+
+        private async void delete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var product = await _productsRepository.GetByIdAsync(Product.Id);
+
+                if (product == null)
+                    throw new Exception("Product is not existed");
+
+                await _productsRepository.DeleteAsync(product);
+                await _productsRepository.SaveChangesAsync();
+
+                MessageBox.Show("Delete new product successfully!", "Success!", MessageBoxButtons.OK);
+                this.OnLoad();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
     }
 }

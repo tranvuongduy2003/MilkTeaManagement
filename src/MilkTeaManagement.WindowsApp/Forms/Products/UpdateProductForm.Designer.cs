@@ -49,6 +49,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
             DescriptionTextbox = new RichTextBox();
             label6 = new Label();
             Update = new Button();
+            delete = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)close).BeginInit();
@@ -237,7 +238,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
             Update.BackColor = Color.FromArgb(192, 192, 0);
             Update.Font = new Font("Poppins", 12F);
             Update.ForeColor = Color.White;
-            Update.Location = new Point(322, 700);
+            Update.Location = new Point(605, 700);
             Update.Margin = new Padding(0);
             Update.Name = "Update";
             Update.Size = new Size(380, 52);
@@ -246,12 +247,28 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
             Update.UseVisualStyleBackColor = false;
             Update.Click += create_Click;
             // 
+            // delete
+            // 
+            delete.AutoSize = true;
+            delete.BackColor = Color.Crimson;
+            delete.Font = new Font("Poppins", 12F);
+            delete.ForeColor = Color.White;
+            delete.Location = new Point(36, 700);
+            delete.Margin = new Padding(0);
+            delete.Name = "delete";
+            delete.Size = new Size(380, 52);
+            delete.TabIndex = 21;
+            delete.Text = "Delete";
+            delete.UseVisualStyleBackColor = false;
+            delete.Click += delete_Click;
+            // 
             // UpdateProductForm
             // 
             AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(64, 64, 64);
             ClientSize = new Size(1024, 788);
+            Controls.Add(delete);
             Controls.Add(Update);
             Controls.Add(label6);
             Controls.Add(DescriptionTextbox);
@@ -295,5 +312,6 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
         private RichTextBox DescriptionTextbox;
         private Label label6;
         private Button Update;
+        private Button delete;
     }
 }

@@ -12,6 +12,7 @@ using MilkTeaManagement.WindowsApp.Pages.Categories;
 using MilkTeaManagement.WindowsApp.Pages.Employees;
 using MilkTeaManagement.WindowsApp.Pages.Home;
 using MilkTeaManagement.WindowsApp.Pages.Products;
+using MilkTeaManagement.WindowsApp.UserControls.Employees;
 
 namespace MilkTeaManagement.WindowsApp
 {
@@ -29,20 +30,21 @@ namespace MilkTeaManagement.WindowsApp
             var host = CreateHostBuilder().Build();
             ServiceProvider = host.Services;
 
-            using (var scope = ServiceProvider.CreateScope())
+            using (var scope = host.Services.CreateScope())
             {
-                var context = ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                var services = scope.ServiceProvider;
+                var context = services.GetRequiredService<ApplicationDbContext>();
 
                 try
                 {
                     if (context.Database.GetPendingMigrations().Count() > 0)
                         context.Database.Migrate();
-                    var seeder = ServiceProvider.GetService<ApplicationDbContextSeed>();
-                    seeder?.SeedAsync().Wait();
+                    var dbInitializer = services.GetService<ApplicationDbContextSeed>();
+                    dbInitializer?.SeedAsync().Wait();
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+                    MessageBox.Show("An error occurred while seeding the database.");
                 }
             }
 
@@ -75,6 +77,7 @@ namespace MilkTeaManagement.WindowsApp
 
             builder.Services.AddScoped<CreateProductForm>();
             builder.Services.AddScoped<UpdateProductForm>();
+            builder.Services.AddScoped<InformationPanel>();
 
             return builder;
         }

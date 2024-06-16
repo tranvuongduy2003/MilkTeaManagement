@@ -1,5 +1,7 @@
 ﻿using Bogus;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Extensions;
 using MilkTeaManagement.Domain.Entities;
 using MilkTeaManagement.Domain.Enums;
 
@@ -7,11 +9,20 @@ namespace MilkTeaManagement.Infrastructure.Data
 {
     public class ApplicationDbContextSeed
     {
-        private readonly ApplicationDbContext _context;
+        private const int MAX_EVENTS_QUANTITY = 20;
+        private const int MAX_CATEGORIES_QUANTITY = 5;
+        private const int MAX_USERS_QUANTITY = 10;
 
-        public ApplicationDbContextSeed(ApplicationDbContext context)
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+
+        public ApplicationDbContextSeed(ApplicationDbContext context, UserManager<User> userManager,
+          RoleManager<IdentityRole> roleManager)
         {
             _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public async Task InitialiseAsync()
@@ -33,7 +44,10 @@ namespace MilkTeaManagement.Infrastructure.Data
         {
             try
             {
-                await TrySeedAsync();
+                await SeedRoles();
+                await SeedUsers();
+                await SeedCategories();
+                await SeedProducts();
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -42,29 +56,86 @@ namespace MilkTeaManagement.Infrastructure.Data
             }
         }
 
-        public async Task TrySeedAsync()
+        private async Task SeedRoles()
         {
-            if (!_context.Users.Any())
+            if (!_roleManager.Roles.Any())
             {
-                var fakerUser = new Faker<User>()
-                    .RuleFor(c => c.Id, _ => Guid.NewGuid().ToString())
-                    .RuleFor(c => c.Status, _ => EUserStatus.ACTIVE)
-                    .RuleFor(c => c.Avatar, _ => "https://i.pravatar.cc/300")
-                    .RuleFor(c => c.DOB, f => f.Person.DateOfBirth)
-                    .RuleFor(c => c.Email, _ => "tranvuongduy2003@gmail.com")
-                    .RuleFor(c => c.FullName, _ => "Trần Vương Duy")
-                    .RuleFor(c => c.Gender, _ => EGender.MALE)
-                    .RuleFor(c => c.Password, _ => BCrypt.Net.BCrypt.HashPassword("Admin@123"))
-                    .RuleFor(c => c.PhoneNumber, _ => "0829440357")
-                    .RuleFor(c => c.UserName, _ => "admin")
-                    .RuleFor(c => c.CreatedDate, _ => DateTimeOffset.UtcNow)
-                    .RuleFor(c => c.UpdatedDate, _ => DateTimeOffset.UtcNow);
+                await _roleManager.CreateAsync(new IdentityRole()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = EUserRole.Admin.GetDisplayName(),
+                });
+                await _roleManager.CreateAsync(new IdentityRole()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = EUserRole.Manager.GetDisplayName(),
+                });
+                await _roleManager.CreateAsync(new IdentityRole()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = EUserRole.Cashier.GetDisplayName(),
+                });
+                await _roleManager.CreateAsync(new IdentityRole()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = EUserRole.Barista.GetDisplayName(),
+                });
+            }
+            await _context.SaveChangesAsync();
+        }
 
-                var user = fakerUser.Generate(1).FirstOrDefault();
-                await _context.Users.AddAsync(user);
+        private async Task SeedUsers()
+        {
+            if (!_userManager.Users.Any())
+            {
+                var fakerAdmin = new Faker<User>()
+                   .RuleFor(c => c.Id, _ => Guid.NewGuid().ToString())
+                   .RuleFor(c => c.Status, _ => EUserStatus.ACTIVE)
+                   .RuleFor(c => c.Avatar, _ => "https://i.pravatar.cc/300")
+                   .RuleFor(c => c.DOB, f => f.Person.DateOfBirth)
+                   .RuleFor(c => c.Email, _ => "admin@gmail.com")
+                   .RuleFor(c => c.FullName, _ => "Admin")
+                   .RuleFor(c => c.Gender, _ => EGender.MALE)
+                   .RuleFor(c => c.PhoneNumber, _ => "0829440357")
+                   .RuleFor(c => c.UserName, _ => "admin");
+
+                var generatedAdmin = fakerAdmin.Generate();
+                var result = await _userManager.CreateAsync(generatedAdmin, "Admin@123");
+                if (result.Succeeded)
+                {
+                    var admin = await _userManager.FindByEmailAsync(generatedAdmin.Email);
+                    await _userManager.AddToRoleAsync(admin, EUserRole.Admin.GetDisplayName());
+                }
+
+
+                var fakerUser = new Faker<User>()
+                   .RuleFor(c => c.Id, _ => Guid.NewGuid().ToString())
+                   .RuleFor(c => c.Status, _ => EUserStatus.ACTIVE)
+                   .RuleFor(c => c.Avatar, _ => "https://i.pravatar.cc/300")
+                   .RuleFor(c => c.DOB, f => f.Person.DateOfBirth)
+                   .RuleFor(c => c.Email, f => f.Person.Email)
+                   .RuleFor(c => c.FullName, f => f.Person.FullName)
+                   .RuleFor(c => c.Gender, f => f.PickRandom<EGender>())
+                   .RuleFor(c => c.PhoneNumber, f => f.Person.Phone)
+                   .RuleFor(c => c.UserName, f => f.Person.UserName);
+
+                var generatedUsers = fakerUser.Generate(MAX_USERS_QUANTITY);
+                foreach (var generatedUser in generatedUsers)
+                {
+                    var userResult = await _userManager.CreateAsync(generatedUser, "User@123");
+                    if (userResult.Succeeded)
+                    {
+                        var user = await _userManager.FindByEmailAsync(generatedUser.Email);
+                        await _userManager.AddToRoleAsync(user, new Faker().PickRandom<EUserRole>().GetDisplayName());
+                    }
+                }
+
                 await _context.SaveChangesAsync();
             }
+        }
 
+        private async Task SeedCategories()
+        {
             if (!_context.Categories.Any())
             {
                 var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == "admin");
@@ -81,10 +152,12 @@ namespace MilkTeaManagement.Infrastructure.Data
                 await _context.Categories.AddRangeAsync(categories);
                 await _context.SaveChangesAsync();
             }
+        }
 
+        private async Task SeedProducts()
+        {
             if (!_context.Products.Any())
             {
-                var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == "admin");
                 var categories = await _context.Categories.ToListAsync();
 
                 var fakerProduct = new Faker<Product>()

@@ -27,6 +27,8 @@ namespace MilkTeaManagement.WindowsApp.Pages.Products
             InitializeComponent();
             _productsRepository = productsRepository;
             _categoriesRepository = categoriesRepository;
+
+            ProductsTable.CellDoubleClick += OnUpdateProduct;
         }
 
         public async void OnLoad()
@@ -94,30 +96,34 @@ namespace MilkTeaManagement.WindowsApp.Pages.Products
 
         private async void update_Click(object sender, EventArgs e)
         {
-            if (ProductsTable.SelectedRows.Count == 0)
+            if (ProductsTable.SelectedCells.Count == 0)
             {
                 MessageBox.Show("Please select product row to update!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            UpdateProductForm updateProductForm = Program.ServiceProvider.GetRequiredService<UpdateProductForm>();
-            var selectedRow = ProductsTable.SelectedRows[0];
-            var product = new Product
+            var selectedCell = ProductsTable.SelectedCells[0];
+            if (selectedCell.RowIndex >= 0)
             {
-                Id = selectedRow.Cells["Id"].Value.ToString(),
-                CategoryId = selectedRow.Cells["ProductCategoryId"].Value.ToString(),
-                Description = selectedRow.Cells["Description"].Value.ToString(),
-                Poster = selectedRow.Cells["Poster"].Value.ToString(),
-                Name = selectedRow.Cells["ProductName"].Value.ToString(),
-                Status = selectedRow.Cells["Status"].Value == nameof(EProductStatus.AVAILABLE) ? EProductStatus.AVAILABLE : EProductStatus.UNAVAILABLE,
-                Price = decimal.Parse(selectedRow.Cells["ProductPrice"].Value.ToString()),
+                UpdateProductForm updateProductForm = Program.ServiceProvider.GetRequiredService<UpdateProductForm>();
+                var selectedRow = ProductsTable.Rows[selectedCell.RowIndex];
+                var product = new Product
+                {
+                    Id = selectedRow.Cells["Id"].Value.ToString(),
+                    CategoryId = selectedRow.Cells["ProductCategoryId"].Value.ToString(),
+                    Description = selectedRow.Cells["Description"].Value.ToString(),
+                    Poster = selectedRow.Cells["Poster"].Value.ToString(),
+                    Name = selectedRow.Cells["ProductName"].Value.ToString(),
+                    Status = selectedRow.Cells["Status"].Value == nameof(EProductStatus.AVAILABLE) ? EProductStatus.AVAILABLE : EProductStatus.UNAVAILABLE,
+                    Price = decimal.Parse(selectedRow.Cells["ProductPrice"].Value.ToString()),
 
-            };
-            updateProductForm.OnLoadProduct(product);
+                };
+                updateProductForm.OnLoadProduct(product);
 
-            if (updateProductForm.ShowDialog() == DialogResult.OK)
-            {
-                this.OnLoad();
+                if (updateProductForm.ShowDialog() == DialogResult.OK)
+                {
+                    this.OnLoad();
+                }
             }
         }
 
@@ -125,29 +131,59 @@ namespace MilkTeaManagement.WindowsApp.Pages.Products
         {
             try
             {
-                if (ProductsTable.SelectedRows.Count == 0)
+                if (ProductsTable.SelectedCells.Count == 0)
                 {
                     MessageBox.Show("Please select product row to delete!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                var selectedRow = ProductsTable.SelectedRows[0];
+                var selectedCell = ProductsTable.SelectedCells[0];
+                if (selectedCell.RowIndex >= 0)
+                {
+                    var selectedRow = ProductsTable.Rows[selectedCell.RowIndex];
 
-                var product = await _productsRepository.GetByIdAsync(selectedRow.Cells["Id"].Value.ToString());
+                    var product = await _productsRepository.GetByIdAsync(selectedRow.Cells["Id"].Value.ToString());
 
-                if (product == null)
-                    throw new Exception("Product is not existed");
+                    if (product == null)
+                        throw new Exception("Product is not existed");
 
-                await _productsRepository.DeleteAsync(product);
-                await _productsRepository.SaveChangesAsync();
+                    await _productsRepository.DeleteAsync(product);
+                    await _productsRepository.SaveChangesAsync();
 
-                MessageBox.Show("Delete new product successfully!", "Success!", MessageBoxButtons.OK);
-                this.OnLoad();
+                    MessageBox.Show("Delete new product successfully!", "Success!", MessageBoxButtons.OK);
+                    this.OnLoad();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
+        }
+
+        private async void OnUpdateProduct(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                UpdateProductForm updateProductForm = Program.ServiceProvider.GetRequiredService<UpdateProductForm>();
+                var selectedRow = ProductsTable.Rows[e.RowIndex];
+                var product = new Product
+                {
+                    Id = selectedRow.Cells["Id"].Value.ToString(),
+                    CategoryId = selectedRow.Cells["ProductCategoryId"].Value.ToString(),
+                    Description = selectedRow.Cells["Description"].Value.ToString(),
+                    Poster = selectedRow.Cells["Poster"].Value.ToString(),
+                    Name = selectedRow.Cells["ProductName"].Value.ToString(),
+                    Status = selectedRow.Cells["Status"].Value == nameof(EProductStatus.AVAILABLE) ? EProductStatus.AVAILABLE : EProductStatus.UNAVAILABLE,
+                    Price = decimal.Parse(selectedRow.Cells["ProductPrice"].Value.ToString()),
+
+                };
+                updateProductForm.OnLoadProduct(product);
+
+                if (updateProductForm.ShowDialog() == DialogResult.OK)
+                {
+                    this.OnLoad();
+                }
             }
         }
     }

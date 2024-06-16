@@ -31,7 +31,6 @@ namespace MilkTeaManagement.Domain.ValueObjetcs
         {
             Id = user.Id;
             UserName = user.UserName;
-            Password = user.Password;
             Name = user.FullName;
             Avatar = user.Avatar;
             Gender = user.Gender;

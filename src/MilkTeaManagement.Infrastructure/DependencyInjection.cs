@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MilkTeaManagement.Application.Common.Interfaces;
 using MilkTeaManagement.Application.Common.SeedWork;
 using MilkTeaManagement.Application.Contracts;
+using MilkTeaManagement.Domain.Entities;
 using MilkTeaManagement.Infrastructure.Common;
 using MilkTeaManagement.Infrastructure.Configurations;
 using MilkTeaManagement.Infrastructure.Data;
@@ -20,7 +22,7 @@ namespace MilkTeaManagement.Infrastructure
             services.ConfigureApplicationDbContext(configuration);
             services.ConfigureAzureSignalR(configuration);
             services.ConfigureInfrastructureServices();
-
+            services.ConfigureIndentity();
             return services;
         }
 
@@ -57,6 +59,29 @@ namespace MilkTeaManagement.Infrastructure
             return services;
         }
 
+        private static IServiceCollection ConfigureIndentity(this IServiceCollection services)
+        {
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Default Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
+                options.SignIn.RequireConfirmedAccount = false;
+                options.SignIn.RequireConfirmedEmail = false;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireDigit = true;
+                options.Password.RequireUppercase = true;
+                options.User.RequireUniqueEmail = true;
+            });
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            return services;
+        }
+
         private static IServiceCollection ConfigureAzureSignalR(this IServiceCollection services, IConfiguration configuration)
         {
             var azureSignalR = configuration.GetValue<string>("AzureSignalR");
@@ -69,12 +94,12 @@ namespace MilkTeaManagement.Infrastructure
         }
 
         private static IServiceCollection ConfigureInfrastructureServices(this IServiceCollection services) =>
-            services.AddScoped<ApplicationDbContextSeed>()
+            services
                 .AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>))
                 .AddScoped(typeof(IEmailService), typeof(EmailService))
                 .AddScoped(typeof(IAzureBlobService), typeof(AzureBlobService))
+                .AddTransient<ApplicationDbContextSeed>()
                 .AddTransient<IAuthRepository, AuthRepository>()
-                .AddTransient<IUsersRepository, UsersRespository>()
                 .AddTransient<ICategoriesRepository, CategoriesRepository>()
                 .AddTransient<IProductsRepository, ProductsRepository>();
     }

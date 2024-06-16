@@ -1,11 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MilkTeaManagement.Domain.Common.Interfaces;
 using MilkTeaManagement.Domain.Entities;
 using System.Reflection;
 
 namespace MilkTeaManagement.Infrastructure.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -55,6 +57,7 @@ namespace MilkTeaManagement.Infrastructure.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<IdentityRole> Roles { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
     }

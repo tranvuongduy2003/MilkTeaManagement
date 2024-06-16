@@ -114,8 +114,8 @@
             ProductsTable.Margin = new Padding(0);
             ProductsTable.Name = "ProductsTable";
             ProductsTable.ReadOnly = true;
-            ProductsTable.RowHeadersWidth = 62;
-            ProductsTable.RowTemplate.Height = 100;
+            ProductsTable.RowHeadersWidth = 50;
+            ProductsTable.RowTemplate.Height = 50;
             ProductsTable.Size = new Size(1760, 835);
             ProductsTable.TabIndex = 13;
             // 
