@@ -1,7 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using MilkTeaManagement.Application.Common.Interfaces;
 using MilkTeaManagement.Application.Common.Models.Auth;
 using MilkTeaManagement.Application.Contracts;
+using MilkTeaManagement.Domain.Entities;
 using MilkTeaManagement.Domain.ValueObjetcs;
 
 namespace MilkTeaManagement.WindowsApp.Pages.Auth
@@ -9,15 +12,17 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
     public partial class RegisterPage : Form
     {
         private readonly IAuthRepository _authRepository;
-        private readonly IUsersRepository _usersRepository;
+        private readonly UserManager<User> _userManager;
+        private readonly IAzureBlobService _azureBlobService;
 
         private string AvatarFileName { get; set; } = string.Empty;
 
-        public RegisterPage(IAuthRepository authRepository, IUsersRepository usersRepository)
+        public RegisterPage(IAuthRepository authRepository, UserManager<User> userManager, IAzureBlobService azureBlobService)
         {
             InitializeComponent();
             _authRepository = authRepository;
-            _usersRepository = usersRepository;
+            _userManager = userManager;
+            _azureBlobService = azureBlobService;
         }
 
         private void pictureBox4_Click(object sender, EventArgs e)
@@ -63,12 +68,14 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
                 return;
             }
 
+            var uploadedFile = await _azureBlobService.UploadAsync(AvatarFileName);
+
             var payload = new RegisterRequest
             {
                 UserName = userName,
                 Password = password,
                 Email = email,
-                AvatarFilePath = AvatarFileName,
+                AvatarFilePath = uploadedFile.Blob.Uri,
                 FullName = fullName
             };
 
@@ -82,7 +89,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
             }
             else
             {
-                var user = await _usersRepository.GetUserByUserNameAsync(userName);
+                var user = await _userManager.FindByNameAsync(payload.UserName);
 
                 UserIdentity.Set(user);
 

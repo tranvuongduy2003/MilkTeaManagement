@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using MilkTeaManagement.Application.Common.Interfaces;
 using MilkTeaManagement.Application.Common.Models.Auth;
 using MilkTeaManagement.Application.Contracts;
@@ -11,36 +12,37 @@ namespace MilkTeaManagement.Infrastructure.Repositories
     {
         private readonly ApplicationDbContext _context;
         private readonly IEmailService _emailService;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AuthRepository(ApplicationDbContext context, IEmailService emailService)
+        public AuthRepository(ApplicationDbContext context, IEmailService emailService, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _context = context;
             _emailService = emailService;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public async Task<string> LoginAsync(LoginRequest request)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == request.UserName);
+            var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null)
                 return "User does not exist";
 
-            var isValidPassword = BCrypt.Net.BCrypt.Verify(request.Password, user.Password);
-
+            bool isValidPassword = await _userManager.CheckPasswordAsync(user, request.Password);
             if (!isValidPassword)
                 return "Wrong password";
+
+            await _signInManager.PasswordSignInAsync(user, request.Password, true, false);
 
             return "Login successfully!";
         }
 
         public async Task<string> RegisterAsync(RegisterRequest request)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == request.UserName);
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName.Equals(request.UserName) || u.Email.Equals(request.Email));
             if (user != null)
-                return "User name already existed";
-
-            user = await _context.Users.FirstOrDefaultAsync(user => user.Email == request.Email);
-            if (user != null)
-                return "Email already existed";
+                return "User name or Email already existed";
 
             user = new User()
             {
@@ -51,16 +53,16 @@ namespace MilkTeaManagement.Infrastructure.Repositories
                 FullName = request.FullName,
             };
 
-            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
-            if (hashedPassword == null)
-                return "Something went wrong!";
+            var result = await _userManager.CreateAsync(user, request.Password);
+            if (result.Succeeded)
+            {
+                var userToReturn = await _userManager.FindByNameAsync(request.UserName);
+                await _userManager.AddToRoleAsync(user, request.Role);
+                await _signInManager.PasswordSignInAsync(user, request.Password, true, false);
+                await SendRegistrationConfirmationEmailAsync(user.Email, user.UserName);
 
-            user.Password = hashedPassword;
-
-            await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
-
-            await SendRegistrationConfirmationEmailAsync(user.Email, user.UserName);
+                return "Register successfully!";
+            }
 
             return "";
         }
@@ -75,7 +77,7 @@ namespace MilkTeaManagement.Infrastructure.Repositories
             if (hashedPassword == null)
                 return "Something went wrong!";
 
-            user.Password = hashedPassword;
+            await _userManager.ChangePasswordAsync(user, user.PasswordHash, hashedPassword);
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();

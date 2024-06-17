@@ -64,6 +64,7 @@ namespace MilkTeaManagement.WindowsApp
             SetItemSelected(sender);
             contentPanel.Controls.Clear();
             EmployeesPage employeesPage = Program.ServiceProvider.GetRequiredService<EmployeesPage>();
+            employeesPage.OnLoad();
             contentPanel.Controls.Add(employeesPage);
         }
 

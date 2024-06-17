@@ -1,19 +1,14 @@
-﻿using MilkTeaManagement.Domain.Common.Interfaces;
+﻿using Microsoft.AspNetCore.Identity;
+using MilkTeaManagement.Domain.Common.Interfaces;
 using MilkTeaManagement.Domain.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MilkTeaManagement.Domain.Entities
 {
     [Table("Users")]
-    public class User : EntityAuditBase<string>
+    public class User : IdentityUser, IAuditable
     {
-        public string UserName { get; set; }
-
-        public string Password { get; set; }
-
         public string FullName { get; set; }
-
-        public string Email { get; set; }
 
         public string Avatar { get; set; }
 
@@ -24,5 +19,9 @@ namespace MilkTeaManagement.Domain.Entities
         public string PhoneNumber { get; set; }
 
         public EUserStatus Status { get; set; } = EUserStatus.ACTIVE;
+
+        public DateTimeOffset CreatedDate { get; set; }
+
+        public DateTimeOffset? UpdatedDate { get; set; }
     }
 }
