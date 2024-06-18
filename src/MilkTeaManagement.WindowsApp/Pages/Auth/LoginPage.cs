@@ -4,7 +4,6 @@ using Microsoft.IdentityModel.Tokens;
 using MilkTeaManagement.Application.Common.Models.Auth;
 using MilkTeaManagement.Application.Contracts;
 using MilkTeaManagement.Domain.Entities;
-using MilkTeaManagement.Domain.ValueObjetcs;
 
 namespace MilkTeaManagement.WindowsApp.Pages.Auth
 {
@@ -54,8 +53,10 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
             else
             {
                 var user = await _userManager.FindByNameAsync(userName);
+                var roles = await _userManager.GetRolesAsync(user);
 
-                UserIdentity.Set(user);
+                Program.UserIdentity.Set(user);
+                Program.UserIdentity.Role = roles.FirstOrDefault();
 
                 //TODO: Notify login successfully -> Hidden Login form -> Show Main form
                 MessageBox.Show("Login successfully!");

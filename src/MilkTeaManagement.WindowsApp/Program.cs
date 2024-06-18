@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MilkTeaManagement.Application;
+using MilkTeaManagement.Domain.ValueObjetcs;
 using MilkTeaManagement.Infrastructure;
 using MilkTeaManagement.Infrastructure.Data;
 using MilkTeaManagement.WindowsApp.Forms;
@@ -13,12 +14,14 @@ using MilkTeaManagement.WindowsApp.Pages.Employees;
 using MilkTeaManagement.WindowsApp.Pages.Home;
 using MilkTeaManagement.WindowsApp.Pages.Products;
 using MilkTeaManagement.WindowsApp.UserControls.Employees;
+using MilkTeaManagement.WindowsApp.UserControls.Home;
 
 namespace MilkTeaManagement.WindowsApp
 {
     internal static class Program
     {
         public static IServiceProvider ServiceProvider { get; private set; }
+        public static UserIdentity? UserIdentity { get; set; } = new();
 
         [STAThread]
         static void Main()
@@ -48,7 +51,7 @@ namespace MilkTeaManagement.WindowsApp
                 }
             }
 
-            System.Windows.Forms.Application.Run(ServiceProvider.GetRequiredService<Main>());
+            System.Windows.Forms.Application.Run(ServiceProvider.GetRequiredService<LoginPage>());
         }
 
         static HostApplicationBuilder CreateHostBuilder()
@@ -62,6 +65,8 @@ namespace MilkTeaManagement.WindowsApp
             builder.Services.AddInfrastructure(builder.Configuration);
 
             builder.Services.AddApplicationServices();
+
+            builder.Services.AddSingleton<UserIdentity>(UserIdentity);
 
             // Main form
             builder.Services.AddTransient<Main>();
@@ -78,6 +83,7 @@ namespace MilkTeaManagement.WindowsApp
             builder.Services.AddScoped<CreateProductForm>();
             builder.Services.AddScoped<UpdateProductForm>();
             builder.Services.AddScoped<InformationPanel>();
+            builder.Services.AddScoped<BillItem>();
 
             return builder;
         }

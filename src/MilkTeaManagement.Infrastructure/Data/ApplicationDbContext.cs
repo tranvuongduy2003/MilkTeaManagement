@@ -16,11 +16,26 @@ namespace MilkTeaManagement.Infrastructure.Data
 
         //public DbSet<Order> Orders { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            base.OnModelCreating(builder);
 
-            base.OnModelCreating(modelBuilder);
+            builder.Entity<User>().Property(x => x.Id).HasMaxLength(50).IsUnicode(false);
+            builder.Entity<IdentityRole>().Property(x => x.Id).HasMaxLength(50).IsUnicode(false);
+            builder.Entity<Product>().Property(x => x.Id).HasMaxLength(50).IsUnicode(false);
+            builder.Entity<Category>().Property(x => x.Id).HasMaxLength(50).IsUnicode(false);
+            builder.Entity<Order>().Property(x => x.Id).HasMaxLength(50).IsUnicode(false);
+            builder.Entity<OrderItem>().Property(x => x.Id).HasMaxLength(50).IsUnicode(false);
+
+            builder.Entity<Order>()
+                    .HasMany(x => x.OrderItems)
+                    .WithOne(x => x.Order)
+                    .HasForeignKey(x => x.OrderId);
+            builder.Entity<Product>()
+                    .HasMany(x => x.OrderItems)
+                    .WithOne(x => x.Product)
+                    .HasForeignKey(x => x.ProductId);
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
@@ -60,6 +75,8 @@ namespace MilkTeaManagement.Infrastructure.Data
         public DbSet<IdentityRole> Roles { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
     }
 
 }

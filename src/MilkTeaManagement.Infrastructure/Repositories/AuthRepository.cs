@@ -13,14 +13,12 @@ namespace MilkTeaManagement.Infrastructure.Repositories
         private readonly ApplicationDbContext _context;
         private readonly IEmailService _emailService;
         private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
 
-        public AuthRepository(ApplicationDbContext context, IEmailService emailService, UserManager<User> userManager, SignInManager<User> signInManager)
+        public AuthRepository(ApplicationDbContext context, IEmailService emailService, UserManager<User> userManager)
         {
             _context = context;
             _emailService = emailService;
             _userManager = userManager;
-            _signInManager = signInManager;
         }
 
         public async Task<string> LoginAsync(LoginRequest request)
@@ -33,9 +31,7 @@ namespace MilkTeaManagement.Infrastructure.Repositories
             if (!isValidPassword)
                 return "Wrong password";
 
-            await _signInManager.PasswordSignInAsync(user, request.Password, true, false);
-
-            return "Login successfully!";
+            return "";
         }
 
         public async Task<string> RegisterAsync(RegisterRequest request)
@@ -58,7 +54,6 @@ namespace MilkTeaManagement.Infrastructure.Repositories
             {
                 var userToReturn = await _userManager.FindByNameAsync(request.UserName);
                 await _userManager.AddToRoleAsync(user, request.Role);
-                await _signInManager.PasswordSignInAsync(user, request.Password, true, false);
                 await SendRegistrationConfirmationEmailAsync(user.Email, user.UserName);
 
                 return "Register successfully!";

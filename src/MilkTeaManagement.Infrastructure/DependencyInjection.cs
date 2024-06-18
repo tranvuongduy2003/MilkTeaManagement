@@ -101,6 +101,7 @@ namespace MilkTeaManagement.Infrastructure
                 .AddTransient<ApplicationDbContextSeed>()
                 .AddTransient<IAuthRepository, AuthRepository>()
                 .AddTransient<ICategoriesRepository, CategoriesRepository>()
+                .AddTransient<IOrdersRepository, OrdersRepository>()
                 .AddTransient<IProductsRepository, ProductsRepository>();
     }
 }

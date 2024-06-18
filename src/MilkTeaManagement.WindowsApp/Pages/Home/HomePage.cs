@@ -1,6 +1,9 @@
-﻿using MilkTeaManagement.Application.Common.Models.Filter;
+﻿using Microsoft.AspNetCore.Identity;
+using MilkTeaManagement.Application.Common.Models.Filter;
+using MilkTeaManagement.Application.Common.Models.Orders;
 using MilkTeaManagement.Application.Contracts;
 using MilkTeaManagement.Domain.Entities;
+using MilkTeaManagement.WindowsApp.Helpers;
 using MilkTeaManagement.WindowsApp.UserControls.Home;
 
 namespace MilkTeaManagement.WindowsApp.Pages.Home
@@ -9,19 +12,29 @@ namespace MilkTeaManagement.WindowsApp.Pages.Home
     {
         private readonly ICategoriesRepository _categoriesRepository;
         private readonly IProductsRepository _productsRepository;
+        private readonly IOrdersRepository _ordersRepository;
+        private readonly SignInManager<User> _signInManager;
 
+        private List<OrderItem> OrderItems = new List<OrderItem>();
         private string SearchText { get; set; } = string.Empty;
         private string CategoryId { get; set; } = string.Empty;
+        private int DiscountPercentValue { get; set; } = 0;
 
-        public HomePage(ICategoriesRepository categoriesRepository, IProductsRepository productsRepository)
+        public HomePage(ICategoriesRepository categoriesRepository, IProductsRepository productsRepository, IOrdersRepository ordersRepository, SignInManager<User> signInManager)
         {
             InitializeComponent();
             _categoriesRepository = categoriesRepository;
             _productsRepository = productsRepository;
+            _ordersRepository = ordersRepository;
+            this._signInManager = signInManager;
         }
 
         public async void OnLoad()
         {
+            this.Role.Text = Program.UserIdentity.Role;
+            this.Avatar.ImageLocation = Program.UserIdentity.Avatar;
+            this.FullName.Text = Program.UserIdentity.FullName;
+
             var categories = _categoriesRepository.FindAll().ToList();
             await LoadCategoriesList(categories);
 
@@ -53,6 +66,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Home
             {
                 ProductItem productItem = new ProductItem();
                 await productItem.OnLoad(product);
+                await productItem.OnAddToCart(OnAddProductToCart);
                 ProductsPanel.Controls.Add(productItem);
             }
         }
@@ -65,6 +79,93 @@ namespace MilkTeaManagement.WindowsApp.Pages.Home
                 await categoryItem.OnLoad(category);
                 categoryItem.OnLoadClickEvent(CategoryItem_Clicked);
                 CategoriesPanel.Controls.Add(categoryItem);
+            }
+        }
+
+        public void OnAddProductToCart(object sender, EventArgs e)
+        {
+            Product product = (Product)sender;
+            var billItems = invoicePanel.Controls
+                .Find(nameof(BillItem), true)
+                .Select(c => c as BillItem)
+                .ToList();
+            var billItemControl = billItems.Find(x => x.OrderItem.ProductId == product.Id);
+
+            if (billItemControl == null)
+            {
+                BillItem billItem = new BillItem();
+                billItem.OnLoad(product);
+                billItem.OnRemove = OnRemoveProductFromCart;
+                billItem.OnIncrease = new EventHandler((sender, e) => ChangeTotalPrice());
+                billItem.OnDecrease = new EventHandler((sender, e) => ChangeTotalPrice());
+                this.invoicePanel.Controls.Add(billItem);
+                OrderItems.Add(billItem.OrderItem);
+            }
+            else
+            {
+                var handler = new EventHandler(billItemControl.increase_Click);
+                handler.Invoke(this, EventArgs.Empty);
+                var orderItem = OrderItems.FirstOrDefault(item => item.ProductId == billItemControl.OrderItem.ProductId);
+                orderItem = billItemControl.OrderItem;
+            }
+            ChangeTotalPrice();
+        }
+
+        public void OnRemoveProductFromCart(object sender, EventArgs e)
+        {
+            OrderItem orderItem = (OrderItem)sender;
+            var billItems = invoicePanel.Controls
+                .Find(nameof(BillItem), true)
+                .Select(c => c as BillItem)
+                .ToList();
+            var billItemControl = billItems.Find(x => x.OrderItem.ProductId == orderItem.ProductId);
+            invoicePanel.Controls.Remove(billItemControl);
+            var foundOrderItem = OrderItems.FirstOrDefault(item => item.ProductId == billItemControl.OrderItem.ProductId);
+            OrderItems.Remove(foundOrderItem);
+            ChangeTotalPrice();
+        }
+
+        private void ChangeTotalPrice()
+        {
+            var subTotal = OrderItems.Sum(item => item.SubTotalPrice);
+            var discountPrice = ((decimal)DiscountPercentValue / 100) * subTotal;
+            var total = subTotal - discountPrice;
+            this.SubTotal.Text = ConvertCurrency.ToVND(subTotal);
+            this.Discount.Text = ConvertCurrency.ToVND(discountPrice);
+            this.Total.Text = ConvertCurrency.ToVND(total);
+        }
+
+        private void Apply_Click(object sender, EventArgs e)
+        {
+            DiscountPercentValue = int.Parse(this.DiscountPercent.Text);
+            ChangeTotalPrice();
+        }
+
+        private async void CheckoutButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var subTotal = OrderItems.Sum(item => item.SubTotalPrice);
+                var discountPrice = ((decimal)DiscountPercentValue / 100) * subTotal;
+                var total = subTotal - discountPrice;
+
+                var request = new CheckoutRequest
+                {
+                    CustomerPhone = this.CustomerPhone.Text,
+                    Discount = (float)(DiscountPercentValue / 100),
+                    EmployeeId = Program.UserIdentity.Id,
+                    TotalPrice = total,
+                    OrderItems = OrderItems,
+                };
+
+                await _ordersRepository.CheckoutAsync(request);
+
+                MessageBox.Show("Checkout successfully!", "Success!", MessageBoxButtons.OK);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
         }
     }

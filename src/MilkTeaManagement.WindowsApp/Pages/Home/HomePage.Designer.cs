@@ -37,9 +37,12 @@
             label2 = new Label();
             label1 = new Label();
             CheckoutPanel = new Panel();
+            CustomerPhone = new TextBox();
+            Apply = new Button();
+            DiscountPercent = new TextBox();
             CheckoutButton = new Button();
             panel1 = new Panel();
-            flowLayoutPanel2 = new FlowLayoutPanel();
+            invoicePanel = new FlowLayoutPanel();
             label12 = new Label();
             label7 = new Label();
             Total = new Label();
@@ -159,9 +162,12 @@
             // CheckoutPanel
             // 
             CheckoutPanel.BackColor = Color.DimGray;
+            CheckoutPanel.Controls.Add(CustomerPhone);
+            CheckoutPanel.Controls.Add(Apply);
+            CheckoutPanel.Controls.Add(DiscountPercent);
             CheckoutPanel.Controls.Add(CheckoutButton);
             CheckoutPanel.Controls.Add(panel1);
-            CheckoutPanel.Controls.Add(flowLayoutPanel2);
+            CheckoutPanel.Controls.Add(invoicePanel);
             CheckoutPanel.Controls.Add(label12);
             CheckoutPanel.Controls.Add(label7);
             CheckoutPanel.Controls.Add(Total);
@@ -179,6 +185,44 @@
             CheckoutPanel.Size = new Size(600, 1050);
             CheckoutPanel.TabIndex = 1;
             // 
+            // CustomerPhone
+            // 
+            CustomerPhone.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            CustomerPhone.BorderStyle = BorderStyle.FixedSingle;
+            CustomerPhone.Font = new Font("Poppins", 12F);
+            CustomerPhone.Location = new Point(20, 680);
+            CustomerPhone.Margin = new Padding(0);
+            CustomerPhone.Name = "CustomerPhone";
+            CustomerPhone.PlaceholderText = "  Enter customer phone number";
+            CustomerPhone.Size = new Size(560, 43);
+            CustomerPhone.TabIndex = 13;
+            // 
+            // Apply
+            // 
+            Apply.BackColor = Color.SteelBlue;
+            Apply.Font = new Font("Poppins", 11F);
+            Apply.ForeColor = Color.White;
+            Apply.Location = new Point(437, 738);
+            Apply.Margin = new Padding(0);
+            Apply.Name = "Apply";
+            Apply.Size = new Size(143, 43);
+            Apply.TabIndex = 12;
+            Apply.Text = "Apply";
+            Apply.UseVisualStyleBackColor = false;
+            Apply.Click += Apply_Click;
+            // 
+            // DiscountPercent
+            // 
+            DiscountPercent.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            DiscountPercent.BorderStyle = BorderStyle.FixedSingle;
+            DiscountPercent.Font = new Font("Poppins", 12F);
+            DiscountPercent.Location = new Point(20, 738);
+            DiscountPercent.Margin = new Padding(0);
+            DiscountPercent.Name = "DiscountPercent";
+            DiscountPercent.PlaceholderText = "  Enter discount percent (%)";
+            DiscountPercent.Size = new Size(400, 43);
+            DiscountPercent.TabIndex = 11;
+            // 
             // CheckoutButton
             // 
             CheckoutButton.BackColor = Color.Coral;
@@ -191,6 +235,7 @@
             CheckoutButton.TabIndex = 5;
             CheckoutButton.Text = "Checkout";
             CheckoutButton.UseVisualStyleBackColor = false;
+            CheckoutButton.Click += CheckoutButton_Click;
             // 
             // panel1
             // 
@@ -200,14 +245,15 @@
             panel1.Size = new Size(560, 2);
             panel1.TabIndex = 4;
             // 
-            // flowLayoutPanel2
+            // invoicePanel
             // 
-            flowLayoutPanel2.AutoScroll = true;
-            flowLayoutPanel2.Location = new Point(20, 177);
-            flowLayoutPanel2.Margin = new Padding(0);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(560, 600);
-            flowLayoutPanel2.TabIndex = 3;
+            invoicePanel.AutoScroll = true;
+            invoicePanel.BorderStyle = BorderStyle.FixedSingle;
+            invoicePanel.Location = new Point(20, 177);
+            invoicePanel.Margin = new Padding(0);
+            invoicePanel.Name = "invoicePanel";
+            invoicePanel.Size = new Size(560, 483);
+            invoicePanel.TabIndex = 3;
             // 
             // label12
             // 
@@ -240,7 +286,7 @@
             Total.Name = "Total";
             Total.Size = new Size(432, 42);
             Total.TabIndex = 2;
-            Total.Text = "2,000,000 VNĐ";
+            Total.Text = "0 VNĐ";
             Total.TextAlign = ContentAlignment.TopRight;
             // 
             // Discount
@@ -252,7 +298,7 @@
             Discount.Name = "Discount";
             Discount.Size = new Size(432, 42);
             Discount.TabIndex = 2;
-            Discount.Text = "10,000,000 VNĐ";
+            Discount.Text = "0 VNĐ";
             Discount.TextAlign = ContentAlignment.TopRight;
             // 
             // SubTotal
@@ -264,7 +310,7 @@
             SubTotal.Name = "SubTotal";
             SubTotal.Size = new Size(432, 42);
             SubTotal.TabIndex = 2;
-            SubTotal.Text = "12,000,000 VNĐ";
+            SubTotal.Text = "0 VNĐ";
             SubTotal.TextAlign = ContentAlignment.TopRight;
             // 
             // label8
@@ -298,9 +344,9 @@
             label5.Location = new Point(20, 115);
             label5.Margin = new Padding(0);
             label5.Name = "label5";
-            label5.Size = new Size(55, 42);
+            label5.Size = new Size(111, 42);
             label5.TabIndex = 2;
-            label5.Text = "Bill";
+            label5.Text = "Invoice";
             // 
             // FullName
             // 
@@ -370,7 +416,7 @@
         private PictureBox Avatar;
         private Label label5;
         private Label FullName;
-        private FlowLayoutPanel flowLayoutPanel2;
+        private FlowLayoutPanel invoicePanel;
         private Label label7;
         private Label Discount;
         private Label SubTotal;
@@ -380,5 +426,8 @@
         private Label Total;
         private Panel panel1;
         private Button CheckoutButton;
+        private TextBox DiscountPercent;
+        private Button Apply;
+        private TextBox CustomerPhone;
     }
 }
