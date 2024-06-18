@@ -20,5 +20,13 @@ namespace MilkTeaManagement.WindowsApp.UserControls.Home
             this.ProductDescription.Text = product.Description;
             this.ProductPrice.Text = ConvertCurrency.ToVND(product.Price);
         }
+
+        public async Task OnAddToCart(EventHandler handler)
+        {
+            this.AddToBillButton.Click += new EventHandler((object sender, EventArgs e) =>
+            {
+                handler(Product, e);
+            });
+        }
     }
 }
