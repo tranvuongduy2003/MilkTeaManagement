@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /src/MilkTeaManagement.WindowsApp/appsettings.json
+/MilkTeaManagement.SignalR/appsettings.json
+/MilkTeaManagement.SignalR/appsettings.Development.json
