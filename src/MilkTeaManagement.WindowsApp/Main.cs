@@ -56,6 +56,7 @@ namespace MilkTeaManagement.WindowsApp
             SetItemSelected(sender);
             contentPanel.Controls.Clear();
             CategoriesPage categoriesPage = Program.ServiceProvider.GetRequiredService<CategoriesPage>();
+            categoriesPage.OnLoad();
             contentPanel.Controls.Add(categoriesPage);
         }
 
