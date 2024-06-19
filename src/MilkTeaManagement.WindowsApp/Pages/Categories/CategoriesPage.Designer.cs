@@ -69,6 +69,7 @@
             SearchTextBox.PlaceholderText = "   Search category";
             SearchTextBox.Size = new Size(444, 34);
             SearchTextBox.TabIndex = 12;
+            SearchTextBox.TextChanged += SearchTextBox_TextChanged;
             // 
             // CategoriesComboBox
             // 
@@ -103,7 +104,7 @@
             CategoriesTable.AllowUserToResizeColumns = false;
             CategoriesTable.AllowUserToResizeRows = false;
             CategoriesTable.BackgroundColor = SystemColors.Control;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
             dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
@@ -121,7 +122,6 @@
             CategoriesTable.RowTemplate.Height = 100;
             CategoriesTable.Size = new Size(1467, 696);
             CategoriesTable.TabIndex = 16;
-            CategoriesTable.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             // 
             // Id
             // 

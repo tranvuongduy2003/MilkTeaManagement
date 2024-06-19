@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MilkTeaManagement.Application.Common.Models.Categories;
+using MilkTeaManagement.Application.Common.Models.Filter;
 using MilkTeaManagement.Application.Contracts;
 using MilkTeaManagement.Infrastructure.Repositories;
 using System;
@@ -27,8 +28,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Categories
 
         public async void OnLoad()
         {
-            var categories = await _categoriesRepository.FindAllCategoriesByFilter(null);
-            await LoadCategoriesList(categories);
+            CategoriesComboBox.SelectedIndex = 0;
         }
 
         private async Task LoadCategoriesList(List<CategoriesDTO> categories)
@@ -51,15 +51,30 @@ namespace MilkTeaManagement.WindowsApp.Pages.Categories
 
         private async void CategoriesComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (CategoriesComboBox.SelectedIndex == 0)
-            {
-                var categories = await _categoriesRepository.FindAllCategoriesByFilter(null);
-                await LoadCategoriesList(categories);
-            }
-            else
-            {
-                
-            }
+            string searchText = SearchTextBox.Text;
+            int filterComboboxSelectedIndex = CategoriesComboBox.SelectedIndex;
+
+            var categories = await _categoriesRepository.FindAllCategoriesByFilter(
+                new FilterInCategoriesPage
+                {
+                    SearchText = searchText,
+                    FilterComboboxSelectedIndex = filterComboboxSelectedIndex
+                });
+            await LoadCategoriesList(categories);
+        }
+
+        private async void SearchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string searchText = SearchTextBox.Text;
+            int filterComboboxSelectedIndex = CategoriesComboBox.SelectedIndex;
+
+            var categories = await _categoriesRepository.FindAllCategoriesByFilter(
+                new FilterInCategoriesPage
+                {
+                    SearchText = searchText,
+                    FilterComboboxSelectedIndex = filterComboboxSelectedIndex
+                });
+            await LoadCategoriesList(categories);
         }
     }
 }
