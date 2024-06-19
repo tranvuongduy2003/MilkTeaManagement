@@ -1,6 +1,6 @@
 ﻿namespace MilkTeaManagement.Domain.Common.Interfaces
 {
-    public class EntityAuditBase<T> : EntityBase<T>, IAuditable
+    public class EntityAuditBase<T> : EntityBase<T>, IDateTracking
     {
         public DateTimeOffset CreatedDate { get; set; }
 

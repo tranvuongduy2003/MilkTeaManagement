@@ -364,3 +364,5 @@ FodyWeavers.xsd
 /src/MilkTeaManagement.WindowsApp/appsettings.json
 /MilkTeaManagement.SignalR/appsettings.json
 /MilkTeaManagement.SignalR/appsettings.Development.json
+/src/MilkTeaManagement.SignalR/appsettings.json
+/src/MilkTeaManagement.SignalR/appsettings.Development.json

@@ -35,6 +35,7 @@
             product = new UserControls.Sidebar.SidebarItem();
             home = new UserControls.Sidebar.SidebarItem();
             sidebarPanel = new Panel();
+            chat = new UserControls.Sidebar.SidebarItem();
             employee = new UserControls.Sidebar.SidebarItem();
             category = new UserControls.Sidebar.SidebarItem();
             panel1.SuspendLayout();
@@ -105,6 +106,7 @@
             // sidebarPanel
             // 
             sidebarPanel.BackColor = Color.FromArgb(192, 192, 255);
+            sidebarPanel.Controls.Add(chat);
             sidebarPanel.Controls.Add(employee);
             sidebarPanel.Controls.Add(category);
             sidebarPanel.Controls.Add(product);
@@ -114,6 +116,15 @@
             sidebarPanel.Name = "sidebarPanel";
             sidebarPanel.Size = new Size(100, 1050);
             sidebarPanel.TabIndex = 3;
+            // 
+            // chat
+            // 
+            chat.Location = new Point(0, 400);
+            chat.Margin = new Padding(0);
+            chat.Name = "chat";
+            chat.Size = new Size(100, 100);
+            chat.TabIndex = 4;
+            chat.Click += chat_Click;
             // 
             // employee
             // 
@@ -146,6 +157,7 @@
             Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
+            Leave += Main_Leave;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)close).EndInit();
             sidebarPanel.ResumeLayout(false);
@@ -163,5 +175,6 @@
         private Panel sidebarPanel;
         private UserControls.Sidebar.SidebarItem category;
         private UserControls.Sidebar.SidebarItem employee;
+        private UserControls.Sidebar.SidebarItem chat;
     }
 }
