@@ -1,8 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using MilkTeaManagement.Application.Common.Models.Categories;
 using MilkTeaManagement.Application.Common.Models.Filter;
 using MilkTeaManagement.Application.Contracts;
 using MilkTeaManagement.Infrastructure.Repositories;
+using MilkTeaManagement.WindowsApp.Forms;
+using MilkTeaManagement.WindowsApp.Forms.Categories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -75,6 +78,16 @@ namespace MilkTeaManagement.WindowsApp.Pages.Categories
                     FilterComboboxSelectedIndex = filterComboboxSelectedIndex
                 });
             await LoadCategoriesList(categories);
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            CreateCategoryForm createCategoryForm = Program.ServiceProvider.GetRequiredService<CreateCategoryForm>();
+
+            if (createCategoryForm.ShowDialog() == DialogResult.OK)
+            {
+                this.OnLoad();
+            }
         }
     }
 }

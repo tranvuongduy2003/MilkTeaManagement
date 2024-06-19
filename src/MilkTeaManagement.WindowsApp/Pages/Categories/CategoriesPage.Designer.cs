@@ -35,13 +35,15 @@
             label1 = new Label();
             SearchTextBox = new TextBox();
             CategoriesComboBox = new ComboBox();
-            create = new Button();
             CategoriesTable = new DataGridView();
             Id = new DataGridViewTextBoxColumn();
             CategoryName = new DataGridViewTextBoxColumn();
             Poster = new DataGridViewTextBoxColumn();
             Creator = new DataGridViewTextBoxColumn();
             CreatedAt = new DataGridViewTextBoxColumn();
+            btnDelete = new Button();
+            btnUpdate = new Button();
+            btnCreate = new Button();
             ((System.ComponentModel.ISupportInitialize)CategoriesTable).BeginInit();
             SuspendLayout();
             // 
@@ -83,19 +85,6 @@
             CategoriesComboBox.TabIndex = 13;
             CategoriesComboBox.Text = "  Sort by";
             CategoriesComboBox.SelectedIndexChanged += CategoriesComboBox_SelectedIndexChanged;
-            // 
-            // create
-            // 
-            create.BackColor = Color.CornflowerBlue;
-            create.Font = new Font("Microsoft Sans Serif", 12F);
-            create.ForeColor = Color.White;
-            create.Location = new Point(1198, 98);
-            create.Margin = new Padding(0);
-            create.Name = "create";
-            create.Size = new Size(293, 41);
-            create.TabIndex = 15;
-            create.Text = "Create new category";
-            create.UseVisualStyleBackColor = false;
             // 
             // CategoriesTable
             // 
@@ -169,13 +158,55 @@
             CreatedAt.Name = "CreatedAt";
             CreatedAt.Width = 400;
             // 
+            // btnDelete
+            // 
+            btnDelete.BackColor = Color.Crimson;
+            btnDelete.Font = new Font("Microsoft Sans Serif", 12F);
+            btnDelete.ForeColor = Color.White;
+            btnDelete.Location = new Point(1080, 98);
+            btnDelete.Margin = new Padding(0);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(133, 41);
+            btnDelete.TabIndex = 19;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = false;
+            // 
+            // btnUpdate
+            // 
+            btnUpdate.BackColor = Color.FromArgb(192, 192, 0);
+            btnUpdate.Font = new Font("Microsoft Sans Serif", 12F);
+            btnUpdate.ForeColor = Color.White;
+            btnUpdate.Location = new Point(1222, 98);
+            btnUpdate.Margin = new Padding(0);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(133, 41);
+            btnUpdate.TabIndex = 18;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = false;
+            // 
+            // btnCreate
+            // 
+            btnCreate.BackColor = Color.CornflowerBlue;
+            btnCreate.Font = new Font("Microsoft Sans Serif", 12F);
+            btnCreate.ForeColor = Color.White;
+            btnCreate.Location = new Point(1363, 98);
+            btnCreate.Margin = new Padding(0);
+            btnCreate.Name = "btnCreate";
+            btnCreate.Size = new Size(133, 41);
+            btnCreate.TabIndex = 17;
+            btnCreate.Text = "Create";
+            btnCreate.UseVisualStyleBackColor = false;
+            btnCreate.Click += btnCreate_Click;
+            // 
             // CategoriesPage
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(64, 64, 64);
+            Controls.Add(btnDelete);
+            Controls.Add(btnUpdate);
+            Controls.Add(btnCreate);
             Controls.Add(CategoriesTable);
-            Controls.Add(create);
             Controls.Add(CategoriesComboBox);
             Controls.Add(SearchTextBox);
             Controls.Add(label1);
@@ -193,12 +224,14 @@
         private Label label1;
         private TextBox SearchTextBox;
         private ComboBox CategoriesComboBox;
-        private Button create;
         private DataGridView CategoriesTable;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn CategoryName;
         private DataGridViewTextBoxColumn Poster;
         private DataGridViewTextBoxColumn Creator;
         private DataGridViewTextBoxColumn CreatedAt;
+        private Button btnDelete;
+        private Button btnUpdate;
+        private Button btnCreate;
     }
 }

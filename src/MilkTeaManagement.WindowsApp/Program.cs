@@ -7,6 +7,7 @@ using MilkTeaManagement.Domain.ValueObjetcs;
 using MilkTeaManagement.Infrastructure;
 using MilkTeaManagement.Infrastructure.Data;
 using MilkTeaManagement.WindowsApp.Forms;
+using MilkTeaManagement.WindowsApp.Forms.Categories;
 using MilkTeaManagement.WindowsApp.Forms.Products;
 using MilkTeaManagement.WindowsApp.Pages.Auth;
 using MilkTeaManagement.WindowsApp.Pages.Categories;
@@ -84,6 +85,8 @@ namespace MilkTeaManagement.WindowsApp
             builder.Services.AddScoped<UpdateProductForm>();
             builder.Services.AddScoped<InformationPanel>();
             builder.Services.AddScoped<BillItem>();
+
+            builder.Services.AddScoped<CreateCategoryForm>();
 
             return builder;
         }
