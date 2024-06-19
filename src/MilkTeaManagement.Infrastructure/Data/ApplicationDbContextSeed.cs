@@ -48,6 +48,8 @@ namespace MilkTeaManagement.Infrastructure.Data
                 await SeedUsers();
                 await SeedCategories();
                 await SeedProducts();
+                await SeedConversations();
+                await SeedMessages();
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -158,7 +160,7 @@ namespace MilkTeaManagement.Infrastructure.Data
         {
             if (!_context.Products.Any())
             {
-                var categories = await _context.Categories.ToListAsync();
+                var categories = await _context.Categories.AsNoTracking().ToListAsync();
 
                 var fakerProduct = new Faker<Product>()
                     .RuleFor(c => c.Id, _ => Guid.NewGuid().ToString())
@@ -173,6 +175,60 @@ namespace MilkTeaManagement.Infrastructure.Data
 
                 var products = fakerProduct.Generate(20);
                 await _context.Products.AddRangeAsync(products);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        private async Task SeedConversations()
+        {
+            if (_userManager.Users.Any() && !_context.Conversations.Any())
+            {
+                var users = _userManager.Users.AsNoTracking().ToList();
+
+                for (int i = 0; i < users.Count; i++)
+                {
+                    for (int j = i + 1; j < users.Count; j++)
+                    {
+                        await _context.Conversations.AddAsync(new Conversation
+                        {
+                            UserOneId = users[i].Id,
+                            UserTwoId = users[j].Id,
+                        });
+                        await _context.SaveChangesAsync();
+                    }
+                }
+
+                await _context.Conversations.AddAsync(new Conversation
+                {
+                    UserOneId = Guid.NewGuid().ToString(),
+                    UserTwoId = Guid.NewGuid().ToString(),
+                });
+
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        private async Task SeedMessages()
+        {
+            if (_context.Conversations.Any() && !_context.Messages.Any())
+            {
+                var conversations = _context.Conversations.AsNoTracking().ToList();
+
+                foreach (var conversation in conversations)
+                {
+                    var fakerMessage = new Faker<Message>()
+                        .RuleFor(m => m.ConversationId, _ => conversation.Id)
+                        .RuleFor(m => m.SenderId, f => f.PickRandom<string>(conversation.UserOneId, conversation.UserTwoId))
+                        .RuleFor(m => m.Content, f => f.Lorem.Text());
+
+                    var messages = fakerMessage.Generate(20);
+                    foreach (var message in messages)
+                    {
+                        message.ReceiverId = message.SenderId == conversation.UserOneId ? conversation.UserTwoId : conversation.UserOneId;
+                        await _context.Messages.AddAsync(message);
+                    }
+                }
+
                 await _context.SaveChangesAsync();
             }
         }

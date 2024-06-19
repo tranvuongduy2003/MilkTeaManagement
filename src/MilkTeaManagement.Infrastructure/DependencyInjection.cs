@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MilkTeaManagement.Application.Common.Interfaces;
+using MilkTeaManagement.Application.Common.Mappings;
 using MilkTeaManagement.Application.Common.SeedWork;
 using MilkTeaManagement.Application.Contracts;
 using MilkTeaManagement.Domain.Entities;
 using MilkTeaManagement.Infrastructure.Common;
-using MilkTeaManagement.Infrastructure.Configurations;
 using MilkTeaManagement.Infrastructure.Data;
 using MilkTeaManagement.Infrastructure.Repositories;
 using MilkTeaManagement.Infrastructure.Services;
@@ -16,16 +17,6 @@ namespace MilkTeaManagement.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddConfigurationSettings(configuration);
-            services.ConfigureApplicationDbContext(configuration);
-            services.ConfigureAzureSignalR(configuration);
-            services.ConfigureInfrastructureServices();
-            services.ConfigureIndentity();
-            return services;
-        }
-
         public static T GetOptions<T>(this IServiceCollection services, string sectionName) where T : new()
         {
             using var serviceProvider = services.BuildServiceProvider();
@@ -37,20 +28,16 @@ namespace MilkTeaManagement.Infrastructure
             return options;
         }
 
-        public static IServiceCollection AddConfigurationSettings(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection ConfigureMapping(this IServiceCollection services)
         {
-            var emailSettings = configuration.GetSection(nameof(EmailSettings))
-                .Get<EmailSettings>();
-            services.AddSingleton(typeof(IEmailSettings), emailSettings);
-
-            var azureBlobStorage = configuration.GetSection(nameof(AzureBlobStorage))
-                .Get<AzureBlobStorage>();
-            services.AddSingleton<AzureBlobStorage>(azureBlobStorage);
+            IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+            services.AddSingleton(mapper);
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             return services;
         }
 
-        private static IServiceCollection ConfigureApplicationDbContext(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection ConfigureApplicationDbContext(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("DefaultConnectionString");
             if (connectionString == null || string.IsNullOrEmpty(connectionString))
@@ -59,7 +46,7 @@ namespace MilkTeaManagement.Infrastructure
             return services;
         }
 
-        private static IServiceCollection ConfigureIndentity(this IServiceCollection services)
+        public static IServiceCollection ConfigureIndentity(this IServiceCollection services)
         {
             services.Configure<IdentityOptions>(options =>
             {
@@ -82,7 +69,7 @@ namespace MilkTeaManagement.Infrastructure
             return services;
         }
 
-        private static IServiceCollection ConfigureAzureSignalR(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection ConfigureAzureSignalR(this IServiceCollection services, IConfiguration configuration)
         {
             var azureSignalR = configuration.GetValue<string>("AzureSignalR");
             if (azureSignalR == null || string.IsNullOrEmpty(azureSignalR))
@@ -93,7 +80,21 @@ namespace MilkTeaManagement.Infrastructure
             return services;
         }
 
-        private static IServiceCollection ConfigureInfrastructureServices(this IServiceCollection services) =>
+        public static IServiceCollection ConfigureCors(this IServiceCollection services, string appCors)
+        {
+            services.AddCors(p =>
+                p.AddPolicy(appCors, build =>
+                {
+                    build
+                    .WithOrigins("*")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+                }));
+
+            return services;
+        }
+
+        public static IServiceCollection ConfigureInfrastructureServices(this IServiceCollection services) =>
             services
                 .AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>))
                 .AddScoped(typeof(IEmailService), typeof(EmailService))
@@ -102,6 +103,8 @@ namespace MilkTeaManagement.Infrastructure
                 .AddTransient<IAuthRepository, AuthRepository>()
                 .AddTransient<ICategoriesRepository, CategoriesRepository>()
                 .AddTransient<IOrdersRepository, OrdersRepository>()
-                .AddTransient<IProductsRepository, ProductsRepository>();
+                .AddTransient<IProductsRepository, ProductsRepository>()
+                .AddTransient<IConversationsRepository, ConversationsRepository>()
+                .AddTransient<IMessagesRepository, MessagesRepository>();
     }
 }
