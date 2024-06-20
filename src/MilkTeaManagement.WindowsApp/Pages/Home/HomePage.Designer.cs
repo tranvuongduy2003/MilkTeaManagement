@@ -28,14 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            MainPanel = new Panel();
-            ProductsPanel = new FlowLayoutPanel();
-            ResultQuantity = new Label();
-            CategoryName = new Label();
-            CategoriesPanel = new FlowLayoutPanel();
-            SearchTextBox = new TextBox();
-            label2 = new Label();
-            label1 = new Label();
             CheckoutPanel = new Panel();
             CustomerPhone = new TextBox();
             Apply = new Button();
@@ -54,110 +46,18 @@
             FullName = new Label();
             Role = new Label();
             Avatar = new PictureBox();
-            MainPanel.SuspendLayout();
+            label1 = new Label();
+            label2 = new Label();
+            SearchTextBox = new TextBox();
+            CategoriesPanel = new FlowLayoutPanel();
+            CategoryName = new Label();
+            ResultQuantity = new Label();
+            ProductsPanel = new FlowLayoutPanel();
+            MainPanel = new Panel();
             CheckoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Avatar).BeginInit();
+            MainPanel.SuspendLayout();
             SuspendLayout();
-            // 
-            // MainPanel
-            // 
-            MainPanel.BackColor = Color.FromArgb(64, 64, 64);
-            MainPanel.Controls.Add(ProductsPanel);
-            MainPanel.Controls.Add(ResultQuantity);
-            MainPanel.Controls.Add(CategoryName);
-            MainPanel.Controls.Add(CategoriesPanel);
-            MainPanel.Controls.Add(SearchTextBox);
-            MainPanel.Controls.Add(label2);
-            MainPanel.Controls.Add(label1);
-            MainPanel.Location = new Point(0, 0);
-            MainPanel.Margin = new Padding(0);
-            MainPanel.Name = "MainPanel";
-            MainPanel.Size = new Size(1220, 1050);
-            MainPanel.TabIndex = 0;
-            // 
-            // ProductsPanel
-            // 
-            ProductsPanel.AutoScroll = true;
-            ProductsPanel.Location = new Point(30, 433);
-            ProductsPanel.Margin = new Padding(0);
-            ProductsPanel.Name = "ProductsPanel";
-            ProductsPanel.Size = new Size(1160, 590);
-            ProductsPanel.TabIndex = 5;
-            // 
-            // ResultQuantity
-            // 
-            ResultQuantity.AutoSize = true;
-            ResultQuantity.Font = new Font("Poppins", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ResultQuantity.ForeColor = Color.White;
-            ResultQuantity.Location = new Point(1058, 384);
-            ResultQuantity.Margin = new Padding(0);
-            ResultQuantity.Name = "ResultQuantity";
-            ResultQuantity.Size = new Size(125, 42);
-            ResultQuantity.TabIndex = 4;
-            ResultQuantity.Text = "0 Results";
-            ResultQuantity.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // CategoryName
-            // 
-            CategoryName.AutoSize = true;
-            CategoryName.Font = new Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            CategoryName.ForeColor = Color.White;
-            CategoryName.Location = new Point(30, 377);
-            CategoryName.Margin = new Padding(0);
-            CategoryName.Name = "CategoryName";
-            CategoryName.Size = new Size(139, 42);
-            CategoryName.TabIndex = 4;
-            CategoryName.Text = "Category";
-            CategoryName.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // CategoriesPanel
-            // 
-            CategoriesPanel.AutoScroll = true;
-            CategoriesPanel.Location = new Point(30, 137);
-            CategoriesPanel.Margin = new Padding(0);
-            CategoriesPanel.Name = "CategoriesPanel";
-            CategoriesPanel.Size = new Size(1160, 230);
-            CategoriesPanel.TabIndex = 3;
-            CategoriesPanel.WrapContents = false;
-            // 
-            // SearchTextBox
-            // 
-            SearchTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            SearchTextBox.BorderStyle = BorderStyle.FixedSingle;
-            SearchTextBox.Font = new Font("Poppins", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            SearchTextBox.Location = new Point(657, 37);
-            SearchTextBox.Margin = new Padding(0);
-            SearchTextBox.Name = "SearchTextBox";
-            SearchTextBox.PlaceholderText = "   Enter food or drink";
-            SearchTextBox.Size = new Size(533, 55);
-            SearchTextBox.TabIndex = 10;
-            SearchTextBox.TextChanged += SearchTextBox_TextChanged;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Poppins", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(40, 89);
-            label2.Margin = new Padding(0);
-            label2.Name = "label2";
-            label2.Size = new Size(247, 42);
-            label2.TabIndex = 1;
-            label2.Text = "Choose a category";
-            label2.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Poppins Medium", 20F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(30, 30);
-            label1.Margin = new Padding(0);
-            label1.Name = "label1";
-            label1.Size = new Size(456, 70);
-            label1.TabIndex = 0;
-            label1.Text = "Welcome to MilkTea";
-            label1.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // CheckoutPanel
             // 
@@ -383,6 +283,106 @@
             Avatar.TabIndex = 0;
             Avatar.TabStop = false;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Poppins Medium", 20F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(30, 30);
+            label1.Margin = new Padding(0);
+            label1.Name = "label1";
+            label1.Size = new Size(456, 70);
+            label1.TabIndex = 0;
+            label1.Text = "Welcome to MilkTea";
+            label1.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Poppins", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(40, 89);
+            label2.Margin = new Padding(0);
+            label2.Name = "label2";
+            label2.Size = new Size(247, 42);
+            label2.TabIndex = 1;
+            label2.Text = "Choose a category";
+            label2.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // SearchTextBox
+            // 
+            SearchTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            SearchTextBox.BorderStyle = BorderStyle.FixedSingle;
+            SearchTextBox.Font = new Font("Poppins", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            SearchTextBox.Location = new Point(657, 37);
+            SearchTextBox.Margin = new Padding(0);
+            SearchTextBox.Name = "SearchTextBox";
+            SearchTextBox.PlaceholderText = "   Enter food or drink";
+            SearchTextBox.Size = new Size(533, 55);
+            SearchTextBox.TabIndex = 10;
+            SearchTextBox.TextChanged += SearchTextBox_TextChanged;
+            // 
+            // CategoriesPanel
+            // 
+            CategoriesPanel.AutoScroll = true;
+            CategoriesPanel.Location = new Point(30, 137);
+            CategoriesPanel.Margin = new Padding(0);
+            CategoriesPanel.Name = "CategoriesPanel";
+            CategoriesPanel.Size = new Size(1160, 230);
+            CategoriesPanel.TabIndex = 3;
+            CategoriesPanel.WrapContents = false;
+            // 
+            // CategoryName
+            // 
+            CategoryName.AutoSize = true;
+            CategoryName.Font = new Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            CategoryName.ForeColor = Color.White;
+            CategoryName.Location = new Point(30, 377);
+            CategoryName.Margin = new Padding(0);
+            CategoryName.Name = "CategoryName";
+            CategoryName.Size = new Size(139, 42);
+            CategoryName.TabIndex = 4;
+            CategoryName.Text = "Category";
+            CategoryName.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // ResultQuantity
+            // 
+            ResultQuantity.AutoSize = true;
+            ResultQuantity.Font = new Font("Poppins", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ResultQuantity.ForeColor = Color.White;
+            ResultQuantity.Location = new Point(1058, 384);
+            ResultQuantity.Margin = new Padding(0);
+            ResultQuantity.Name = "ResultQuantity";
+            ResultQuantity.Size = new Size(125, 42);
+            ResultQuantity.TabIndex = 4;
+            ResultQuantity.Text = "0 Results";
+            ResultQuantity.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // ProductsPanel
+            // 
+            ProductsPanel.AutoScroll = true;
+            ProductsPanel.Location = new Point(30, 433);
+            ProductsPanel.Margin = new Padding(0);
+            ProductsPanel.Name = "ProductsPanel";
+            ProductsPanel.Size = new Size(1160, 590);
+            ProductsPanel.TabIndex = 5;
+            // 
+            // MainPanel
+            // 
+            MainPanel.BackColor = Color.FromArgb(64, 64, 64);
+            MainPanel.Controls.Add(ProductsPanel);
+            MainPanel.Controls.Add(ResultQuantity);
+            MainPanel.Controls.Add(CategoryName);
+            MainPanel.Controls.Add(CategoriesPanel);
+            MainPanel.Controls.Add(SearchTextBox);
+            MainPanel.Controls.Add(label2);
+            MainPanel.Controls.Add(label1);
+            MainPanel.Location = new Point(0, 0);
+            MainPanel.Margin = new Padding(0);
+            MainPanel.Name = "MainPanel";
+            MainPanel.Size = new Size(1220, 1050);
+            MainPanel.TabIndex = 0;
+            // 
             // HomePage
             // 
             AutoScaleDimensions = new SizeF(144F, 144F);
@@ -393,25 +393,16 @@
             Margin = new Padding(0);
             Name = "HomePage";
             Size = new Size(1820, 1050);
-            MainPanel.ResumeLayout(false);
-            MainPanel.PerformLayout();
             CheckoutPanel.ResumeLayout(false);
             CheckoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)Avatar).EndInit();
+            MainPanel.ResumeLayout(false);
+            MainPanel.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Panel MainPanel;
-        private Label label1;
         private Panel CheckoutPanel;
-        private TextBox SearchTextBox;
-        private Label label2;
-        private Label CategoryName;
-        private FlowLayoutPanel CategoriesPanel;
-        private Label ResultQuantity;
-        private FlowLayoutPanel ProductsPanel;
         private Label Role;
         private PictureBox Avatar;
         private Label label5;
@@ -429,5 +420,13 @@
         private TextBox DiscountPercent;
         private Button Apply;
         private TextBox CustomerPhone;
+        private Label label1;
+        private Label label2;
+        private TextBox SearchTextBox;
+        private FlowLayoutPanel CategoriesPanel;
+        private Label CategoryName;
+        private Label ResultQuantity;
+        private FlowLayoutPanel ProductsPanel;
+        private Panel MainPanel;
     }
 }

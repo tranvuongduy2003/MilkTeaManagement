@@ -1,21 +1,16 @@
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MilkTeaManagement.Application;
 using MilkTeaManagement.Domain.ValueObjetcs;
-using MilkTeaManagement.Infrastructure;
 using MilkTeaManagement.Infrastructure.Data;
 using MilkTeaManagement.WindowsApp.Forms;
 using MilkTeaManagement.WindowsApp.Forms.Categories;
 using MilkTeaManagement.WindowsApp.Forms.Products;
+using MilkTeaManagement.WindowsApp.Extensions;
 using MilkTeaManagement.WindowsApp.Pages.Auth;
-using MilkTeaManagement.WindowsApp.Pages.Categories;
-using MilkTeaManagement.WindowsApp.Pages.Employees;
-using MilkTeaManagement.WindowsApp.Pages.Home;
-using MilkTeaManagement.WindowsApp.Pages.Products;
-using MilkTeaManagement.WindowsApp.UserControls.Employees;
-using MilkTeaManagement.WindowsApp.UserControls.Home;
 
 namespace MilkTeaManagement.WindowsApp
 {
@@ -23,6 +18,7 @@ namespace MilkTeaManagement.WindowsApp
     {
         public static IServiceProvider ServiceProvider { get; private set; }
         public static UserIdentity? UserIdentity { get; set; } = new();
+        public static HubConnection? SignalRConnection { get; set; }
 
         [STAThread]
         static void Main()
@@ -64,7 +60,6 @@ namespace MilkTeaManagement.WindowsApp
                 .AddEnvironmentVariables();
 
             builder.Services.AddInfrastructure(builder.Configuration);
-
             builder.Services.AddApplicationServices();
 
             builder.Services.AddSingleton<UserIdentity>(UserIdentity);

@@ -88,8 +88,8 @@ namespace MilkTeaManagement.WindowsApp.Forms
                     CategoryId = CategoryId,
                     Status = EProductStatus.AVAILABLE,
                 };
-                await _productsRepository.CreateAsync(product);
 
+                await _productsRepository.CreateAsync(product);
                 await _productsRepository.SaveChangesAsync();
 
                 MessageBox.Show("Create new product successfully!", "Success!", MessageBoxButtons.OK);

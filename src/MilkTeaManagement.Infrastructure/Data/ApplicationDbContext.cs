@@ -14,8 +14,6 @@ namespace MilkTeaManagement.Infrastructure.Data
 
         }
 
-        //public DbSet<Order> Orders { get; set; }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
@@ -27,6 +25,8 @@ namespace MilkTeaManagement.Infrastructure.Data
             builder.Entity<Category>().Property(x => x.Id).HasMaxLength(50).IsUnicode(false);
             builder.Entity<Order>().Property(x => x.Id).HasMaxLength(50).IsUnicode(false);
             builder.Entity<OrderItem>().Property(x => x.Id).HasMaxLength(50).IsUnicode(false);
+            builder.Entity<Conversation>().Property(x => x.Id).HasMaxLength(50).IsUnicode(false);
+            builder.Entity<Message>().Property(x => x.Id).HasMaxLength(50).IsUnicode(false);
 
             builder.Entity<Order>()
                     .HasMany(x => x.OrderItems)
@@ -36,6 +36,26 @@ namespace MilkTeaManagement.Infrastructure.Data
                     .HasMany(x => x.OrderItems)
                     .WithOne(x => x.Product)
                     .HasForeignKey(x => x.ProductId);
+            builder.Entity<User>()
+                    .HasMany(x => x.ConversationOnes)
+                    .WithOne(x => x.UserOne)
+                    .HasForeignKey(x => x.UserOneId);
+            builder.Entity<User>()
+                    .HasMany(x => x.ConversationTwos)
+                    .WithOne(x => x.UserTwo)
+                    .HasForeignKey(x => x.UserTwoId);
+            builder.Entity<User>()
+                    .HasMany(x => x.SenderMessages)
+                    .WithOne(x => x.Sender)
+                    .HasForeignKey(x => x.SenderId);
+            builder.Entity<User>()
+                    .HasMany(x => x.ReceiverMessages)
+                    .WithOne(x => x.Receiver)
+                    .HasForeignKey(x => x.ReceiverId);
+            builder.Entity<Conversation>()
+                    .HasMany(x => x.Messages)
+                    .WithOne(x => x.Conversation)
+                    .HasForeignKey(x => x.ConversationId);
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
@@ -77,6 +97,8 @@ namespace MilkTeaManagement.Infrastructure.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Conversation> Conversations { get; set; }
+        public DbSet<Message> Messages { get; set; }
     }
 
 }

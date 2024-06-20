@@ -188,6 +188,96 @@ namespace MilkTeaManagement.Infrastructure.Data.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("MilkTeaManagement.Domain.Entities.Conversation", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("ConnectionId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("LastMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset?>("UpdatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("UserOneId")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("UserTwoId")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserOneId");
+
+                    b.HasIndex("UserTwoId");
+
+                    b.ToTable("Conversations");
+                });
+
+            modelBuilder.Entity("MilkTeaManagement.Domain.Entities.Message", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Content")
+                        .HasMaxLength(10000)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConversationId")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReceiverId")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<DateTimeOffset?>("UpdatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Video")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConversationId");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("MilkTeaManagement.Domain.Entities.Order", b =>
                 {
                     b.Property<string>("Id")
@@ -453,6 +543,46 @@ namespace MilkTeaManagement.Infrastructure.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MilkTeaManagement.Domain.Entities.Conversation", b =>
+                {
+                    b.HasOne("MilkTeaManagement.Domain.Entities.User", "UserOne")
+                        .WithMany("ConversationOnes")
+                        .HasForeignKey("UserOneId");
+
+                    b.HasOne("MilkTeaManagement.Domain.Entities.User", "UserTwo")
+                        .WithMany("ConversationTwos")
+                        .HasForeignKey("UserTwoId");
+
+                    b.Navigation("UserOne");
+
+                    b.Navigation("UserTwo");
+                });
+
+            modelBuilder.Entity("MilkTeaManagement.Domain.Entities.Message", b =>
+                {
+                    b.HasOne("MilkTeaManagement.Domain.Entities.Conversation", "Conversation")
+                        .WithMany("Messages")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MilkTeaManagement.Domain.Entities.User", "Receiver")
+                        .WithMany("ReceiverMessages")
+                        .HasForeignKey("ReceiverId");
+
+                    b.HasOne("MilkTeaManagement.Domain.Entities.User", "Sender")
+                        .WithMany("SenderMessages")
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Conversation");
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
+                });
+
             modelBuilder.Entity("MilkTeaManagement.Domain.Entities.Order", b =>
                 {
                     b.HasOne("MilkTeaManagement.Domain.Entities.User", "Employee")
@@ -494,6 +624,11 @@ namespace MilkTeaManagement.Infrastructure.Data.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("MilkTeaManagement.Domain.Entities.Conversation", b =>
+                {
+                    b.Navigation("Messages");
+                });
+
             modelBuilder.Entity("MilkTeaManagement.Domain.Entities.Order", b =>
                 {
                     b.Navigation("OrderItems");
@@ -502,6 +637,17 @@ namespace MilkTeaManagement.Infrastructure.Data.Migrations
             modelBuilder.Entity("MilkTeaManagement.Domain.Entities.Product", b =>
                 {
                     b.Navigation("OrderItems");
+                });
+
+            modelBuilder.Entity("MilkTeaManagement.Domain.Entities.User", b =>
+                {
+                    b.Navigation("ConversationOnes");
+
+                    b.Navigation("ConversationTwos");
+
+                    b.Navigation("ReceiverMessages");
+
+                    b.Navigation("SenderMessages");
                 });
 #pragma warning restore 612, 618
         }
