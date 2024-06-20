@@ -7,17 +7,7 @@ using MilkTeaManagement.Application;
 using MilkTeaManagement.Domain.ValueObjetcs;
 using MilkTeaManagement.Infrastructure.Data;
 using MilkTeaManagement.WindowsApp.Extensions;
-using MilkTeaManagement.WindowsApp.Forms;
-using MilkTeaManagement.WindowsApp.Forms.Products;
 using MilkTeaManagement.WindowsApp.Pages.Auth;
-using MilkTeaManagement.WindowsApp.Pages.Categories;
-using MilkTeaManagement.WindowsApp.Pages.Chat;
-using MilkTeaManagement.WindowsApp.Pages.Employees;
-using MilkTeaManagement.WindowsApp.Pages.Home;
-using MilkTeaManagement.WindowsApp.Pages.Products;
-using MilkTeaManagement.WindowsApp.UserControls.Chat;
-using MilkTeaManagement.WindowsApp.UserControls.Employees;
-using MilkTeaManagement.WindowsApp.UserControls.Home;
 
 namespace MilkTeaManagement.WindowsApp
 {
@@ -68,29 +58,6 @@ namespace MilkTeaManagement.WindowsApp
 
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddApplicationServices();
-
-            // Global State
-            builder.Services.AddSingleton<UserIdentity>(UserIdentity);
-
-            // Main form
-            builder.Services.AddTransient<Main>();
-            builder.Services.AddTransient<LoginPage>();
-            builder.Services.AddTransient<RegisterPage>();
-            builder.Services.AddTransient<ResetPasswordPage>();
-
-            // Pages
-            builder.Services.AddTransient<HomePage>();
-            builder.Services.AddTransient<CategoriesPage>();
-            builder.Services.AddTransient<ProductsPage>();
-            builder.Services.AddTransient<EmployeesPage>();
-            builder.Services.AddTransient<ChatPage>();
-
-            // User Controls
-            builder.Services.AddScoped<CreateProductForm>();
-            builder.Services.AddScoped<UpdateProductForm>();
-            builder.Services.AddScoped<InformationPanel>();
-            builder.Services.AddScoped<BillItem>();
-            builder.Services.AddScoped<ChatViewPanel>();
 
             return builder;
         }

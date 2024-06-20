@@ -1,4 +1,4 @@
-﻿namespace MilkTeaManagement.WindowsApp.UserControls.Chat
+﻿namespace MilkTeaManagement.WindowsApp.UserControls.Chat.Self
 {
     public partial class SelfMessage : UserControl
     {

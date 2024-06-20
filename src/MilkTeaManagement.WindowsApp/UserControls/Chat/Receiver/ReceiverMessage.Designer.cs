@@ -1,4 +1,4 @@
-﻿namespace MilkTeaManagement.WindowsApp.UserControls.Chat
+﻿namespace MilkTeaManagement.WindowsApp.UserControls.Chat.Receiver
 {
     partial class ReceiverMessage
     {
@@ -43,6 +43,7 @@
             Message.Margin = new Padding(0);
             Message.MinimumSize = new Size(940, 45);
             Message.Name = "Message";
+            Message.ReadOnly = true;
             Message.RightToLeft = RightToLeft.No;
             Message.ScrollBars = RichTextBoxScrollBars.None;
             Message.Size = new Size(940, 45);
@@ -68,7 +69,7 @@
             AutoSize = true;
             Controls.Add(Avatar);
             Controls.Add(Message);
-            Margin = new Padding(0);
+            Margin = new Padding(0, 0, 0, 5);
             MinimumSize = new Size(1260, 45);
             Name = "ReceiverMessage";
             Size = new Size(1260, 45);

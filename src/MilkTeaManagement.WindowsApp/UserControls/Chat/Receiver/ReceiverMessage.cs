@@ -1,4 +1,4 @@
-﻿namespace MilkTeaManagement.WindowsApp.UserControls.Chat
+﻿namespace MilkTeaManagement.WindowsApp.UserControls.Chat.Receiver
 {
     public partial class ReceiverMessage : UserControl
     {
