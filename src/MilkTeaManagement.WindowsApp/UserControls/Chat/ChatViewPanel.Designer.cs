@@ -33,12 +33,16 @@
             FullName = new Label();
             Avatar = new Common.CircularPictureBox();
             panel2 = new Panel();
+            SendImage = new PictureBox();
+            SendVideo = new PictureBox();
             Send = new PictureBox();
             Content = new TextBox();
             MessagesPanel = new FlowLayoutPanel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Avatar).BeginInit();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)SendImage).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)SendVideo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Send).BeginInit();
             SuspendLayout();
             // 
@@ -91,6 +95,8 @@
             // panel2
             // 
             panel2.BackColor = Color.DarkGray;
+            panel2.Controls.Add(SendImage);
+            panel2.Controls.Add(SendVideo);
             panel2.Controls.Add(Send);
             panel2.Controls.Add(Content);
             panel2.Location = new Point(0, 950);
@@ -99,26 +105,50 @@
             panel2.Size = new Size(1290, 100);
             panel2.TabIndex = 2;
             // 
+            // SendImage
+            // 
+            SendImage.BackgroundImage = Properties.Resources.insert_picture_icon;
+            SendImage.BackgroundImageLayout = ImageLayout.Stretch;
+            SendImage.Location = new Point(80, 30);
+            SendImage.Margin = new Padding(0);
+            SendImage.Name = "SendImage";
+            SendImage.Size = new Size(40, 40);
+            SendImage.TabIndex = 3;
+            SendImage.TabStop = false;
+            SendImage.Click += SendImage_Click;
+            // 
+            // SendVideo
+            // 
+            SendVideo.BackgroundImage = Properties.Resources.clapperboard__1_;
+            SendVideo.BackgroundImageLayout = ImageLayout.Stretch;
+            SendVideo.Location = new Point(20, 30);
+            SendVideo.Margin = new Padding(0);
+            SendVideo.Name = "SendVideo";
+            SendVideo.Size = new Size(40, 40);
+            SendVideo.TabIndex = 2;
+            SendVideo.TabStop = false;
+            SendVideo.Click += SendVideo_Click;
+            // 
             // Send
             // 
             Send.BackgroundImage = Properties.Resources.send_icon2;
             Send.BackgroundImageLayout = ImageLayout.Stretch;
-            Send.Location = new Point(1227, 33);
+            Send.Location = new Point(1230, 30);
             Send.Margin = new Padding(0);
             Send.Name = "Send";
-            Send.Size = new Size(34, 34);
+            Send.Size = new Size(40, 40);
             Send.TabIndex = 1;
             Send.TabStop = false;
             Send.Click += Send_Click;
             // 
             // Content
             // 
-            Content.Font = new Font("Poppins", 9F);
-            Content.Location = new Point(187, 33);
+            Content.Font = new Font("Poppins", 11F);
+            Content.Location = new Point(140, 30);
             Content.Margin = new Padding(0);
             Content.MaxLength = 10000;
             Content.Name = "Content";
-            Content.Size = new Size(1022, 34);
+            Content.Size = new Size(1070, 40);
             Content.TabIndex = 0;
             // 
             // MessagesPanel
@@ -147,6 +177,8 @@
             ((System.ComponentModel.ISupportInitialize)Avatar).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)SendImage).EndInit();
+            ((System.ComponentModel.ISupportInitialize)SendVideo).EndInit();
             ((System.ComponentModel.ISupportInitialize)Send).EndInit();
             ResumeLayout(false);
         }
@@ -162,5 +194,7 @@
         private FlowLayoutPanel MessagesPanel;
         private PictureBox Send;
         private TextBox Content;
+        private PictureBox SendImage;
+        private PictureBox SendVideo;
     }
 }

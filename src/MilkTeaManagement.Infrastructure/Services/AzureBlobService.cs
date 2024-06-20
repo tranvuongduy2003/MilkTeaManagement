@@ -1,5 +1,6 @@
 ﻿using Azure.Storage;
 using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using MilkTeaManagement.Application.Common.Interfaces;
 using MilkTeaManagement.Application.Common.Models.Files;
 using MilkTeaManagement.Infrastructure.Configurations;
@@ -53,9 +54,11 @@ namespace MilkTeaManagement.Infrastructure.Services
 
                 if (await client.ExistsAsync())
                 {
+                    await client.SetAccessTierAsync(AccessTier.Hot);
+
                     response.Status = $"File {fileName} Uploaded Successfully";
                     response.Error = false;
-                    response.Blob.Uri = client.Uri.ToString();
+                    response.Blob.Uri = client.Uri.AbsoluteUri;
                     response.Blob.Name = fileName;
                 }
                 else
@@ -63,11 +66,14 @@ namespace MilkTeaManagement.Infrastructure.Services
                     using (FileStream fileStream = File.OpenRead(filePath))
                     {
                         await client.UploadAsync(fileStream, true);
+                        fileStream.Close();
                     }
+
+                    await client.SetAccessTierAsync(AccessTier.Hot);
 
                     response.Status = $"File {fileName} Uploaded Successfully";
                     response.Error = false;
-                    response.Blob.Uri = client.Uri.ToString();
+                    response.Blob.Uri = client.Uri.AbsoluteUri;
                     response.Blob.Name = fileName;
                 }
 
