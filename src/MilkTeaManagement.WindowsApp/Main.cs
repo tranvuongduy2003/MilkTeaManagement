@@ -5,6 +5,7 @@ using MilkTeaManagement.WindowsApp.Pages.Categories;
 using MilkTeaManagement.WindowsApp.Pages.Chat;
 using MilkTeaManagement.WindowsApp.Pages.Employees;
 using MilkTeaManagement.WindowsApp.Pages.Home;
+using MilkTeaManagement.WindowsApp.Pages.Payments;
 using MilkTeaManagement.WindowsApp.Pages.Products;
 using MilkTeaManagement.WindowsApp.UserControls.Sidebar;
 
@@ -24,6 +25,8 @@ namespace MilkTeaManagement.WindowsApp
             product.label1.Text = "Products";
             employee.pictureBox1.BackgroundImage = Properties.Resources.user;
             employee.label1.Text = "Employees";
+            payments.pictureBox1.BackgroundImage = Properties.Resources.invoice;
+            payments.label1.Text = "Payments";
             chat.pictureBox1.BackgroundImage = Properties.Resources.bubble_chat;
             chat.label1.Text = "Chat";
 
@@ -46,6 +49,7 @@ namespace MilkTeaManagement.WindowsApp
         private async void InitializeSignalR()
         {
             Program.SignalRConnection = new HubConnectionBuilder()
+                //.WithUrl("https://milkteamanagementsignalr.azurewebsites.net/Chat", HttpTransportType.WebSockets)
                 .WithUrl("https://localhost:8008/Chat", HttpTransportType.WebSockets)
                 .WithAutomaticReconnect()
                 .Build();
@@ -102,6 +106,15 @@ namespace MilkTeaManagement.WindowsApp
             ChatPage chatPage = Program.ServiceProvider.GetRequiredService<ChatPage>();
             chatPage.OnLoad();
             contentPanel.Controls.Add(chatPage);
+        }
+
+        private void payments_Click(object sender, EventArgs e)
+        {
+            SetItemSelected(sender);
+            contentPanel.Controls.Clear();
+            PaymentsPage paymentsPage = Program.ServiceProvider.GetRequiredService<PaymentsPage>();
+            paymentsPage.OnLoad();
+            contentPanel.Controls.Add(paymentsPage);
         }
 
         private async void close_Click(object sender, EventArgs e)

@@ -35,6 +35,7 @@
             product = new UserControls.Sidebar.SidebarItem();
             home = new UserControls.Sidebar.SidebarItem();
             sidebarPanel = new Panel();
+            payments = new UserControls.Sidebar.SidebarItem();
             chat = new UserControls.Sidebar.SidebarItem();
             employee = new UserControls.Sidebar.SidebarItem();
             category = new UserControls.Sidebar.SidebarItem();
@@ -106,6 +107,7 @@
             // sidebarPanel
             // 
             sidebarPanel.BackColor = Color.FromArgb(192, 192, 255);
+            sidebarPanel.Controls.Add(payments);
             sidebarPanel.Controls.Add(chat);
             sidebarPanel.Controls.Add(employee);
             sidebarPanel.Controls.Add(category);
@@ -117,9 +119,18 @@
             sidebarPanel.Size = new Size(100, 1050);
             sidebarPanel.TabIndex = 3;
             // 
+            // payments
+            // 
+            payments.Location = new Point(0, 400);
+            payments.Margin = new Padding(0);
+            payments.Name = "payments";
+            payments.Size = new Size(100, 100);
+            payments.TabIndex = 5;
+            payments.Click += payments_Click;
+            // 
             // chat
             // 
-            chat.Location = new Point(0, 400);
+            chat.Location = new Point(0, 500);
             chat.Margin = new Padding(0);
             chat.Name = "chat";
             chat.Size = new Size(100, 100);
@@ -176,5 +187,6 @@
         private UserControls.Sidebar.SidebarItem category;
         private UserControls.Sidebar.SidebarItem employee;
         private UserControls.Sidebar.SidebarItem chat;
+        private UserControls.Sidebar.SidebarItem payments;
     }
 }
