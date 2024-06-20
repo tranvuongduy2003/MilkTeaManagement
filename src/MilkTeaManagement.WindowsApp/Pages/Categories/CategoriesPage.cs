@@ -163,5 +163,40 @@ namespace MilkTeaManagement.WindowsApp.Pages.Categories
                 }
             }
         }
+
+        private async void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (CategoriesTable.SelectedCells.Count == 0)
+                {
+                    MessageBox.Show("Please select category row to delete!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var selectedCell = CategoriesTable.SelectedCells[0];
+                if (selectedCell.RowIndex >= 0)
+                {
+                    var selectedRow = CategoriesTable.Rows[selectedCell.RowIndex];
+
+                    var category = await _categoriesRepository.GetByIdAsync(selectedRow.Cells["Id"].Value.ToString());
+
+                    if (category == null)
+                        throw new Exception("Category is not existed");
+
+                    
+                    await _categoriesRepository.DeleteAsync(category);
+                    await _categoriesRepository.SaveChangesAsync();
+
+                    MessageBox.Show("Delete new category successfully!", "Success!", MessageBoxButtons.OK);
+                    this.OnLoad();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
     }
 }

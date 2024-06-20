@@ -114,7 +114,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Categories
                 await _categoriesRepository.SaveChangesAsync();
 
                 MessageBox.Show("Delete new category successfully!", "Success!", MessageBoxButtons.OK);
-                this.Close();
+                this.DialogResult = DialogResult.OK;
             }
             catch (Exception ex)
             {

@@ -36,15 +36,15 @@
             SearchTextBox = new TextBox();
             CategoriesComboBox = new ComboBox();
             CategoriesTable = new DataGridView();
-            btnDelete = new Button();
-            btnUpdate = new Button();
-            btnCreate = new Button();
             Id = new DataGridViewTextBoxColumn();
             CategoryName = new DataGridViewTextBoxColumn();
             Poster = new DataGridViewTextBoxColumn();
             CreatorId = new DataGridViewTextBoxColumn();
             Creator = new DataGridViewTextBoxColumn();
             CreatedAt = new DataGridViewTextBoxColumn();
+            btnDelete = new Button();
+            btnUpdate = new Button();
+            btnCreate = new Button();
             ((System.ComponentModel.ISupportInitialize)CategoriesTable).BeginInit();
             SuspendLayout();
             // 
@@ -113,47 +113,6 @@
             CategoriesTable.Size = new Size(1467, 696);
             CategoriesTable.TabIndex = 16;
             // 
-            // btnDelete
-            // 
-            btnDelete.BackColor = Color.Crimson;
-            btnDelete.Font = new Font("Microsoft Sans Serif", 12F);
-            btnDelete.ForeColor = Color.White;
-            btnDelete.Location = new Point(1080, 98);
-            btnDelete.Margin = new Padding(0);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(133, 41);
-            btnDelete.TabIndex = 19;
-            btnDelete.Text = "Delete";
-            btnDelete.UseVisualStyleBackColor = false;
-            // 
-            // btnUpdate
-            // 
-            btnUpdate.BackColor = Color.FromArgb(192, 192, 0);
-            btnUpdate.Font = new Font("Microsoft Sans Serif", 12F);
-            btnUpdate.ForeColor = Color.White;
-            btnUpdate.Location = new Point(1222, 98);
-            btnUpdate.Margin = new Padding(0);
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(133, 41);
-            btnUpdate.TabIndex = 18;
-            btnUpdate.Text = "Update";
-            btnUpdate.UseVisualStyleBackColor = false;
-            btnUpdate.Click += btnUpdate_Click;
-            // 
-            // btnCreate
-            // 
-            btnCreate.BackColor = Color.CornflowerBlue;
-            btnCreate.Font = new Font("Microsoft Sans Serif", 12F);
-            btnCreate.ForeColor = Color.White;
-            btnCreate.Location = new Point(1363, 98);
-            btnCreate.Margin = new Padding(0);
-            btnCreate.Name = "btnCreate";
-            btnCreate.Size = new Size(133, 41);
-            btnCreate.TabIndex = 17;
-            btnCreate.Text = "Create";
-            btnCreate.UseVisualStyleBackColor = false;
-            btnCreate.Click += btnCreate_Click;
-            // 
             // Id
             // 
             Id.HeaderText = "Id";
@@ -208,6 +167,48 @@
             CreatedAt.Name = "CreatedAt";
             CreatedAt.Width = 400;
             CategoriesTable.Columns["CreatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
+            // 
+            // btnDelete
+            // 
+            btnDelete.BackColor = Color.Crimson;
+            btnDelete.Font = new Font("Microsoft Sans Serif", 12F);
+            btnDelete.ForeColor = Color.White;
+            btnDelete.Location = new Point(1080, 98);
+            btnDelete.Margin = new Padding(0);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(133, 41);
+            btnDelete.TabIndex = 19;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
+            // 
+            // btnUpdate
+            // 
+            btnUpdate.BackColor = Color.FromArgb(192, 192, 0);
+            btnUpdate.Font = new Font("Microsoft Sans Serif", 12F);
+            btnUpdate.ForeColor = Color.White;
+            btnUpdate.Location = new Point(1222, 98);
+            btnUpdate.Margin = new Padding(0);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(133, 41);
+            btnUpdate.TabIndex = 18;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = false;
+            btnUpdate.Click += btnUpdate_Click;
+            // 
+            // btnCreate
+            // 
+            btnCreate.BackColor = Color.CornflowerBlue;
+            btnCreate.Font = new Font("Microsoft Sans Serif", 12F);
+            btnCreate.ForeColor = Color.White;
+            btnCreate.Location = new Point(1363, 98);
+            btnCreate.Margin = new Padding(0);
+            btnCreate.Name = "btnCreate";
+            btnCreate.Size = new Size(133, 41);
+            btnCreate.TabIndex = 17;
+            btnCreate.Text = "Create";
+            btnCreate.UseVisualStyleBackColor = false;
+            btnCreate.Click += btnCreate_Click;
             // 
             // CategoriesPage
             // 
