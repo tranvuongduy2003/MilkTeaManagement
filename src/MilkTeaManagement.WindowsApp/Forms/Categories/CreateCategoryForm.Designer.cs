@@ -157,7 +157,7 @@
             btnCreate.BackColor = Color.SteelBlue;
             btnCreate.Font = new Font("Microsoft Sans Serif", 12F);
             btnCreate.ForeColor = Color.White;
-            btnCreate.Location = new Point(412, 514);
+            btnCreate.Location = new Point(420, 514);
             btnCreate.Margin = new Padding(0);
             btnCreate.Name = "btnCreate";
             btnCreate.Size = new Size(317, 43);
@@ -166,7 +166,7 @@
             btnCreate.UseVisualStyleBackColor = false;
             btnCreate.Click += btnCreate_Click;
             // 
-            // CreatCategoryForm
+            // CreateCategoryForm
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
             AutoScaleMode = AutoScaleMode.Dpi;
@@ -180,7 +180,7 @@
             Controls.Add(label6);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "CreatCategoryForm";
+            Name = "CreateCategoryForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CreatCategoryForm";
             ((System.ComponentModel.ISupportInitialize)btnClose).EndInit();

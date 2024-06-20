@@ -32,6 +32,9 @@ namespace MilkTeaManagement.WindowsApp.Forms.Categories
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            Poster.BackgroundImage = Properties.Resources.upload_image1;
+            PosterFilePath = string.Empty;
+            tbName.Clear();
             this.Close();
         }
 
@@ -76,6 +79,10 @@ namespace MilkTeaManagement.WindowsApp.Forms.Categories
                 await _categoriesRepository.SaveChangesAsync();
 
                 MessageBox.Show("Create new category successfully!", "Success!", MessageBoxButtons.OK);
+
+                Poster.BackgroundImage = Properties.Resources.upload_image1;
+                PosterFilePath = string.Empty;
+                tbName.Clear();
                 this.DialogResult = DialogResult.OK;
             }
             catch (Exception ex)
