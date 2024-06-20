@@ -87,6 +87,7 @@ namespace MilkTeaManagement.WindowsApp
             builder.Services.AddScoped<BillItem>();
 
             builder.Services.AddScoped<CreateCategoryForm>();
+            builder.Services.AddScoped<UpdateCategoryForm>();
 
             return builder;
         }

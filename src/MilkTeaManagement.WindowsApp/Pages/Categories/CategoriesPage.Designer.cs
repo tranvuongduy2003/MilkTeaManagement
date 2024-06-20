@@ -36,14 +36,15 @@
             SearchTextBox = new TextBox();
             CategoriesComboBox = new ComboBox();
             CategoriesTable = new DataGridView();
-            Id = new DataGridViewTextBoxColumn();
-            CategoryName = new DataGridViewTextBoxColumn();
-            Poster = new DataGridViewTextBoxColumn();
-            Creator = new DataGridViewTextBoxColumn();
-            CreatedAt = new DataGridViewTextBoxColumn();
             btnDelete = new Button();
             btnUpdate = new Button();
             btnCreate = new Button();
+            Id = new DataGridViewTextBoxColumn();
+            CategoryName = new DataGridViewTextBoxColumn();
+            Poster = new DataGridViewTextBoxColumn();
+            CreatorId = new DataGridViewTextBoxColumn();
+            Creator = new DataGridViewTextBoxColumn();
+            CreatedAt = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)CategoriesTable).BeginInit();
             SuspendLayout();
             // 
@@ -103,7 +104,7 @@
             CategoriesTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             CategoriesTable.ColumnHeadersHeight = 50;
             CategoriesTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            CategoriesTable.Columns.AddRange(new DataGridViewColumn[] { Id, CategoryName, Poster, Creator, CreatedAt });
+            CategoriesTable.Columns.AddRange(new DataGridViewColumn[] { Id, CategoryName, Poster, CreatorId, Creator, CreatedAt });
             CategoriesTable.Location = new Point(25, 155);
             CategoriesTable.Margin = new Padding(0);
             CategoriesTable.Name = "CategoriesTable";
@@ -111,6 +112,47 @@
             CategoriesTable.RowTemplate.Height = 100;
             CategoriesTable.Size = new Size(1467, 696);
             CategoriesTable.TabIndex = 16;
+            // 
+            // btnDelete
+            // 
+            btnDelete.BackColor = Color.Crimson;
+            btnDelete.Font = new Font("Microsoft Sans Serif", 12F);
+            btnDelete.ForeColor = Color.White;
+            btnDelete.Location = new Point(1080, 98);
+            btnDelete.Margin = new Padding(0);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(133, 41);
+            btnDelete.TabIndex = 19;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = false;
+            // 
+            // btnUpdate
+            // 
+            btnUpdate.BackColor = Color.FromArgb(192, 192, 0);
+            btnUpdate.Font = new Font("Microsoft Sans Serif", 12F);
+            btnUpdate.ForeColor = Color.White;
+            btnUpdate.Location = new Point(1222, 98);
+            btnUpdate.Margin = new Padding(0);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(133, 41);
+            btnUpdate.TabIndex = 18;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = false;
+            btnUpdate.Click += btnUpdate_Click;
+            // 
+            // btnCreate
+            // 
+            btnCreate.BackColor = Color.CornflowerBlue;
+            btnCreate.Font = new Font("Microsoft Sans Serif", 12F);
+            btnCreate.ForeColor = Color.White;
+            btnCreate.Location = new Point(1363, 98);
+            btnCreate.Margin = new Padding(0);
+            btnCreate.Name = "btnCreate";
+            btnCreate.Size = new Size(133, 41);
+            btnCreate.TabIndex = 17;
+            btnCreate.Text = "Create";
+            btnCreate.UseVisualStyleBackColor = false;
+            btnCreate.Click += btnCreate_Click;
             // 
             // Id
             // 
@@ -138,6 +180,14 @@
             Poster.Visible = false;
             Poster.Width = 125;
             // 
+            // CreatorId
+            // 
+            CreatorId.HeaderText = "CreatorId";
+            CreatorId.MinimumWidth = 6;
+            CreatorId.Name = "CreatorId";
+            CreatorId.Visible = false;
+            CreatorId.Width = 125;
+            // 
             // Creator
             // 
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -157,46 +207,7 @@
             CreatedAt.MinimumWidth = 8;
             CreatedAt.Name = "CreatedAt";
             CreatedAt.Width = 400;
-            // 
-            // btnDelete
-            // 
-            btnDelete.BackColor = Color.Crimson;
-            btnDelete.Font = new Font("Microsoft Sans Serif", 12F);
-            btnDelete.ForeColor = Color.White;
-            btnDelete.Location = new Point(1080, 98);
-            btnDelete.Margin = new Padding(0);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(133, 41);
-            btnDelete.TabIndex = 19;
-            btnDelete.Text = "Delete";
-            btnDelete.UseVisualStyleBackColor = false;
-            // 
-            // btnUpdate
-            // 
-            btnUpdate.BackColor = Color.FromArgb(192, 192, 0);
-            btnUpdate.Font = new Font("Microsoft Sans Serif", 12F);
-            btnUpdate.ForeColor = Color.White;
-            btnUpdate.Location = new Point(1222, 98);
-            btnUpdate.Margin = new Padding(0);
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(133, 41);
-            btnUpdate.TabIndex = 18;
-            btnUpdate.Text = "Update";
-            btnUpdate.UseVisualStyleBackColor = false;
-            // 
-            // btnCreate
-            // 
-            btnCreate.BackColor = Color.CornflowerBlue;
-            btnCreate.Font = new Font("Microsoft Sans Serif", 12F);
-            btnCreate.ForeColor = Color.White;
-            btnCreate.Location = new Point(1363, 98);
-            btnCreate.Margin = new Padding(0);
-            btnCreate.Name = "btnCreate";
-            btnCreate.Size = new Size(133, 41);
-            btnCreate.TabIndex = 17;
-            btnCreate.Text = "Create";
-            btnCreate.UseVisualStyleBackColor = false;
-            btnCreate.Click += btnCreate_Click;
+            CategoriesTable.Columns["CreatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
             // 
             // CategoriesPage
             // 
@@ -225,13 +236,14 @@
         private TextBox SearchTextBox;
         private ComboBox CategoriesComboBox;
         private DataGridView CategoriesTable;
-        private DataGridViewTextBoxColumn Id;
-        private DataGridViewTextBoxColumn CategoryName;
-        private DataGridViewTextBoxColumn Poster;
-        private DataGridViewTextBoxColumn Creator;
-        private DataGridViewTextBoxColumn CreatedAt;
         private Button btnDelete;
         private Button btnUpdate;
         private Button btnCreate;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn CategoryName;
+        private DataGridViewTextBoxColumn Poster;
+        private DataGridViewTextBoxColumn CreatorId;
+        private DataGridViewTextBoxColumn Creator;
+        private DataGridViewTextBoxColumn CreatedAt;
     }
 }

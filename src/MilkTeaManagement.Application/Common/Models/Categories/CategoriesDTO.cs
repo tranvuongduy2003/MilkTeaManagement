@@ -18,6 +18,6 @@ namespace MilkTeaManagement.Application.Common.Models.Categories
 
         public string Creator { get; set; }
 
-        public string CreatedDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
     }
 }

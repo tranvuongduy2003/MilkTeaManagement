@@ -35,7 +35,7 @@ namespace MilkTeaManagement.Infrastructure.Repositories
                     Poster = c.Poster,
                     CreatorId = c.CreatorId,
                     Creator = u.FullName,
-                    CreatedDate = c.CreatedDate.ToString("dd/MM/yyyy")
+                    CreatedDate = c.CreatedDate
                 }).OrderBy(dto => dto.Name).ToListAsync();
             }
             // Find all categories which search text is empty and filter z -> a
@@ -48,7 +48,7 @@ namespace MilkTeaManagement.Infrastructure.Repositories
                     Poster = c.Poster,
                     CreatorId = c.CreatorId,
                     Creator = u.FullName,
-                    CreatedDate = c.CreatedDate.ToString("dd/MM/yyyy")
+                    CreatedDate = c.CreatedDate
                 }).OrderByDescending(dto => dto.Name).ToListAsync();
             }
             // Find all categories which search text is not empty and filter a -> z
@@ -61,7 +61,7 @@ namespace MilkTeaManagement.Infrastructure.Repositories
                     Poster = c.Poster,
                     CreatorId = c.CreatorId,
                     Creator = u.FullName,
-                    CreatedDate = c.CreatedDate.ToString("dd/MM/yyyy")
+                    CreatedDate = c.CreatedDate
                 }).Where(dto => dto.Name.ToLower().Contains(filter.SearchText.ToLower()))
                 .OrderBy(dto => dto.Name)
                 .ToListAsync();
@@ -76,7 +76,7 @@ namespace MilkTeaManagement.Infrastructure.Repositories
                     Poster = c.Poster,
                     CreatorId = c.CreatorId,
                     Creator = u.FullName,
-                    CreatedDate = c.CreatedDate.ToString("dd/MM/yyyy")
+                    CreatedDate = c.CreatedDate
                 }).Where(dto => dto.Name.ToLower().Contains(filter.SearchText.ToLower()))
                 .OrderByDescending(dto => dto.Name)
                 .ToListAsync();

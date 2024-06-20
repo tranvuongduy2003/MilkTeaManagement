@@ -3,9 +3,12 @@ using Microsoft.Extensions.DependencyInjection;
 using MilkTeaManagement.Application.Common.Models.Categories;
 using MilkTeaManagement.Application.Common.Models.Filter;
 using MilkTeaManagement.Application.Contracts;
+using MilkTeaManagement.Domain.Entities;
+using MilkTeaManagement.Domain.Enums;
 using MilkTeaManagement.Infrastructure.Repositories;
 using MilkTeaManagement.WindowsApp.Forms;
 using MilkTeaManagement.WindowsApp.Forms.Categories;
+using MilkTeaManagement.WindowsApp.Forms.Products;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,7 +34,22 @@ namespace MilkTeaManagement.WindowsApp.Pages.Categories
 
         public async void OnLoad()
         {
-            CategoriesComboBox.SelectedIndex = 0;
+            string searchText = SearchTextBox.Text;
+
+            int filterComboboxSelectedIndex = CategoriesComboBox.SelectedIndex;
+
+            if (filterComboboxSelectedIndex == -1)
+            {
+                filterComboboxSelectedIndex = 0;
+            }
+
+            var categories = await _categoriesRepository.FindAllCategoriesByFilter(
+                new FilterInCategoriesPage
+                {
+                    SearchText = searchText,
+                    FilterComboboxSelectedIndex = filterComboboxSelectedIndex
+                });
+            await LoadCategoriesList(categories);
         }
 
         private async Task LoadCategoriesList(List<CategoriesDTO> categories)
@@ -46,6 +64,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Categories
                     CategoriesTable.Rows[i].Cells["Id"].Value = category.Id;
                     CategoriesTable.Rows[i].Cells["CategoryName"].Value = category.Name;
                     CategoriesTable.Rows[i].Cells["Poster"].Value = category.Poster;
+                    CategoriesTable.Rows[i].Cells["CreatorId"].Value = category.CreatorId;
                     CategoriesTable.Rows[i].Cells["Creator"].Value = category.Creator;
                     CategoriesTable.Rows[i].Cells["CreatedAt"].Value = category.CreatedDate;
                 }
@@ -87,6 +106,36 @@ namespace MilkTeaManagement.WindowsApp.Pages.Categories
             if (createCategoryForm.ShowDialog() == DialogResult.OK)
             {
                 this.OnLoad();
+            }
+        }
+
+        private async void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (CategoriesTable.SelectedCells.Count == 0)
+            {
+                MessageBox.Show("Please select category row to update!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var selectedCell = CategoriesTable.SelectedCells[0];
+            if (selectedCell.RowIndex >= 0)
+            {
+                UpdateCategoryForm updateCategoryForm = Program.ServiceProvider.GetRequiredService<UpdateCategoryForm>();
+                var selectedRow = CategoriesTable.Rows[selectedCell.RowIndex];
+                var category = new Category
+                {
+                    Id = selectedRow.Cells["Id"].Value.ToString(),
+                    Poster = selectedRow.Cells["Poster"].Value.ToString(),
+                    Name = selectedRow.Cells["CategoryName"].Value.ToString(),
+                    CreatorId = selectedRow.Cells["CreatorId"].Value.ToString(),
+                    CreatedDate = (DateTimeOffset)selectedRow.Cells["CreatedAt"].Value
+                };
+                updateCategoryForm.OnLoadCategory(category);
+
+                if (updateCategoryForm.ShowDialog() == DialogResult.OK)
+                {
+                    this.OnLoad();
+                }
             }
         }
     }
