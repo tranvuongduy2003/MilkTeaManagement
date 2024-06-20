@@ -32,20 +32,19 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             label1 = new Label();
             SearchTextBox = new TextBox();
             CategoriesComboBox = new ComboBox();
-            create = new Button();
             CategoriesTable = new DataGridView();
-            Poster = new DataGridViewImageColumn();
+            Id = new DataGridViewTextBoxColumn();
             CategoryName = new DataGridViewTextBoxColumn();
-            Quantity = new DataGridViewTextBoxColumn();
-            CreatedAt = new DataGridViewTextBoxColumn();
+            Poster = new DataGridViewTextBoxColumn();
+            CreatorId = new DataGridViewTextBoxColumn();
             Creator = new DataGridViewTextBoxColumn();
-            Action = new DataGridViewTextBoxColumn();
+            CreatedAt = new DataGridViewTextBoxColumn();
+            btnDelete = new Button();
+            btnUpdate = new Button();
+            btnCreate = new Button();
             ((System.ComponentModel.ISupportInitialize)CategoriesTable).BeginInit();
             SuspendLayout();
             // 
@@ -73,30 +72,20 @@
             SearchTextBox.PlaceholderText = "   Search category";
             SearchTextBox.Size = new Size(444, 34);
             SearchTextBox.TabIndex = 12;
+            SearchTextBox.TextChanged += SearchTextBox_TextChanged;
             // 
             // CategoriesComboBox
             // 
             CategoriesComboBox.Font = new Font("Microsoft Sans Serif", 12F);
             CategoriesComboBox.FormattingEnabled = true;
+            CategoriesComboBox.Items.AddRange(new object[] { "A to Z", "Z to A" });
             CategoriesComboBox.Location = new Point(478, 98);
             CategoriesComboBox.Margin = new Padding(0);
             CategoriesComboBox.Name = "CategoriesComboBox";
             CategoriesComboBox.Size = new Size(152, 33);
             CategoriesComboBox.TabIndex = 13;
-            CategoriesComboBox.Text = "  Category";
-            // 
-            // create
-            // 
-            create.BackColor = Color.CornflowerBlue;
-            create.Font = new Font("Microsoft Sans Serif", 12F);
-            create.ForeColor = Color.White;
-            create.Location = new Point(1198, 98);
-            create.Margin = new Padding(0);
-            create.Name = "create";
-            create.Size = new Size(293, 41);
-            create.TabIndex = 15;
-            create.Text = "Create new category";
-            create.UseVisualStyleBackColor = false;
+            CategoriesComboBox.Text = "  Sort by";
+            CategoriesComboBox.SelectedIndexChanged += CategoriesComboBox_SelectedIndexChanged;
             // 
             // CategoriesTable
             // 
@@ -105,7 +94,7 @@
             CategoriesTable.AllowUserToResizeColumns = false;
             CategoriesTable.AllowUserToResizeRows = false;
             CategoriesTable.BackgroundColor = SystemColors.Control;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
             dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
@@ -115,7 +104,7 @@
             CategoriesTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             CategoriesTable.ColumnHeadersHeight = 50;
             CategoriesTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            CategoriesTable.Columns.AddRange(new DataGridViewColumn[] { Poster, CategoryName, Quantity, CreatedAt, Creator, Action });
+            CategoriesTable.Columns.AddRange(new DataGridViewColumn[] { Id, CategoryName, Poster, CreatorId, Creator, CreatedAt });
             CategoriesTable.Location = new Point(25, 155);
             CategoriesTable.Margin = new Padding(0);
             CategoriesTable.Name = "CategoriesTable";
@@ -124,76 +113,112 @@
             CategoriesTable.Size = new Size(1467, 696);
             CategoriesTable.TabIndex = 16;
             // 
-            // Poster
+            // Id
             // 
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 20F);
-            dataGridViewCellStyle2.NullValue = null;
-            Poster.DefaultCellStyle = dataGridViewCellStyle2;
-            Poster.HeaderText = "Category";
-            Poster.MinimumWidth = 8;
-            Poster.Name = "Poster";
-            Poster.Resizable = DataGridViewTriState.True;
-            Poster.SortMode = DataGridViewColumnSortMode.Automatic;
-            Poster.Width = 300;
+            Id.HeaderText = "Id";
+            Id.MinimumWidth = 6;
+            Id.Name = "Id";
+            Id.Visible = false;
+            Id.Width = 125;
             // 
             // CategoryName
             // 
             CategoryName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 9F);
-            CategoryName.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 9F);
+            CategoryName.DefaultCellStyle = dataGridViewCellStyle2;
             CategoryName.HeaderText = "Name";
             CategoryName.MinimumWidth = 8;
             CategoryName.Name = "CategoryName";
             // 
-            // Quantity
+            // Poster
             // 
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 9F);
-            Quantity.DefaultCellStyle = dataGridViewCellStyle4;
-            Quantity.HeaderText = "Quantity";
-            Quantity.MinimumWidth = 8;
-            Quantity.Name = "Quantity";
-            Quantity.Width = 200;
+            Poster.HeaderText = "Poster";
+            Poster.MinimumWidth = 6;
+            Poster.Name = "Poster";
+            Poster.Visible = false;
+            Poster.Width = 125;
             // 
-            // CreatedAt
+            // CreatorId
             // 
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 9F);
-            CreatedAt.DefaultCellStyle = dataGridViewCellStyle5;
-            CreatedAt.HeaderText = "Created At";
-            CreatedAt.MinimumWidth = 8;
-            CreatedAt.Name = "CreatedAt";
-            CreatedAt.Width = 150;
+            CreatorId.HeaderText = "CreatorId";
+            CreatorId.MinimumWidth = 6;
+            CreatorId.Name = "CreatorId";
+            CreatorId.Visible = false;
+            CreatorId.Width = 125;
             // 
             // Creator
             // 
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.Font = new Font("Microsoft Sans Serif", 9F);
-            Creator.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 9F);
+            Creator.DefaultCellStyle = dataGridViewCellStyle3;
             Creator.HeaderText = "Creator";
             Creator.MinimumWidth = 8;
             Creator.Name = "Creator";
-            Creator.Width = 200;
+            Creator.Width = 400;
             // 
-            // Action
+            // CreatedAt
             // 
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.Font = new Font("Microsoft Sans Serif", 9F);
-            Action.DefaultCellStyle = dataGridViewCellStyle7;
-            Action.HeaderText = "Action";
-            Action.MinimumWidth = 8;
-            Action.Name = "Action";
-            Action.Width = 150;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 9F);
+            CreatedAt.DefaultCellStyle = dataGridViewCellStyle4;
+            CreatedAt.HeaderText = "Created At";
+            CreatedAt.MinimumWidth = 8;
+            CreatedAt.Name = "CreatedAt";
+            CreatedAt.Width = 400;
+            CategoriesTable.Columns["CreatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
+            // 
+            // btnDelete
+            // 
+            btnDelete.BackColor = Color.Crimson;
+            btnDelete.Font = new Font("Microsoft Sans Serif", 12F);
+            btnDelete.ForeColor = Color.White;
+            btnDelete.Location = new Point(1080, 98);
+            btnDelete.Margin = new Padding(0);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(133, 41);
+            btnDelete.TabIndex = 19;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
+            // 
+            // btnUpdate
+            // 
+            btnUpdate.BackColor = Color.FromArgb(192, 192, 0);
+            btnUpdate.Font = new Font("Microsoft Sans Serif", 12F);
+            btnUpdate.ForeColor = Color.White;
+            btnUpdate.Location = new Point(1222, 98);
+            btnUpdate.Margin = new Padding(0);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(133, 41);
+            btnUpdate.TabIndex = 18;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = false;
+            btnUpdate.Click += btnUpdate_Click;
+            // 
+            // btnCreate
+            // 
+            btnCreate.BackColor = Color.CornflowerBlue;
+            btnCreate.Font = new Font("Microsoft Sans Serif", 12F);
+            btnCreate.ForeColor = Color.White;
+            btnCreate.Location = new Point(1363, 98);
+            btnCreate.Margin = new Padding(0);
+            btnCreate.Name = "btnCreate";
+            btnCreate.Size = new Size(133, 41);
+            btnCreate.TabIndex = 17;
+            btnCreate.Text = "Create";
+            btnCreate.UseVisualStyleBackColor = false;
+            btnCreate.Click += btnCreate_Click;
             // 
             // CategoriesPage
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(64, 64, 64);
+            Controls.Add(btnDelete);
+            Controls.Add(btnUpdate);
+            Controls.Add(btnCreate);
             Controls.Add(CategoriesTable);
-            Controls.Add(create);
             Controls.Add(CategoriesComboBox);
             Controls.Add(SearchTextBox);
             Controls.Add(label1);
@@ -211,13 +236,15 @@
         private Label label1;
         private TextBox SearchTextBox;
         private ComboBox CategoriesComboBox;
-        private Button create;
         private DataGridView CategoriesTable;
-        private DataGridViewImageColumn Poster;
+        private Button btnDelete;
+        private Button btnUpdate;
+        private Button btnCreate;
+        private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn CategoryName;
-        private DataGridViewTextBoxColumn Quantity;
-        private DataGridViewTextBoxColumn CreatedAt;
+        private DataGridViewTextBoxColumn Poster;
+        private DataGridViewTextBoxColumn CreatorId;
         private DataGridViewTextBoxColumn Creator;
-        private DataGridViewTextBoxColumn Action;
+        private DataGridViewTextBoxColumn CreatedAt;
     }
 }
