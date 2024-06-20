@@ -161,6 +161,12 @@ namespace MilkTeaManagement.WindowsApp.Pages.Home
                 await _ordersRepository.CheckoutAsync(request);
 
                 MessageBox.Show("Checkout successfully!", "Success!", MessageBoxButtons.OK);
+
+                invoicePanel.Controls.Clear();
+                this.SubTotal.Text = "0 VNĐ";
+                this.Discount.Text = "0 VNĐ";
+                this.Total.Text = "0 VNĐ";
+
             }
             catch (Exception ex)
             {
