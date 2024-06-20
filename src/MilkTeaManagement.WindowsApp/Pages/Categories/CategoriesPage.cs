@@ -30,6 +30,8 @@ namespace MilkTeaManagement.WindowsApp.Pages.Categories
             InitializeComponent();
 
             _categoriesRepository = categoriesRepository;
+
+            CategoriesTable.CellDoubleClick += OnUpdateCategory;
         }
 
         public async void OnLoad()
@@ -122,6 +124,29 @@ namespace MilkTeaManagement.WindowsApp.Pages.Categories
             {
                 UpdateCategoryForm updateCategoryForm = Program.ServiceProvider.GetRequiredService<UpdateCategoryForm>();
                 var selectedRow = CategoriesTable.Rows[selectedCell.RowIndex];
+                var category = new Category
+                {
+                    Id = selectedRow.Cells["Id"].Value.ToString(),
+                    Poster = selectedRow.Cells["Poster"].Value.ToString(),
+                    Name = selectedRow.Cells["CategoryName"].Value.ToString(),
+                    CreatorId = selectedRow.Cells["CreatorId"].Value.ToString(),
+                    CreatedDate = (DateTimeOffset)selectedRow.Cells["CreatedAt"].Value
+                };
+                updateCategoryForm.OnLoadCategory(category);
+
+                if (updateCategoryForm.ShowDialog() == DialogResult.OK)
+                {
+                    this.OnLoad();
+                }
+            }
+        }
+
+        private async void OnUpdateCategory(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                UpdateCategoryForm updateCategoryForm = Program.ServiceProvider.GetRequiredService<UpdateCategoryForm>();
+                var selectedRow = CategoriesTable.Rows[e.RowIndex];
                 var category = new Category
                 {
                     Id = selectedRow.Cells["Id"].Value.ToString(),
