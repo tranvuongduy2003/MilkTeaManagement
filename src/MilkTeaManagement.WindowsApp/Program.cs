@@ -11,6 +11,12 @@ using MilkTeaManagement.WindowsApp.Forms.Categories;
 using MilkTeaManagement.WindowsApp.Forms.Products;
 using MilkTeaManagement.WindowsApp.Extensions;
 using MilkTeaManagement.WindowsApp.Pages.Auth;
+using MilkTeaManagement.WindowsApp.Pages.Home;
+using MilkTeaManagement.WindowsApp.Pages.Categories;
+using MilkTeaManagement.WindowsApp.Pages.Products;
+using MilkTeaManagement.WindowsApp.Pages.Employees;
+using MilkTeaManagement.WindowsApp.UserControls.Employees;
+using MilkTeaManagement.WindowsApp.UserControls.Home;
 
 namespace MilkTeaManagement.WindowsApp
 {
