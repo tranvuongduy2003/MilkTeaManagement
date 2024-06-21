@@ -48,12 +48,15 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
             PriceTextbox.Text = product.Price.ToString();
             DescriptionTextbox.Text = product.Description;
             Poster.ImageLocation = product.Poster;
+            Poster.SizeMode = PictureBoxSizeMode.Zoom;
+            PosterFilePath = product.Poster;
             Product = product;
         }
 
         private void closeButton_Click(object sender, EventArgs e)
         {
             this.Close();
+            Poster.Image = Properties.Resources.upload_image1;
         }
 
         private void poster_Click(object sender, EventArgs e)
@@ -62,7 +65,8 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                Poster.BackgroundImage = new Bitmap(openFileDialog.FileName);
+                Poster.ImageLocation = openFileDialog.FileName;
+                Poster.SizeMode = PictureBoxSizeMode.Zoom;
                 PosterFilePath = openFileDialog.FileName;
             }
         }
@@ -137,7 +141,6 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
 
                 MessageBox.Show("Delete new product successfully!", "Success!", MessageBoxButtons.OK);
                 this.DialogResult = DialogResult.OK;
-
             }
             catch (Exception ex)
             {
