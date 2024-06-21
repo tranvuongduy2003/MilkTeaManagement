@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using MilkTeaManagement.Application.Common.Models.Auth;
 using MilkTeaManagement.Application.Contracts;
 using MilkTeaManagement.Domain.Entities;
+using System.Runtime.InteropServices;
 
 namespace MilkTeaManagement.WindowsApp.Pages.Auth
 {
@@ -12,9 +13,25 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
         private readonly IAuthRepository _authRepository;
         private readonly UserManager<User> _userManager;
 
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+        (
+            int nLeftRect,     // x-coordinate of upper-left corner
+            int nTopRect,      // y-coordinate of upper-left corner
+            int nRightRect,    // x-coordinate of lower-right corner
+            int nBottomRect,   // y-coordinate of lower-right corner
+            int nWidthEllipse, // width of ellipse
+            int nHeightEllipse // height of ellipse
+        );
+
         public LoginPage(IAuthRepository authRepository, UserManager<User> userManager)
         {
             InitializeComponent();
+
+            DoubleBuffered = true;
+            ResizeRedraw = true;
+            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 50, 50));
+
             _authRepository = authRepository;
             _userManager = userManager;
         }

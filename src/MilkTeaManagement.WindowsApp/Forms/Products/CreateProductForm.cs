@@ -38,6 +38,11 @@ namespace MilkTeaManagement.WindowsApp.Forms
 
         private void closeButton_Click(object sender, EventArgs e)
         {
+            Poster.BackgroundImage = Properties.Resources.upload_image1;
+            PosterFilePath = string.Empty;
+            NameTextbox.Clear();
+            PriceTextbox.Clear();
+            DescriptionTextbox.Clear();
             this.Close();
         }
 
@@ -93,6 +98,13 @@ namespace MilkTeaManagement.WindowsApp.Forms
                 await _productsRepository.SaveChangesAsync();
 
                 MessageBox.Show("Create new product successfully!", "Success!", MessageBoxButtons.OK);
+
+                Poster.BackgroundImage = Properties.Resources.upload_image1;
+                PosterFilePath = string.Empty;
+                NameTextbox.Clear();
+                PriceTextbox.Clear();
+                DescriptionTextbox.Clear();
+
                 this.DialogResult = DialogResult.OK;
             }
             catch (Exception ex)

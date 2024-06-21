@@ -42,17 +42,21 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
             foreach (var category in categories)
                 this.CategoriesComboBox.Items.Add(category.Name);
             var selectedCategory = Categories.Find(c => c.Id == product.CategoryId);
-            CategoriesComboBox.SelectedText = selectedCategory.Name;
+            CategoriesComboBox.SelectedItem = selectedCategory.Name;
+            //CategoriesComboBox.SelectedText = selectedCategory.Name;
             NameTextbox.Text = product.Name;
             PriceTextbox.Text = product.Price.ToString();
             DescriptionTextbox.Text = product.Description;
             Poster.ImageLocation = product.Poster;
+            Poster.SizeMode = PictureBoxSizeMode.Zoom;
+            PosterFilePath = product.Poster;
             Product = product;
         }
 
         private void closeButton_Click(object sender, EventArgs e)
         {
             this.Close();
+            Poster.Image = Properties.Resources.upload_image1;
         }
 
         private void poster_Click(object sender, EventArgs e)
@@ -61,7 +65,8 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                Poster.BackgroundImage = new Bitmap(openFileDialog.FileName);
+                Poster.ImageLocation = openFileDialog.FileName;
+                Poster.SizeMode = PictureBoxSizeMode.Zoom;
                 PosterFilePath = openFileDialog.FileName;
             }
         }
@@ -135,8 +140,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
                 await _productsRepository.SaveChangesAsync();
 
                 MessageBox.Show("Delete product successfully!", "Success!", MessageBoxButtons.OK);
-                this.OnLoad();
-
+                this.DialogResult = DialogResult.OK;
             }
             catch (Exception ex)
             {

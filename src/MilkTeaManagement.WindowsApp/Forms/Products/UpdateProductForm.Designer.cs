@@ -116,7 +116,6 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
             // Poster
             // 
             Poster.BackColor = Color.White;
-            Poster.BackgroundImage = Properties.Resources.upload_image1;
             Poster.BackgroundImageLayout = ImageLayout.Zoom;
             Poster.Location = new Point(36, 208);
             Poster.Name = "Poster";

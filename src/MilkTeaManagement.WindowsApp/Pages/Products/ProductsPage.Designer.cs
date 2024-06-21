@@ -99,7 +99,7 @@
             ProductsTable.AllowUserToResizeColumns = false;
             ProductsTable.AllowUserToResizeRows = false;
             ProductsTable.BackgroundColor = SystemColors.Control;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
             dataGridViewCellStyle1.Font = new Font("Poppins Medium", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
@@ -178,6 +178,7 @@
             // Status
             // 
             dataGridViewCellStyle3.Font = new Font("Poppins", 9F);
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
             Status.DefaultCellStyle = dataGridViewCellStyle3;
             Status.HeaderText = "Status";
             Status.MinimumWidth = 8;
@@ -187,7 +188,7 @@
             // 
             // Category
             // 
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle4.Font = new Font("Poppins", 9F);
             Category.DefaultCellStyle = dataGridViewCellStyle4;
             Category.HeaderText = "Category";
@@ -198,7 +199,7 @@
             // 
             // Price
             // 
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle5.Font = new Font("Poppins", 9F);
             Price.DefaultCellStyle = dataGridViewCellStyle5;
             Price.HeaderText = "Price";
@@ -209,7 +210,7 @@
             // 
             // CreatedAt
             // 
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle6.Font = new Font("Poppins", 9F);
             CreatedAt.DefaultCellStyle = dataGridViewCellStyle6;
             CreatedAt.HeaderText = "Created At";
@@ -217,6 +218,7 @@
             CreatedAt.Name = "CreatedAt";
             CreatedAt.ReadOnly = true;
             CreatedAt.Width = 350;
+            ProductsTable.Columns["CreatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
             // 
             // create
             // 

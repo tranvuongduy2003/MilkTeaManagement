@@ -188,7 +188,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
             registerButton.BackColor = Color.FromArgb(128, 128, 255);
             registerButton.FlatStyle = FlatStyle.Flat;
             registerButton.Font = new Font("Poppins", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            registerButton.ForeColor = Color.FromArgb(192, 192, 255);
+            registerButton.ForeColor = Color.FromArgb(255, 251, 228);
             registerButton.Location = new Point(3, 801);
             registerButton.Name = "registerButton";
             registerButton.Size = new Size(444, 48);

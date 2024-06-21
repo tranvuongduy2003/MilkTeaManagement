@@ -10,14 +10,30 @@ using MilkTeaManagement.WindowsApp.Pages.Payments;
 using MilkTeaManagement.WindowsApp.Pages.Products;
 using MilkTeaManagement.WindowsApp.Pages.Profile;
 using MilkTeaManagement.WindowsApp.UserControls.Sidebar;
+using System.Runtime.InteropServices;
 
 namespace MilkTeaManagement.WindowsApp
 {
     public partial class Main : Form
     {
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+        (
+            int nLeftRect,     // x-coordinate of upper-left corner
+            int nTopRect,      // y-coordinate of upper-left corner
+            int nRightRect,    // x-coordinate of lower-right corner
+            int nBottomRect,   // y-coordinate of lower-right corner
+            int nWidthEllipse, // width of ellipse
+            int nHeightEllipse // height of ellipse
+        );
+
         public Main()
         {
             InitializeComponent();
+
+            DoubleBuffered = true;
+            ResizeRedraw = true;
+            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 50, 50));
 
             home.pictureBox1.BackgroundImage = Properties.Resources.home;
             home.label1.Text = "Home";
