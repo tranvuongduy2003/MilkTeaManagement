@@ -5,6 +5,7 @@ using MilkTeaManagement.Domain.ValueObjetcs;
 using MilkTeaManagement.Infrastructure;
 using MilkTeaManagement.Infrastructure.Configurations;
 using MilkTeaManagement.WindowsApp.Forms;
+using MilkTeaManagement.WindowsApp.Forms.Categories;
 using MilkTeaManagement.WindowsApp.Forms.Products;
 using MilkTeaManagement.WindowsApp.Pages.Auth;
 using MilkTeaManagement.WindowsApp.Pages.Categories;
@@ -13,6 +14,7 @@ using MilkTeaManagement.WindowsApp.Pages.Employees;
 using MilkTeaManagement.WindowsApp.Pages.Home;
 using MilkTeaManagement.WindowsApp.Pages.Payments;
 using MilkTeaManagement.WindowsApp.Pages.Products;
+using MilkTeaManagement.WindowsApp.Pages.Profile;
 using MilkTeaManagement.WindowsApp.UserControls.Chat;
 using MilkTeaManagement.WindowsApp.UserControls.Employees;
 using MilkTeaManagement.WindowsApp.UserControls.Home;
@@ -63,9 +65,13 @@ namespace MilkTeaManagement.WindowsApp.Extensions
             services.AddTransient<EmployeesPage>();
             services.AddTransient<PaymentsPage>();
             services.AddTransient<ChatPage>();
+            services.AddTransient<ProfilePage>();
 
             // User Controls
             services.AddScoped<CreateProductForm>();
+            services.AddScoped<UpdateProductForm>();
+            services.AddScoped<CreateCategoryForm>();
+            services.AddScoped<UpdateCategoryForm>();
             services.AddScoped<UpdateProductForm>();
             services.AddScoped<InformationPanel>();
             services.AddScoped<BillItem>();

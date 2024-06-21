@@ -226,9 +226,9 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
             label6.Location = new Point(36, 55);
             label6.Margin = new Padding(0);
             label6.Name = "label6";
-            label6.Size = new Size(461, 70);
+            label6.Size = new Size(360, 70);
             label6.TabIndex = 19;
-            label6.Text = "Update New Product";
+            label6.Text = "Update Product";
             label6.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // Update

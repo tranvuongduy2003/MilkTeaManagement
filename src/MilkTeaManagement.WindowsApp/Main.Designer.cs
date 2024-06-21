@@ -35,6 +35,8 @@
             product = new UserControls.Sidebar.SidebarItem();
             home = new UserControls.Sidebar.SidebarItem();
             sidebarPanel = new Panel();
+            profile = new UserControls.Sidebar.SidebarItem();
+            logout = new UserControls.Sidebar.SidebarItem();
             payments = new UserControls.Sidebar.SidebarItem();
             chat = new UserControls.Sidebar.SidebarItem();
             employee = new UserControls.Sidebar.SidebarItem();
@@ -107,6 +109,8 @@
             // sidebarPanel
             // 
             sidebarPanel.BackColor = Color.FromArgb(192, 192, 255);
+            sidebarPanel.Controls.Add(profile);
+            sidebarPanel.Controls.Add(logout);
             sidebarPanel.Controls.Add(payments);
             sidebarPanel.Controls.Add(chat);
             sidebarPanel.Controls.Add(employee);
@@ -118,6 +122,24 @@
             sidebarPanel.Name = "sidebarPanel";
             sidebarPanel.Size = new Size(100, 1050);
             sidebarPanel.TabIndex = 3;
+            // 
+            // profile
+            // 
+            profile.Location = new Point(0, 850);
+            profile.Margin = new Padding(0);
+            profile.Name = "profile";
+            profile.Size = new Size(100, 100);
+            profile.TabIndex = 7;
+            profile.Click += profile_Click;
+            // 
+            // logout
+            // 
+            logout.Location = new Point(0, 950);
+            logout.Margin = new Padding(0);
+            logout.Name = "logout";
+            logout.Size = new Size(100, 100);
+            logout.TabIndex = 6;
+            logout.Click += logout_Click;
             // 
             // payments
             // 
@@ -188,5 +210,7 @@
         private UserControls.Sidebar.SidebarItem employee;
         private UserControls.Sidebar.SidebarItem chat;
         private UserControls.Sidebar.SidebarItem payments;
+        private UserControls.Sidebar.SidebarItem profile;
+        private UserControls.Sidebar.SidebarItem logout;
     }
 }

@@ -111,7 +111,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
 
                 await _productsRepository.SaveChangesAsync();
 
-                MessageBox.Show("Update new product successfully!", "Success!", MessageBoxButtons.OK);
+                MessageBox.Show("Update product successfully!", "Success!", MessageBoxButtons.OK);
                 this.DialogResult = DialogResult.OK;
             }
             catch (Exception ex)
@@ -139,7 +139,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
                 await _productsRepository.DeleteAsync(product);
                 await _productsRepository.SaveChangesAsync();
 
-                MessageBox.Show("Delete new product successfully!", "Success!", MessageBoxButtons.OK);
+                MessageBox.Show("Delete product successfully!", "Success!", MessageBoxButtons.OK);
                 this.DialogResult = DialogResult.OK;
             }
             catch (Exception ex)
