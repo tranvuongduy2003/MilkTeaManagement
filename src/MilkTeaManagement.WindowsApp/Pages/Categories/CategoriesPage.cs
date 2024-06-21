@@ -1,23 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using MilkTeaManagement.Application.Common.Models.Categories;
 using MilkTeaManagement.Application.Common.Models.Filter;
 using MilkTeaManagement.Application.Contracts;
 using MilkTeaManagement.Domain.Entities;
-using MilkTeaManagement.Domain.Enums;
-using MilkTeaManagement.Infrastructure.Repositories;
-using MilkTeaManagement.WindowsApp.Forms;
 using MilkTeaManagement.WindowsApp.Forms.Categories;
-using MilkTeaManagement.WindowsApp.Forms.Products;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace MilkTeaManagement.WindowsApp.Pages.Categories
 {
@@ -184,7 +170,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Categories
                     if (category == null)
                         throw new Exception("Category is not existed");
 
-                    
+
                     await _categoriesRepository.DeleteAsync(category);
                     await _categoriesRepository.SaveChangesAsync();
 

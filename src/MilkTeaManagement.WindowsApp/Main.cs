@@ -1,12 +1,14 @@
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
+using MilkTeaManagement.WindowsApp.Pages.Auth;
 using MilkTeaManagement.WindowsApp.Pages.Categories;
 using MilkTeaManagement.WindowsApp.Pages.Chat;
 using MilkTeaManagement.WindowsApp.Pages.Employees;
 using MilkTeaManagement.WindowsApp.Pages.Home;
 using MilkTeaManagement.WindowsApp.Pages.Payments;
 using MilkTeaManagement.WindowsApp.Pages.Products;
+using MilkTeaManagement.WindowsApp.Pages.Profile;
 using MilkTeaManagement.WindowsApp.UserControls.Sidebar;
 
 namespace MilkTeaManagement.WindowsApp
@@ -29,6 +31,11 @@ namespace MilkTeaManagement.WindowsApp
             payments.label1.Text = "Payments";
             chat.pictureBox1.BackgroundImage = Properties.Resources.bubble_chat;
             chat.label1.Text = "Chat";
+
+            profile.pictureBox1.BackgroundImage = Properties.Resources.profile_user;
+            profile.label1.Text = "Profile";
+            logout.pictureBox1.BackgroundImage = Properties.Resources.logout;
+            logout.label1.Text = "Logout";
 
             InitializeSignalR();
 
@@ -116,6 +123,23 @@ namespace MilkTeaManagement.WindowsApp
             PaymentsPage paymentsPage = Program.ServiceProvider.GetRequiredService<PaymentsPage>();
             paymentsPage.OnLoad();
             contentPanel.Controls.Add(paymentsPage);
+        }
+
+        private void profile_Click(object sender, EventArgs e)
+        {
+            SetItemSelected(sender);
+            contentPanel.Controls.Clear();
+            ProfilePage profilePage = Program.ServiceProvider.GetRequiredService<ProfilePage>();
+            profilePage.OnLoad();
+            contentPanel.Controls.Add(profilePage);
+        }
+
+        private async void logout_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            await OnCloseHubConnection();
+            LoginPage loginForm = Program.ServiceProvider.GetRequiredService<LoginPage>();
+            loginForm.Show();
         }
 
         private async void close_Click(object sender, EventArgs e)
