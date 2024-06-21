@@ -14,6 +14,7 @@ using MilkTeaManagement.WindowsApp.Pages.Employees;
 using MilkTeaManagement.WindowsApp.Pages.Home;
 using MilkTeaManagement.WindowsApp.Pages.Payments;
 using MilkTeaManagement.WindowsApp.Pages.Products;
+using MilkTeaManagement.WindowsApp.Pages.Profile;
 using MilkTeaManagement.WindowsApp.UserControls.Chat;
 using MilkTeaManagement.WindowsApp.UserControls.Employees;
 using MilkTeaManagement.WindowsApp.UserControls.Home;
@@ -64,6 +65,7 @@ namespace MilkTeaManagement.WindowsApp.Extensions
             services.AddTransient<EmployeesPage>();
             services.AddTransient<PaymentsPage>();
             services.AddTransient<ChatPage>();
+            services.AddTransient<ProfilePage>();
 
             // User Controls
             services.AddScoped<CreateProductForm>();
