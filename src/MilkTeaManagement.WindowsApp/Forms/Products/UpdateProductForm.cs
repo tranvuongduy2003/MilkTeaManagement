@@ -136,7 +136,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
                 await _productsRepository.SaveChangesAsync();
 
                 MessageBox.Show("Delete new product successfully!", "Success!", MessageBoxButtons.OK);
-                this.OnLoad();
+                this.DialogResult = DialogResult.OK;
 
             }
             catch (Exception ex)
