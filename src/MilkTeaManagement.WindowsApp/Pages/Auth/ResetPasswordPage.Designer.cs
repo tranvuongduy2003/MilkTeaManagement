@@ -108,7 +108,7 @@
             loginButton.BackColor = Color.FromArgb(128, 128, 255);
             loginButton.FlatStyle = FlatStyle.Flat;
             loginButton.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            loginButton.ForeColor = Color.FromArgb(192, 192, 255);
+            loginButton.ForeColor = Color.FromArgb(255, 251, 228);
             loginButton.Location = new Point(3, 209);
             loginButton.Name = "loginButton";
             loginButton.Size = new Size(444, 41);
