@@ -91,7 +91,7 @@
             CategoriesTable.AllowUserToResizeColumns = false;
             CategoriesTable.AllowUserToResizeRows = false;
             CategoriesTable.BackgroundColor = SystemColors.Control;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
             dataGridViewCellStyle1.Font = new Font("Poppins Medium", 9F, FontStyle.Bold);
             dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
@@ -122,6 +122,7 @@
             // CategoryName
             // 
             CategoryName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            CategoryName.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             CategoryName.HeaderText = "Name";
             CategoryName.MinimumWidth = 8;
             CategoryName.Name = "CategoryName";
@@ -144,6 +145,7 @@
             // 
             // Creator
             // 
+            Creator.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             Creator.HeaderText = "Creator";
             Creator.MinimumWidth = 8;
             Creator.Name = "Creator";
@@ -151,10 +153,12 @@
             // 
             // CreatedAt
             // 
+            CreatedAt.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             CreatedAt.HeaderText = "Created At";
             CreatedAt.MinimumWidth = 8;
             CreatedAt.Name = "CreatedAt";
             CreatedAt.Width = 500;
+            CategoriesTable.Columns["CreatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
             // 
             // btnDelete
             // 
