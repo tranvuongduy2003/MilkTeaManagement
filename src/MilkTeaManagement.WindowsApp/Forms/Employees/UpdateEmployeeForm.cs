@@ -5,25 +5,26 @@ using MilkTeaManagement.Application.Common.Interfaces;
 using MilkTeaManagement.Domain.Entities;
 using MilkTeaManagement.Domain.Enums;
 
-namespace MilkTeaManagement.WindowsApp.Pages.Profile
+namespace MilkTeaManagement.WindowsApp.Forms.Employees
 {
-    public partial class ProfilePage : UserControl
+    public partial class UpdateEmployeeForm : Form
     {
         private readonly IAzureBlobService _azureBlobService;
         private readonly UserManager<User> _userManager;
 
-        public string AvatarFilePath { get; set; }
+        private User Employee { get; set; }
+        private string AvatarFilePath { get; set; } = string.Empty;
 
-        public ProfilePage(IAzureBlobService azureBlobService, UserManager<User> userManager)
+        public UpdateEmployeeForm(IAzureBlobService azureBlobService, UserManager<User> userManager)
         {
             InitializeComponent();
             _azureBlobService = azureBlobService;
             _userManager = userManager;
         }
 
-        public async void OnLoad()
+        public async void OnLoadEmployee(string id)
         {
-            var user = await _userManager.FindByIdAsync(Program.UserIdentity.Id);
+            var user = await _userManager.FindByIdAsync(id);
             var roles = await _userManager.GetRolesAsync(user);
 
             Avatar.SizeMode = PictureBoxSizeMode.Zoom;
@@ -34,8 +35,32 @@ namespace MilkTeaManagement.WindowsApp.Pages.Profile
             PhoneNumberTextbox.Text = user.PhoneNumber;
             GenderComboBox.SelectedText = user.Gender.GetDisplayName();
             DOBDateTimePicker.Value = DateTime.Parse(user.DOB.ToString());
-            RoleTextbox.SelectedText = roles.FirstOrDefault();
-            StatusTextbox.SelectedText = user.Status.GetDisplayName();
+            RoleComboBox.SelectedText = roles.FirstOrDefault();
+            StatusComboBox.SelectedText = user.Status.GetDisplayName();
+
+            Employee = user;
+        }
+
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            Avatar.BackgroundImage = Properties.Resources.upload_image1;
+            AvatarFilePath = string.Empty;
+            FullNameTextbox.Clear();
+            UserNameTextbox.Clear();
+            EmailTextbox.Clear();
+            PhoneNumberTextbox.Clear();
+            this.Close();
+        }
+
+        private void Avatar_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Avatar.ImageLocation = openFileDialog.FileName;
+                AvatarFilePath = openFileDialog.FileName;
+            }
         }
 
         private async void Update_Click(object sender, EventArgs e)
@@ -46,10 +71,10 @@ namespace MilkTeaManagement.WindowsApp.Pages.Profile
                 var userName = UserNameTextbox.Text;
                 var email = EmailTextbox.Text;
                 var phoneNumber = PhoneNumberTextbox.Text;
-                var gender = GenderComboBox.SelectedText;
                 var dob = DOBDateTimePicker.Value;
-                var role = RoleTextbox.Text;
-                var status = StatusTextbox.Text;
+                var gender = GenderComboBox.Text;
+                var role = RoleComboBox.Text;
+                var status = StatusComboBox.Text;
 
                 string error = "";
 
@@ -87,11 +112,11 @@ namespace MilkTeaManagement.WindowsApp.Pages.Profile
                     Gender = Enum.Parse<EGender>(gender),
                     Status = Enum.Parse<EUserStatus>(status)
                 };
-                await _userManager.UpdateAsync(user);
+                await _userManager.CreateAsync(user, "User@123");
+                await _userManager.AddToRoleAsync(user, role);
 
-                MessageBox.Show("Update profile successfully!", "Success!", MessageBoxButtons.OK);
-
-                Program.UserIdentity.Set(user);
+                MessageBox.Show("Update employee successfully!", "Success!", MessageBoxButtons.OK);
+                this.DialogResult = DialogResult.OK;
             }
             catch (Exception ex)
             {
@@ -100,14 +125,22 @@ namespace MilkTeaManagement.WindowsApp.Pages.Profile
             }
         }
 
-        private void Avatar_Click(object sender, EventArgs e)
+        private async void Delete_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;";
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            try
             {
-                Avatar.ImageLocation = openFileDialog.FileName;
-                AvatarFilePath = openFileDialog.FileName;
+                if (Employee == null)
+                    throw new Exception("Employee is not existed");
+
+                await _userManager.DeleteAsync(Employee);
+
+                MessageBox.Show("Delete employee successfully!", "Success!", MessageBoxButtons.OK);
+                this.DialogResult = DialogResult.OK;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
         }
     }

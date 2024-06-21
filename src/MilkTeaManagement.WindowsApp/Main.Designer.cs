@@ -70,7 +70,7 @@
             close.BackColor = Color.Transparent;
             close.BackgroundImage = Properties.Resources.multiply;
             close.BackgroundImageLayout = ImageLayout.Stretch;
-            close.Location = new Point(1563, 0);
+            close.Location = new Point(1874, 0);
             close.Margin = new Padding(0);
             close.Name = "close";
             close.Size = new Size(30, 30);

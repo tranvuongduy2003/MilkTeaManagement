@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             informationPanel = new Panel();
             panel2 = new Panel();
+            delete = new Button();
+            update = new Button();
             create = new Button();
             SearchTextBox = new TextBox();
             label1 = new Label();
@@ -60,6 +62,8 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(delete);
+            panel2.Controls.Add(update);
             panel2.Controls.Add(create);
             panel2.Controls.Add(SearchTextBox);
             panel2.Controls.Add(label1);
@@ -69,6 +73,34 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1220, 1050);
             panel2.TabIndex = 1;
+            // 
+            // delete
+            // 
+            delete.BackColor = Color.Crimson;
+            delete.Font = new Font("Poppins", 12F);
+            delete.ForeColor = Color.White;
+            delete.Location = new Point(690, 121);
+            delete.Margin = new Padding(0);
+            delete.Name = "delete";
+            delete.Size = new Size(160, 49);
+            delete.TabIndex = 19;
+            delete.Text = "Delete";
+            delete.UseVisualStyleBackColor = false;
+            delete.Click += delete_Click;
+            // 
+            // update
+            // 
+            update.BackColor = Color.FromArgb(192, 192, 0);
+            update.Font = new Font("Poppins", 12F);
+            update.ForeColor = Color.White;
+            update.Location = new Point(866, 121);
+            update.Margin = new Padding(0);
+            update.Name = "update";
+            update.Size = new Size(160, 49);
+            update.TabIndex = 18;
+            update.Text = "Update";
+            update.UseVisualStyleBackColor = false;
+            update.Click += update_Click;
             // 
             // create
             // 
@@ -82,6 +114,7 @@
             create.TabIndex = 17;
             create.Text = "Create";
             create.UseVisualStyleBackColor = false;
+            create.Click += create_Click;
             // 
             // SearchTextBox
             // 
@@ -115,14 +148,14 @@
             EmployeesTable.AllowUserToResizeColumns = false;
             EmployeesTable.AllowUserToResizeRows = false;
             EmployeesTable.BackgroundColor = SystemColors.Control;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Poppins Medium", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            EmployeesTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Control;
+            dataGridViewCellStyle4.Font = new Font("Poppins Medium", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            EmployeesTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             EmployeesTable.ColumnHeadersHeight = 50;
             EmployeesTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             EmployeesTable.Columns.AddRange(new DataGridViewColumn[] { Id, UserName, FullName, Email, PhoneNumber, Gender, DOB, Status, Role });
@@ -147,9 +180,9 @@
             // UserName
             // 
             UserName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.Font = new Font("Poppins", 9F);
-            UserName.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.Font = new Font("Poppins", 9F);
+            UserName.DefaultCellStyle = dataGridViewCellStyle5;
             UserName.HeaderText = "Username";
             UserName.MinimumWidth = 8;
             UserName.Name = "UserName";
@@ -200,8 +233,8 @@
             // 
             // Status
             // 
-            dataGridViewCellStyle3.Font = new Font("Poppins", 9F);
-            Status.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Font = new Font("Poppins", 9F);
+            Status.DefaultCellStyle = dataGridViewCellStyle6;
             Status.HeaderText = "Status";
             Status.MinimumWidth = 8;
             Status.Name = "Status";
@@ -251,5 +284,7 @@
         private DataGridViewTextBoxColumn DOB;
         private DataGridViewTextBoxColumn Status;
         private DataGridViewTextBoxColumn Role;
+        private Button delete;
+        private Button update;
     }
 }

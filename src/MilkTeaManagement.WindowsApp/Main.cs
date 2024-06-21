@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
+using MilkTeaManagement.Domain.Enums;
 using MilkTeaManagement.WindowsApp.Pages.Auth;
 using MilkTeaManagement.WindowsApp.Pages.Categories;
 using MilkTeaManagement.WindowsApp.Pages.Chat;
@@ -52,6 +53,23 @@ namespace MilkTeaManagement.WindowsApp
             profile.label1.Text = "Profile";
             logout.pictureBox1.BackgroundImage = Properties.Resources.logout;
             logout.label1.Text = "Logout";
+
+            if (Program.UserIdentity.Role == nameof(EUserRole.Cashier) || Program.UserIdentity.Role == nameof(EUserRole.Barista))
+            {
+                category.Hide();
+                product.Hide();
+                employee.Hide();
+                payments.Hide();
+                chat.Location = new Point(0, home.Location.Y + home.Height);
+            }
+            else if (Program.UserIdentity.Role == nameof(EUserRole.Manager))
+            {
+                category.Hide();
+                product.Hide();
+                employee.Location = new Point(0, home.Location.Y + home.Height);
+                payments.Location = new Point(0, employee.Location.Y + employee.Height);
+                chat.Location = new Point(0, payments.Location.Y + payments.Height);
+            }
 
             InitializeSignalR();
 

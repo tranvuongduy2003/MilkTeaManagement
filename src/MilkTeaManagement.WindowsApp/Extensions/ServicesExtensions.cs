@@ -6,6 +6,7 @@ using MilkTeaManagement.Infrastructure;
 using MilkTeaManagement.Infrastructure.Configurations;
 using MilkTeaManagement.WindowsApp.Forms;
 using MilkTeaManagement.WindowsApp.Forms.Categories;
+using MilkTeaManagement.WindowsApp.Forms.Employees;
 using MilkTeaManagement.WindowsApp.Forms.Products;
 using MilkTeaManagement.WindowsApp.Pages.Auth;
 using MilkTeaManagement.WindowsApp.Pages.Categories;
@@ -72,7 +73,8 @@ namespace MilkTeaManagement.WindowsApp.Extensions
             services.AddScoped<UpdateProductForm>();
             services.AddScoped<CreateCategoryForm>();
             services.AddScoped<UpdateCategoryForm>();
-            services.AddScoped<UpdateProductForm>();
+            services.AddScoped<CreateEmployeeForm>();
+            services.AddScoped<UpdateEmployeeForm>();
             services.AddScoped<InformationPanel>();
             services.AddScoped<BillItem>();
             services.AddScoped<ChatViewPanel>();
