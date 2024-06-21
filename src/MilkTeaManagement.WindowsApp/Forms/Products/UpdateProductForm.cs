@@ -42,7 +42,8 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
             foreach (var category in categories)
                 this.CategoriesComboBox.Items.Add(category.Name);
             var selectedCategory = Categories.Find(c => c.Id == product.CategoryId);
-            CategoriesComboBox.SelectedText = selectedCategory.Name;
+            CategoriesComboBox.SelectedItem = selectedCategory.Name;
+            //CategoriesComboBox.SelectedText = selectedCategory.Name;
             NameTextbox.Text = product.Name;
             PriceTextbox.Text = product.Price.ToString();
             DescriptionTextbox.Text = product.Description;
