@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MilkTeaManagement.Domain.Entities;
+using MilkTeaManagement.WindowsApp.Forms.Employees;
 using MilkTeaManagement.WindowsApp.UserControls.Employees;
 
 namespace MilkTeaManagement.WindowsApp.Pages.Employees
@@ -59,6 +60,71 @@ namespace MilkTeaManagement.WindowsApp.Pages.Employees
                 infoPanel.Location = new Point(0, 0);
                 informationPanel.Controls.Add(infoPanel);
                 infoPanel.OnLoad(id);
+            }
+        }
+
+        private void create_Click(object sender, EventArgs e)
+        {
+            CreateEmployeeForm createEmployeeForm = Program.ServiceProvider.GetRequiredService<CreateEmployeeForm>();
+
+            if (createEmployeeForm.ShowDialog() == DialogResult.OK)
+            {
+                this.OnLoad();
+            }
+        }
+
+        private void update_Click(object sender, EventArgs e)
+        {
+            if (EmployeesTable.SelectedCells.Count == 0)
+            {
+                MessageBox.Show("Please select employee row to update!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var selectedCell = EmployeesTable.SelectedCells[0];
+            if (selectedCell.RowIndex >= 0)
+            {
+                UpdateEmployeeForm updateEmployeeForm = Program.ServiceProvider.GetRequiredService<UpdateEmployeeForm>();
+                var selectedRow = EmployeesTable.Rows[selectedCell.RowIndex];
+                var id = selectedRow.Cells["Id"].Value.ToString();
+                updateEmployeeForm.OnLoadEmployee(id);
+                if (updateEmployeeForm.ShowDialog() == DialogResult.OK)
+                {
+                    this.OnLoad();
+                }
+            }
+        }
+
+        private async void delete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (EmployeesTable.SelectedCells.Count == 0)
+                {
+                    MessageBox.Show("Please select employee row to delete!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var selectedCell = EmployeesTable.SelectedCells[0];
+                if (selectedCell.RowIndex >= 0)
+                {
+                    var selectedRow = EmployeesTable.Rows[selectedCell.RowIndex];
+
+                    var employee = await _userManager.FindByIdAsync(selectedRow.Cells["Id"].Value.ToString());
+
+                    if (employee == null)
+                        throw new Exception("Employee is not existed");
+
+                    await _userManager.DeleteAsync(employee);
+
+                    MessageBox.Show("Delete employee successfully!", "Success!", MessageBoxButtons.OK);
+                    this.OnLoad();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
         }
     }

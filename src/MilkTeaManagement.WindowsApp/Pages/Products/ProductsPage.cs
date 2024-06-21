@@ -150,7 +150,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Products
                     await _productsRepository.DeleteAsync(product);
                     await _productsRepository.SaveChangesAsync();
 
-                    MessageBox.Show("Delete new product successfully!", "Success!", MessageBoxButtons.OK);
+                    MessageBox.Show("Delete product successfully!", "Success!", MessageBoxButtons.OK);
                     this.OnLoad();
                 }
             }
