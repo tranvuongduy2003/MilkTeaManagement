@@ -88,6 +88,8 @@ namespace MilkTeaManagement.WindowsApp.Pages.Products
         {
             CreateProductForm createProductForm = Program.ServiceProvider.GetRequiredService<CreateProductForm>();
 
+            createProductForm.OnLoad();
+
             if (createProductForm.ShowDialog() == DialogResult.OK)
             {
                 this.OnLoad();
