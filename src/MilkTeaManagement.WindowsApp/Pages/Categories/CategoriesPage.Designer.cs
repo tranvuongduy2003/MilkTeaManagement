@@ -69,7 +69,7 @@
             SearchTextBox.PlaceholderText = "   Search category";
             SearchTextBox.Size = new Size(533, 49);
             SearchTextBox.TabIndex = 12;
-            SearchTextBox.TextChanged += SearchTextBox_TextChanged;
+            SearchTextBox.KeyPress += SearchTextBox_KeyPress;
             // 
             // CategoriesComboBox
             // 

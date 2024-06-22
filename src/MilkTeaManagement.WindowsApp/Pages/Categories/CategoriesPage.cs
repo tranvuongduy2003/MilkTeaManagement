@@ -73,19 +73,24 @@ namespace MilkTeaManagement.WindowsApp.Pages.Categories
             await LoadCategoriesList(categories);
         }
 
-        private async void SearchTextBox_TextChanged(object sender, EventArgs e)
-        {
-            string searchText = SearchTextBox.Text;
-            int filterComboboxSelectedIndex = CategoriesComboBox.SelectedIndex;
+        //private async void SearchTextBox_TextChanged(object sender, EventArgs e)
+        //{
+        //    string searchText = SearchTextBox.Text;
+        //    int filterComboboxSelectedIndex = CategoriesComboBox.SelectedIndex;
 
-            var categories = await _categoriesRepository.FindAllCategoriesByFilter(
-                new FilterInCategoriesPage
-                {
-                    SearchText = searchText,
-                    FilterComboboxSelectedIndex = filterComboboxSelectedIndex
-                });
-            await LoadCategoriesList(categories);
-        }
+        //    if (filterComboboxSelectedIndex == -1)
+        //    {
+        //        filterComboboxSelectedIndex = 0;
+        //    }
+
+        //    var categories = await _categoriesRepository.FindAllCategoriesByFilter(
+        //        new FilterInCategoriesPage
+        //        {
+        //            SearchText = searchText,
+        //            FilterComboboxSelectedIndex = filterComboboxSelectedIndex
+        //        });
+        //    await LoadCategoriesList(categories);
+        //}
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
@@ -182,6 +187,28 @@ namespace MilkTeaManagement.WindowsApp.Pages.Categories
             {
                 MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
+        }
+
+        private async void SearchTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                string searchText = SearchTextBox.Text;
+                int filterComboboxSelectedIndex = CategoriesComboBox.SelectedIndex;
+
+                if (filterComboboxSelectedIndex == -1)
+                {
+                    filterComboboxSelectedIndex = 0;
+                }
+
+                var categories = await _categoriesRepository.FindAllCategoriesByFilter(
+                    new FilterInCategoriesPage
+                    {
+                        SearchText = searchText,
+                        FilterComboboxSelectedIndex = filterComboboxSelectedIndex
+                    });
+                await LoadCategoriesList(categories);
             }
         }
     }
