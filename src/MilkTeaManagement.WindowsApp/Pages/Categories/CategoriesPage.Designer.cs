@@ -105,6 +105,7 @@
             CategoriesTable.Location = new Point(30, 186);
             CategoriesTable.Margin = new Padding(0);
             CategoriesTable.Name = "CategoriesTable";
+            CategoriesTable.ReadOnly = true;
             CategoriesTable.RowHeadersWidth = 50;
             CategoriesTable.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             CategoriesTable.RowTemplate.Height = 50;
