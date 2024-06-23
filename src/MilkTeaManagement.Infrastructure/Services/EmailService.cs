@@ -46,7 +46,7 @@ namespace MilkTeaManagement.Infrastructure.Services
             {
                 To = email,
                 Subject = subject,
-                Body = htmlMessage
+                Body = htmlMessage,
             });
         }
     }

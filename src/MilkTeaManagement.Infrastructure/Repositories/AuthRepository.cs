@@ -47,6 +47,7 @@ namespace MilkTeaManagement.Infrastructure.Repositories
                 Email = request.Email,
                 Avatar = request.AvatarFilePath,
                 FullName = request.FullName,
+                PhoneNumber = request.PhoneNumber,
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);
@@ -54,7 +55,7 @@ namespace MilkTeaManagement.Infrastructure.Repositories
             {
                 var userToReturn = await _userManager.FindByNameAsync(request.UserName);
                 await _userManager.AddToRoleAsync(user, request.Role);
-                await SendRegistrationConfirmationEmailAsync(user.Email, user.UserName);
+                //await SendRegistrationConfirmationEmailAsync(user.Email, user.UserName);
 
                 return "Register successfully!";
             }
@@ -68,7 +69,7 @@ namespace MilkTeaManagement.Infrastructure.Repositories
             if (user == null)
                 return "User does not exist";
 
-            var hashedPassword = BCrypt.Net.BCrypt.HashPassword("user@123");
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword("User@123");
             if (hashedPassword == null)
                 return "Something went wrong!";
 
@@ -77,7 +78,7 @@ namespace MilkTeaManagement.Infrastructure.Repositories
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
 
-            await SendResetPasswordEmailAsync(user.Email, hashedPassword);
+            //await SendResetPasswordEmailAsync(user.Email, hashedPassword);
 
             return "";
         }

@@ -32,6 +32,10 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            Phone = new Label();
+            phoneNumberTextBox = new TextBox();
+            roleComboBox = new ComboBox();
+            RoleLabel = new Label();
             avatarUpload = new CircularPictureBox();
             label8 = new Label();
             label7 = new Label();
@@ -58,6 +62,10 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
             // 
             panel1.AutoSize = true;
             panel1.BackColor = Color.Transparent;
+            panel1.Controls.Add(Phone);
+            panel1.Controls.Add(phoneNumberTextBox);
+            panel1.Controls.Add(roleComboBox);
+            panel1.Controls.Add(RoleLabel);
             panel1.Controls.Add(avatarUpload);
             panel1.Controls.Add(label8);
             panel1.Controls.Add(label7);
@@ -76,8 +84,49 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
             panel1.Controls.Add(label1);
             panel1.Location = new Point(680, 48);
             panel1.Name = "panel1";
-            panel1.Size = new Size(451, 955);
+            panel1.Size = new Size(451, 1168);
             panel1.TabIndex = 0;
+            // 
+            // Phone
+            // 
+            Phone.Font = new Font("Poppins", 12F);
+            Phone.Location = new Point(3, 550);
+            Phone.Name = "Phone";
+            Phone.Size = new Size(444, 43);
+            Phone.TabIndex = 50;
+            Phone.Text = "Phone Number:";
+            Phone.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // phoneNumberTextBox
+            // 
+            phoneNumberTextBox.BorderStyle = BorderStyle.FixedSingle;
+            phoneNumberTextBox.Font = new Font("Poppins", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            phoneNumberTextBox.Location = new Point(3, 596);
+            phoneNumberTextBox.Margin = new Padding(0);
+            phoneNumberTextBox.Name = "phoneNumberTextBox";
+            phoneNumberTextBox.Size = new Size(444, 49);
+            phoneNumberTextBox.TabIndex = 49;
+            // 
+            // roleComboBox
+            // 
+            roleComboBox.Font = new Font("Poppins", 11F);
+            roleComboBox.FormattingEnabled = true;
+            roleComboBox.Items.AddRange(new object[] { "Admin", "Manager", "Cashier", "Barista" });
+            roleComboBox.Location = new Point(3, 706);
+            roleComboBox.Margin = new Padding(0);
+            roleComboBox.Name = "roleComboBox";
+            roleComboBox.Size = new Size(444, 47);
+            roleComboBox.TabIndex = 48;
+            // 
+            // RoleLabel
+            // 
+            RoleLabel.Font = new Font("Poppins", 12F);
+            RoleLabel.Location = new Point(0, 660);
+            RoleLabel.Name = "RoleLabel";
+            RoleLabel.Size = new Size(444, 43);
+            RoleLabel.TabIndex = 19;
+            RoleLabel.Text = "Role:";
+            RoleLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // avatarUpload
             // 
@@ -125,7 +174,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
             // label6
             // 
             label6.Font = new Font("Poppins", 12F);
-            label6.Location = new Point(3, 550);
+            label6.Location = new Point(3, 770);
             label6.Name = "label6";
             label6.Size = new Size(444, 43);
             label6.TabIndex = 14;
@@ -136,7 +185,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
             // 
             passwordTextBox.BorderStyle = BorderStyle.FixedSingle;
             passwordTextBox.Font = new Font("Poppins", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            passwordTextBox.Location = new Point(3, 596);
+            passwordTextBox.Location = new Point(3, 816);
             passwordTextBox.Name = "passwordTextBox";
             passwordTextBox.PasswordChar = '•';
             passwordTextBox.Size = new Size(444, 49);
@@ -165,7 +214,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
             // 
             openLoginFormButton.Font = new Font("Poppins", 10F);
             openLoginFormButton.ForeColor = Color.FromArgb(128, 128, 255);
-            openLoginFormButton.Location = new Point(3, 913);
+            openLoginFormButton.Location = new Point(4, 1118);
             openLoginFormButton.Name = "openLoginFormButton";
             openLoginFormButton.Size = new Size(444, 35);
             openLoginFormButton.TabIndex = 7;
@@ -176,7 +225,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
             // label4
             // 
             label4.Font = new Font("Poppins", 10F);
-            label4.Location = new Point(3, 878);
+            label4.Location = new Point(4, 1083);
             label4.Name = "label4";
             label4.Size = new Size(444, 35);
             label4.TabIndex = 6;
@@ -189,7 +238,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
             registerButton.FlatStyle = FlatStyle.Flat;
             registerButton.Font = new Font("Poppins", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             registerButton.ForeColor = Color.FromArgb(255, 251, 228);
-            registerButton.Location = new Point(3, 801);
+            registerButton.Location = new Point(4, 1006);
             registerButton.Name = "registerButton";
             registerButton.Size = new Size(444, 48);
             registerButton.TabIndex = 5;
@@ -200,7 +249,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
             // label3
             // 
             label3.Font = new Font("Poppins", 12F);
-            label3.Location = new Point(3, 660);
+            label3.Location = new Point(3, 880);
             label3.Name = "label3";
             label3.Size = new Size(444, 43);
             label3.TabIndex = 4;
@@ -211,7 +260,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
             // 
             confirmPasswordTextBox.BorderStyle = BorderStyle.FixedSingle;
             confirmPasswordTextBox.Font = new Font("Poppins", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            confirmPasswordTextBox.Location = new Point(3, 706);
+            confirmPasswordTextBox.Location = new Point(3, 926);
             confirmPasswordTextBox.Name = "confirmPasswordTextBox";
             confirmPasswordTextBox.PasswordChar = '•';
             confirmPasswordTextBox.Size = new Size(444, 49);
@@ -265,7 +314,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
             BackColor = Color.Lavender;
             BackgroundImage = Properties.Resources.register_background;
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(1280, 1047);
+            ClientSize = new Size(1280, 1257);
             Controls.Add(pictureBox4);
             Controls.Add(panel1);
             DoubleBuffered = true;
@@ -302,5 +351,9 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
         private TextBox emailTextBox;
         private CircularPictureBox avatarUpload;
         private Label label8;
+        private Label RoleLabel;
+        private ComboBox roleComboBox;
+        private Label Phone;
+        private TextBox phoneNumberTextBox;
     }
 }
