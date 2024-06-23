@@ -28,6 +28,8 @@ namespace MilkTeaManagement.WindowsApp.UserControls.Home
                 Product = product,
             };
             this.poster.ImageLocation = product.Poster;
+            this.poster.SizeMode = PictureBoxSizeMode.Zoom;
+            this.poster.BackgroundImage = null;
             this.name.Text = product.Name;
             this.price.Text = ConvertCurrency.ToVND(product.Price);
             this.quantity.Text = "1";
