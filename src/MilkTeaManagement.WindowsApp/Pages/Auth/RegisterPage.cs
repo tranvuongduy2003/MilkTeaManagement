@@ -58,8 +58,10 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
             var fullName = fullNameTextBox.Text;
             var userName = userNameTextBox.Text;
             var email = emailTextBox.Text;
+            var phoneNumber = phoneNumberTextBox.Text;
             var password = passwordTextBox.Text;
             var confirmPassword = confirmPasswordTextBox.Text;
+            var role = roleComboBox.Text;
 
             string error = "";
 
@@ -69,6 +71,8 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
                 error += "**User name is required\n\n";
             if (email.IsNullOrEmpty())
                 error += "**Email is required\n\n";
+            if (phoneNumber.IsNullOrEmpty())
+                error += "**Phone Number is required\n\n";
             if (password.IsNullOrEmpty())
                 error += "**Password is required\n\n";
             if (confirmPassword.IsNullOrEmpty())
@@ -77,6 +81,8 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
                 error += "**Avatar is required\n\n";
             if (confirmPassword != password)
                 error += "**Confirm password does not match with password!\n\n";
+            if (role.IsNullOrEmpty())
+                error += "**Role is required\n\n";
 
             if (!error.IsNullOrEmpty())
             {
@@ -85,14 +91,15 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
             }
 
             var uploadedFile = await _azureBlobService.UploadAsync(AvatarFileName);
-
             var payload = new RegisterRequest
             {
                 UserName = userName,
                 Password = password,
                 Email = email,
+                PhoneNumber = phoneNumber,
                 AvatarFilePath = uploadedFile.Blob.Uri,
-                FullName = fullName
+                FullName = fullName,
+                Role = role,
             };
 
             var errorMessage = await _authRepository.RegisterAsync(payload);
