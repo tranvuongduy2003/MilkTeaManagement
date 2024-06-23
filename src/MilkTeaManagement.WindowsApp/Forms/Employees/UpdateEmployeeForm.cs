@@ -43,7 +43,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Employees
 
         private void closeButton_Click(object sender, EventArgs e)
         {
-            Avatar.BackgroundImage = Properties.Resources.upload_image1;
+            Avatar.Image = Properties.Resources.upload_image1;
             AvatarFilePath = string.Empty;
             FullNameTextbox.Clear();
             UserNameTextbox.Clear();
