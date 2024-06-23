@@ -24,7 +24,7 @@ namespace MilkTeaManagement.WindowsApp.Forms
             _productsRepository = productsRepository;
             _categoriesRepository = categoriesRepository;
 
-            this.OnLoad();
+            //this.OnLoad();
         }
 
         public async void OnLoad()
