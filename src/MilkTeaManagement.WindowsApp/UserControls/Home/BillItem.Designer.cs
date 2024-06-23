@@ -43,7 +43,7 @@
             // 
             // poster
             // 
-            poster.BackColor = Color.White;
+            poster.BackColor = Color.Transparent;
             poster.BackgroundImage = Properties.Resources.product_image1;
             poster.BackgroundImageLayout = ImageLayout.Zoom;
             poster.Location = new Point(0, 0);

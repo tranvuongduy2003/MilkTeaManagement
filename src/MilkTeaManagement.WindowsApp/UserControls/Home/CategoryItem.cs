@@ -15,6 +15,8 @@ namespace MilkTeaManagement.WindowsApp.UserControls.Home
         {
             Category = category;
             this.CategoryImage.ImageLocation = category.Poster;
+            this.CategoryImage.SizeMode = PictureBoxSizeMode.Zoom;
+            this.CategoryImage.BackgroundImage = null;
             this.CategoryName.Text = category.Name;
         }
 
