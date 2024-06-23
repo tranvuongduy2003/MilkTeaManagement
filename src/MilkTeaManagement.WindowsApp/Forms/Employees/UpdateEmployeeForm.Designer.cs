@@ -119,7 +119,6 @@
             // Avatar
             // 
             Avatar.BackColor = Color.White;
-            Avatar.BackgroundImage = Properties.Resources.upload_image1;
             Avatar.BackgroundImageLayout = ImageLayout.Zoom;
             Avatar.Location = new Point(36, 185);
             Avatar.Name = "Avatar";

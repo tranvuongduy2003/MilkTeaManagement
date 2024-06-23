@@ -37,7 +37,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Employees
             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                Avatar.ImageLocation = openFileDialog.FileName;
+                Avatar.BackgroundImage = new Bitmap(openFileDialog.FileName);
                 AvatarFilePath = openFileDialog.FileName;
             }
         }
@@ -95,6 +95,14 @@ namespace MilkTeaManagement.WindowsApp.Forms.Employees
                 await _userManager.AddToRoleAsync(user, role);
 
                 MessageBox.Show("Create new employee successfully!", "Success!", MessageBoxButtons.OK);
+
+                Avatar.BackgroundImage = Properties.Resources.upload_image1;
+                AvatarFilePath = string.Empty;
+                FullNameTextbox.Clear();
+                UserNameTextbox.Clear();
+                EmailTextbox.Clear();
+                PhoneNumberTextbox.Clear();
+
                 this.DialogResult = DialogResult.OK;
             }
             catch (Exception ex)
