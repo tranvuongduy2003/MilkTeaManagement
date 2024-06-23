@@ -217,6 +217,7 @@
             CreatedAt.MinimumWidth = 8;
             CreatedAt.Name = "CreatedAt";
             CreatedAt.ReadOnly = true;
+            CreatedAt.Visible = false;
             CreatedAt.Width = 350;
             ProductsTable.Columns["CreatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
             // 
