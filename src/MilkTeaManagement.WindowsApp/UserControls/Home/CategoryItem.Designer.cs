@@ -36,7 +36,7 @@
             // CategoryImage
             // 
             CategoryImage.BackgroundImage = Properties.Resources.coke;
-            CategoryImage.BackgroundImageLayout = ImageLayout.Stretch;
+            CategoryImage.BackgroundImageLayout = ImageLayout.Zoom;
             CategoryImage.Location = new Point(25, 25);
             CategoryImage.Margin = new Padding(0);
             CategoryImage.Name = "CategoryImage";
