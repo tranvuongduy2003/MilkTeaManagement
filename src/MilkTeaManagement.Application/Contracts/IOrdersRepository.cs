@@ -10,5 +10,7 @@ namespace MilkTeaManagement.Application.Contracts
         Task<Order> CheckoutAsync(CheckoutRequest request);
 
         Task<List<OrderDto>> GetOrdersByFilterAsync(string? search);
+
+        Task<List<OrderDto>> GetOrdersByEmployeeIdAsync(string id, string? search);
     }
 }

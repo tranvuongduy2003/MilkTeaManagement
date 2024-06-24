@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using MilkTeaManagement.Domain.Enums;
+using MilkTeaManagement.WindowsApp.Helpers;
 using MilkTeaManagement.WindowsApp.Pages.Auth;
 using MilkTeaManagement.WindowsApp.Pages.Categories;
 using MilkTeaManagement.WindowsApp.Pages.Chat;
@@ -73,13 +74,10 @@ namespace MilkTeaManagement.WindowsApp
 
             InitializeSignalR();
 
-            // Load Home Page
-            SetItemSelected(home);
-            contentPanel.Controls.Clear();
-            HomePage homePage = Program.ServiceProvider.GetRequiredService<HomePage>();
-            homePage.OnLoad();
-            contentPanel.Controls.Add(homePage);
+            LoadPage<HomePage>(this.home, null);
         }
+
+        private async void Main_Leave(object sender, EventArgs e) => await OnCloseHubConnection();
 
         private async Task OnCloseHubConnection()
         {
@@ -105,68 +103,19 @@ namespace MilkTeaManagement.WindowsApp
             }
         }
 
-        private void home_Click(object sender, EventArgs e)
-        {
-            SetItemSelected(sender);
-            contentPanel.Controls.Clear();
-            HomePage homePage = Program.ServiceProvider.GetRequiredService<HomePage>();
-            homePage.OnLoad();
-            contentPanel.Controls.Add(homePage);
-        }
+        private void home_Click(object sender, EventArgs e) => LoadPage<HomePage>(sender, e);
 
-        private void product_Click(object sender, EventArgs e)
-        {
-            SetItemSelected(sender);
-            contentPanel.Controls.Clear();
-            ProductsPage productsPage = Program.ServiceProvider.GetRequiredService<ProductsPage>();
-            productsPage.OnLoad();
-            contentPanel.Controls.Add(productsPage);
-        }
+        private void product_Click(object sender, EventArgs e) => LoadPage<ProductsPage>(sender, e);
 
-        private void category_Click(object sender, EventArgs e)
-        {
-            SetItemSelected(sender);
-            contentPanel.Controls.Clear();
-            CategoriesPage categoriesPage = Program.ServiceProvider.GetRequiredService<CategoriesPage>();
-            categoriesPage.OnLoad();
-            contentPanel.Controls.Add(categoriesPage);
-        }
+        private void category_Click(object sender, EventArgs e) => LoadPage<CategoriesPage>(sender, e);
 
-        private void employee_Click(object sender, EventArgs e)
-        {
-            SetItemSelected(sender);
-            contentPanel.Controls.Clear();
-            EmployeesPage employeesPage = Program.ServiceProvider.GetRequiredService<EmployeesPage>();
-            employeesPage.OnLoad();
-            contentPanel.Controls.Add(employeesPage);
-        }
+        private void employee_Click(object sender, EventArgs e) => LoadPage<EmployeesPage>(sender, e);
 
-        private void chat_Click(object sender, EventArgs e)
-        {
-            SetItemSelected(sender);
-            contentPanel.Controls.Clear();
-            ChatPage chatPage = Program.ServiceProvider.GetRequiredService<ChatPage>();
-            chatPage.OnLoad();
-            contentPanel.Controls.Add(chatPage);
-        }
+        private void chat_Click(object sender, EventArgs e) => LoadPage<ChatPage>(sender, e);
 
-        private void payments_Click(object sender, EventArgs e)
-        {
-            SetItemSelected(sender);
-            contentPanel.Controls.Clear();
-            PaymentsPage paymentsPage = Program.ServiceProvider.GetRequiredService<PaymentsPage>();
-            paymentsPage.OnLoad();
-            contentPanel.Controls.Add(paymentsPage);
-        }
+        private void payments_Click(object sender, EventArgs e) => LoadPage<PaymentsPage>(sender, e);
 
-        private void profile_Click(object sender, EventArgs e)
-        {
-            SetItemSelected(sender);
-            contentPanel.Controls.Clear();
-            ProfilePage profilePage = Program.ServiceProvider.GetRequiredService<ProfilePage>();
-            profilePage.OnLoad();
-            contentPanel.Controls.Add(profilePage);
-        }
+        private void profile_Click(object sender, EventArgs e) => LoadPage<ProfilePage>(sender, e);
 
         private async void logout_Click(object sender, EventArgs e)
         {
@@ -182,17 +131,21 @@ namespace MilkTeaManagement.WindowsApp
             this.Close();
         }
 
-        private void SetItemSelected(object sender)
+        public void LoadPage<T>(object sender, EventArgs e) where T : Page
+        {
+            SetItemSelected(sender);
+            contentPanel.Controls.Clear();
+            var page = Program.ServiceProvider.GetRequiredService<T>();
+            page.OnLoad();
+            contentPanel.Controls.Add(page);
+        }
+
+        public void SetItemSelected(object sender)
         {
             foreach (SidebarItem control in sidebarPanel.Controls)
                 control.BackColor = sidebarPanel.BackColor;
             var item = (SidebarItem)sender;
             item.BackColor = Color.FromArgb(128, 128, 255);
-        }
-
-        private async void Main_Leave(object sender, EventArgs e)
-        {
-            await OnCloseHubConnection();
         }
     }
 }

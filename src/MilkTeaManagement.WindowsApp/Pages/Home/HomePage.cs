@@ -8,7 +8,7 @@ using MilkTeaManagement.WindowsApp.UserControls.Home;
 
 namespace MilkTeaManagement.WindowsApp.Pages.Home
 {
-    public partial class HomePage : UserControl
+    public partial class HomePage : Page
     {
         private readonly ICategoriesRepository _categoriesRepository;
         private readonly IProductsRepository _productsRepository;
@@ -29,7 +29,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Home
             this._signInManager = signInManager;
         }
 
-        public async void OnLoad()
+        public override async void OnLoad()
         {
             this.Role.Text = Program.UserIdentity.Role;
             this.Avatar.ImageLocation = Program.UserIdentity.Avatar;

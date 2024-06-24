@@ -1,66 +1,71 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Extensions;
 using MilkTeaManagement.Application.Common.Interfaces;
+using MilkTeaManagement.Application.Contracts;
 using MilkTeaManagement.Domain.Entities;
 using MilkTeaManagement.Domain.Enums;
+using MilkTeaManagement.WindowsApp.UserControls.Employees;
 
 namespace MilkTeaManagement.WindowsApp.Forms.Employees
 {
-    public partial class UpdateEmployeeForm : Form
+    public partial class DetailEmployeeForm : Form
     {
-        private readonly IAzureBlobService _azureBlobService;
         private readonly UserManager<User> _userManager;
+        private readonly IOrdersRepository _ordersRepository;
+        private readonly IAzureBlobService _azureBlobService;
 
-        private User Employee { get; set; }
+        public User Employee { get; set; }
+        public string Search { get; set; } = string.Empty;
         private string AvatarFilePath { get; set; } = string.Empty;
 
-        public UpdateEmployeeForm(IAzureBlobService azureBlobService, UserManager<User> userManager)
+        public DetailEmployeeForm(UserManager<User> userManager, IOrdersRepository ordersRepository, IAzureBlobService azureBlobService)
         {
             InitializeComponent();
-            _azureBlobService = azureBlobService;
             _userManager = userManager;
+            _ordersRepository = ordersRepository;
+            _azureBlobService = azureBlobService;
         }
 
-        public async void OnLoadEmployee(string id)
+        public async void OnLoad(string id)
         {
-            var user = await _userManager.FindByIdAsync(id);
-            var roles = await _userManager.GetRolesAsync(user);
+            var employee = await _userManager.FindByIdAsync(id);
+            var roles = await _userManager.GetRolesAsync(employee);
+            var employeeRole = roles.FirstOrDefault();
 
-            Avatar.SizeMode = PictureBoxSizeMode.Zoom;
-            Avatar.ImageLocation = user.Avatar;
-            FullNameTextbox.Text = user.FullName;
-            UserNameTextbox.Text = user.UserName;
-            EmailTextbox.Text = user.Email;
-            PhoneNumberTextbox.Text = user.PhoneNumber;
-            GenderComboBox.SelectedText = user.Gender.GetDisplayName();
-            DOBDateTimePicker.Value = DateTime.Parse(user.DOB.ToString());
-            RoleComboBox.SelectedText = roles.FirstOrDefault();
-            StatusComboBox.SelectedText = user.Status.GetDisplayName();
+            Employee = employee;
+            AvatarFilePath = employee.Avatar;
+            Avatar.ImageLocation = employee.Avatar;
+            role.Text = employeeRole;
+            fullName.Text = employee.FullName;
+            FullNameTextbox.Text = employee.FullName;
+            UserNameTextbox.Text = employee.UserName;
+            EmailTextbox.Text = employee.Email;
+            PhoneNumberTextbox.Text = employee.PhoneNumber;
+            GenderComboBox.Text = employee.Gender.GetDisplayName();
+            DOBDateTimePicker.Value = DateTime.Parse(employee.DOB.ToString());
+            RoleComboBox.Text = employeeRole;
+            StatusComboBox.Text = employee.Status.GetDisplayName();
+            SalaryTextBox.Text = employee.HourlySalary.ToString();
 
-            Employee = user;
+            LoadCheckoutHistory(employee);
         }
 
-        private void closeButton_Click(object sender, EventArgs e)
+        private void LoadCheckoutHistory(User? employee)
         {
-            Avatar.Image = Properties.Resources.upload_image1;
-            AvatarFilePath = string.Empty;
-            FullNameTextbox.Clear();
-            UserNameTextbox.Clear();
-            EmailTextbox.Clear();
-            PhoneNumberTextbox.Clear();
-            this.Close();
+            ContentPanel.Controls.Clear();
+            CheckoutHistory checkoutHistory = Program.ServiceProvider.GetRequiredService<CheckoutHistory>();
+            checkoutHistory.OnLoad(employee);
+            ContentPanel.Controls.Add(checkoutHistory);
         }
 
-        private void Avatar_Click(object sender, EventArgs e)
+        private void LoadWorkDays(User? employee)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;";
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                Avatar.ImageLocation = openFileDialog.FileName;
-                AvatarFilePath = openFileDialog.FileName;
-            }
+            ContentPanel.Controls.Clear();
+            WorkDays workDays = Program.ServiceProvider.GetRequiredService<WorkDays>();
+            workDays.OnLoad(employee);
+            ContentPanel.Controls.Add(workDays);
         }
 
         private async void Update_Click(object sender, EventArgs e)
@@ -125,23 +130,19 @@ namespace MilkTeaManagement.WindowsApp.Forms.Employees
             }
         }
 
-        private async void Delete_Click(object sender, EventArgs e)
+        private void closeButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (Employee == null)
-                    throw new Exception("Employee is not existed");
-
-                await _userManager.DeleteAsync(Employee);
-
-                MessageBox.Show("Delete employee successfully!", "Success!", MessageBoxButtons.OK);
-                this.DialogResult = DialogResult.OK;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            Avatar.Image = Properties.Resources.upload_image1;
+            AvatarFilePath = string.Empty;
+            FullNameTextbox.Clear();
+            UserNameTextbox.Clear();
+            EmailTextbox.Clear();
+            PhoneNumberTextbox.Clear();
+            this.DialogResult = DialogResult.OK;
         }
+
+        private void CheckoutHistoryButton_Click(object sender, EventArgs e) => LoadCheckoutHistory(Employee);
+
+        private void WorkDayButton_Click(object sender, EventArgs e) => LoadWorkDays(Employee);
     }
 }

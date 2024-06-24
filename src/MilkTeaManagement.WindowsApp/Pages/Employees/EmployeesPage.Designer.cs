@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            informationPanel = new Panel();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             panel2 = new Panel();
             delete = new Button();
             update = new Button();
@@ -40,25 +39,18 @@
             label1 = new Label();
             EmployeesTable = new DataGridView();
             Id = new DataGridViewTextBoxColumn();
-            UserName = new DataGridViewTextBoxColumn();
             FullName = new DataGridViewTextBoxColumn();
             Email = new DataGridViewTextBoxColumn();
             PhoneNumber = new DataGridViewTextBoxColumn();
+            UserName = new DataGridViewTextBoxColumn();
             Gender = new DataGridViewTextBoxColumn();
+            Salary = new DataGridViewTextBoxColumn();
             DOB = new DataGridViewTextBoxColumn();
             Status = new DataGridViewTextBoxColumn();
             Role = new DataGridViewTextBoxColumn();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)EmployeesTable).BeginInit();
             SuspendLayout();
-            // 
-            // informationPanel
-            // 
-            informationPanel.Location = new Point(0, 0);
-            informationPanel.Margin = new Padding(0);
-            informationPanel.Name = "informationPanel";
-            informationPanel.Size = new Size(600, 1050);
-            informationPanel.TabIndex = 0;
             // 
             // panel2
             // 
@@ -68,10 +60,10 @@
             panel2.Controls.Add(SearchTextBox);
             panel2.Controls.Add(label1);
             panel2.Controls.Add(EmployeesTable);
-            panel2.Location = new Point(600, 0);
+            panel2.Location = new Point(0, 0);
             panel2.Margin = new Padding(0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1220, 1050);
+            panel2.Size = new Size(1820, 1050);
             panel2.TabIndex = 1;
             // 
             // delete
@@ -79,7 +71,7 @@
             delete.BackColor = Color.Crimson;
             delete.Font = new Font("Poppins", 12F);
             delete.ForeColor = Color.White;
-            delete.Location = new Point(690, 121);
+            delete.Location = new Point(1274, 117);
             delete.Margin = new Padding(0);
             delete.Name = "delete";
             delete.Size = new Size(160, 49);
@@ -93,7 +85,7 @@
             update.BackColor = Color.FromArgb(192, 192, 0);
             update.Font = new Font("Poppins", 12F);
             update.ForeColor = Color.White;
-            update.Location = new Point(866, 121);
+            update.Location = new Point(1447, 117);
             update.Margin = new Padding(0);
             update.Name = "update";
             update.Size = new Size(160, 49);
@@ -107,7 +99,7 @@
             create.BackColor = Color.CornflowerBlue;
             create.Font = new Font("Poppins", 12F);
             create.ForeColor = Color.White;
-            create.Location = new Point(1040, 121);
+            create.Location = new Point(1620, 117);
             create.Margin = new Padding(0);
             create.Name = "create";
             create.Size = new Size(160, 49);
@@ -148,24 +140,24 @@
             EmployeesTable.AllowUserToResizeColumns = false;
             EmployeesTable.AllowUserToResizeRows = false;
             EmployeesTable.BackgroundColor = SystemColors.Control;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.Control;
-            dataGridViewCellStyle4.Font = new Font("Poppins Medium", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            EmployeesTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Poppins Medium", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            EmployeesTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             EmployeesTable.ColumnHeadersHeight = 50;
             EmployeesTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            EmployeesTable.Columns.AddRange(new DataGridViewColumn[] { Id, UserName, FullName, Email, PhoneNumber, Gender, DOB, Status, Role });
+            EmployeesTable.Columns.AddRange(new DataGridViewColumn[] { Id, FullName, Email, PhoneNumber, UserName, Gender, Salary, DOB, Status, Role });
             EmployeesTable.Location = new Point(20, 190);
             EmployeesTable.Margin = new Padding(0);
             EmployeesTable.Name = "EmployeesTable";
             EmployeesTable.ReadOnly = true;
             EmployeesTable.RowHeadersWidth = 50;
             EmployeesTable.RowTemplate.Height = 50;
-            EmployeesTable.Size = new Size(1180, 835);
+            EmployeesTable.Size = new Size(1760, 835);
             EmployeesTable.TabIndex = 14;
             // 
             // Id
@@ -176,18 +168,6 @@
             Id.ReadOnly = true;
             Id.Visible = false;
             Id.Width = 8;
-            // 
-            // UserName
-            // 
-            UserName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.Font = new Font("Poppins", 9F);
-            UserName.DefaultCellStyle = dataGridViewCellStyle5;
-            UserName.HeaderText = "Username";
-            UserName.MinimumWidth = 8;
-            UserName.Name = "UserName";
-            UserName.ReadOnly = true;
-            UserName.Visible = false;
             // 
             // FullName
             // 
@@ -203,7 +183,7 @@
             Email.MinimumWidth = 8;
             Email.Name = "Email";
             Email.ReadOnly = true;
-            Email.Width = 320;
+            Email.Width = 400;
             // 
             // PhoneNumber
             // 
@@ -213,6 +193,18 @@
             PhoneNumber.ReadOnly = true;
             PhoneNumber.Width = 250;
             // 
+            // UserName
+            // 
+            UserName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Font = new Font("Poppins", 9F);
+            UserName.DefaultCellStyle = dataGridViewCellStyle2;
+            UserName.HeaderText = "Username";
+            UserName.MinimumWidth = 8;
+            UserName.Name = "UserName";
+            UserName.ReadOnly = true;
+            UserName.Visible = false;
+            // 
             // Gender
             // 
             Gender.HeaderText = "Gender";
@@ -221,6 +213,14 @@
             Gender.ReadOnly = true;
             Gender.Visible = false;
             Gender.Width = 150;
+            // 
+            // Salary
+            // 
+            Salary.HeaderText = "Salary";
+            Salary.MinimumWidth = 8;
+            Salary.Name = "Salary";
+            Salary.ReadOnly = true;
+            Salary.Width = 250;
             // 
             // DOB
             // 
@@ -233,8 +233,8 @@
             // 
             // Status
             // 
-            dataGridViewCellStyle6.Font = new Font("Poppins", 9F);
-            Status.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Font = new Font("Poppins", 9F);
+            Status.DefaultCellStyle = dataGridViewCellStyle3;
             Status.HeaderText = "Status";
             Status.MinimumWidth = 8;
             Status.Name = "Status";
@@ -248,7 +248,7 @@
             Role.MinimumWidth = 8;
             Role.Name = "Role";
             Role.ReadOnly = true;
-            Role.Width = 150;
+            Role.Width = 250;
             // 
             // EmployeesPage
             // 
@@ -256,7 +256,6 @@
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(64, 64, 64);
             Controls.Add(panel2);
-            Controls.Add(informationPanel);
             ForeColor = Color.Black;
             Margin = new Padding(0);
             Name = "EmployeesPage";
@@ -268,23 +267,22 @@
         }
 
         #endregion
-
-        private Panel informationPanel;
         private Panel panel2;
         private DataGridView EmployeesTable;
         private Label label1;
         private TextBox SearchTextBox;
         private Button create;
+        private Button delete;
+        private Button update;
         private DataGridViewTextBoxColumn Id;
-        private DataGridViewTextBoxColumn UserName;
         private DataGridViewTextBoxColumn FullName;
         private DataGridViewTextBoxColumn Email;
         private DataGridViewTextBoxColumn PhoneNumber;
+        private DataGridViewTextBoxColumn UserName;
         private DataGridViewTextBoxColumn Gender;
+        private DataGridViewTextBoxColumn Salary;
         private DataGridViewTextBoxColumn DOB;
         private DataGridViewTextBoxColumn Status;
         private DataGridViewTextBoxColumn Role;
-        private Button delete;
-        private Button update;
     }
 }
