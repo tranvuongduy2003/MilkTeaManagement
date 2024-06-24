@@ -166,7 +166,8 @@ namespace MilkTeaManagement.WindowsApp.Pages.Home
                 this.SubTotal.Text = "0 VNĐ";
                 this.Discount.Text = "0 VNĐ";
                 this.Total.Text = "0 VNĐ";
-
+                this.CustomerPhone.Clear();
+                this.DiscountPercent.Clear();
             }
             catch (Exception ex)
             {
