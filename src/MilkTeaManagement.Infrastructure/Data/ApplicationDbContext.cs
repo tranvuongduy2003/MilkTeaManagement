@@ -27,6 +27,7 @@ namespace MilkTeaManagement.Infrastructure.Data
             builder.Entity<OrderItem>().Property(x => x.Id).HasMaxLength(50).IsUnicode(false);
             builder.Entity<Conversation>().Property(x => x.Id).HasMaxLength(50).IsUnicode(false);
             builder.Entity<Message>().Property(x => x.Id).HasMaxLength(50).IsUnicode(false);
+            builder.Entity<Shift>().Property(x => x.Id).HasMaxLength(50).IsUnicode(false);
 
             builder.Entity<Order>()
                     .HasMany(x => x.OrderItems)
@@ -99,6 +100,7 @@ namespace MilkTeaManagement.Infrastructure.Data
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Conversation> Conversations { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Shift> Shifts { get; set; }
     }
 
 }

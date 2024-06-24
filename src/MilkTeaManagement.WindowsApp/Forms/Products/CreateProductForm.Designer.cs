@@ -52,7 +52,7 @@ namespace MilkTeaManagement.WindowsApp.Forms
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Silver;
+            panel1.BackColor = Color.Gainsboro;
             panel1.Controls.Add(closeButton);
             panel1.Controls.Add(flowLayoutPanel1);
             panel1.Controls.Add(close);
@@ -245,7 +245,7 @@ namespace MilkTeaManagement.WindowsApp.Forms
             // 
             AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            BackColor = Color.FromArgb(64, 64, 64);
+            BackColor = Color.DarkSlateBlue;
             ClientSize = new Size(1024, 788);
             Controls.Add(Create);
             Controls.Add(label6);

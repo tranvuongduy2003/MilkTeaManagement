@@ -4,7 +4,7 @@ using MilkTeaManagement.WindowsApp.Helpers;
 
 namespace MilkTeaManagement.WindowsApp.Pages.Payments
 {
-    public partial class PaymentsPage : UserControl
+    public partial class PaymentsPage : Page
     {
         private readonly IOrdersRepository _ordersRepository;
 
@@ -16,7 +16,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Payments
             _ordersRepository = ordersRepository;
         }
 
-        public async void OnLoad()
+        public override async void OnLoad()
         {
 
             var orders = await _ordersRepository.GetOrdersByFilterAsync(null);
@@ -43,7 +43,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Payments
                     var order = orders[index];
                     PaymentsTable.Rows[index].Cells["Id"].Value = order.Id;
                     PaymentsTable.Rows[index].Cells["TotalPrice"].Value = ConvertCurrency.ToVND(order.TotalPrice);
-                    PaymentsTable.Rows[index].Cells["Discount"].Value = ConvertCurrency.ToVND(order.Discount ?? (decimal)0.0);
+                    PaymentsTable.Rows[index].Cells["Discount"].Value = order.Discount != null && order.Discount > 0 ? ConvertCurrency.ToVND((decimal)order.Discount) : "0 VNĐ";
                     PaymentsTable.Rows[index].Cells["CustomerPhone"].Value = order.CustomerPhone;
                     PaymentsTable.Rows[index].Cells["EmployeeId"].Value = order.EmployeeId;
                     PaymentsTable.Rows[index].Cells["EmployeeName"].Value = order.EmployeeName;

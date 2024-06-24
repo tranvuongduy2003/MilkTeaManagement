@@ -50,6 +50,7 @@ namespace MilkTeaManagement.Infrastructure.Data
                 await SeedProducts();
                 await SeedConversations();
                 await SeedMessages();
+                await SeedShifts();
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -227,6 +228,60 @@ namespace MilkTeaManagement.Infrastructure.Data
                         message.ReceiverId = message.SenderId == conversation.UserOneId ? conversation.UserTwoId : conversation.UserOneId;
                         await _context.Messages.AddAsync(message);
                     }
+                }
+
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        private async Task SeedShifts()
+        {
+            if (_userManager.Users.Any() && !_context.Shifts.Any())
+            {
+                var users = _userManager.Users.AsNoTracking().ToList();
+
+                foreach (var user in users)
+                {
+                    var fakerMorningShift = new Faker<Shift>()
+                        .RuleFor(m => m.EmployeeId, _ => user.Id)
+                        .RuleFor(m => m.Time, _ => EDayTime.Morning)
+                        .RuleFor(m => m.Mo, f => f.Random.Bool())
+                        .RuleFor(m => m.Tu, f => f.Random.Bool())
+                        .RuleFor(m => m.We, f => f.Random.Bool())
+                        .RuleFor(m => m.Th, f => f.Random.Bool())
+                        .RuleFor(m => m.Fr, f => f.Random.Bool())
+                        .RuleFor(m => m.Sa, f => f.Random.Bool())
+                        .RuleFor(m => m.Su, f => f.Random.Bool());
+
+                    var fakerAfternoonShift = new Faker<Shift>()
+                        .RuleFor(m => m.EmployeeId, _ => user.Id)
+                        .RuleFor(m => m.Time, _ => EDayTime.Afternoon)
+                        .RuleFor(m => m.Mo, f => f.Random.Bool())
+                        .RuleFor(m => m.Tu, f => f.Random.Bool())
+                        .RuleFor(m => m.We, f => f.Random.Bool())
+                        .RuleFor(m => m.Th, f => f.Random.Bool())
+                        .RuleFor(m => m.Fr, f => f.Random.Bool())
+                        .RuleFor(m => m.Sa, f => f.Random.Bool())
+                        .RuleFor(m => m.Su, f => f.Random.Bool());
+
+                    var fakerEveningShift = new Faker<Shift>()
+                        .RuleFor(m => m.EmployeeId, _ => user.Id)
+                        .RuleFor(m => m.Time, _ => EDayTime.Evening)
+                        .RuleFor(m => m.Mo, f => f.Random.Bool())
+                        .RuleFor(m => m.Tu, f => f.Random.Bool())
+                        .RuleFor(m => m.We, f => f.Random.Bool())
+                        .RuleFor(m => m.Th, f => f.Random.Bool())
+                        .RuleFor(m => m.Fr, f => f.Random.Bool())
+                        .RuleFor(m => m.Sa, f => f.Random.Bool())
+                        .RuleFor(m => m.Su, f => f.Random.Bool());
+
+                    var fakerMorning = fakerMorningShift.Generate();
+                    var fakerAfternoon = fakerAfternoonShift.Generate();
+                    var fakerEvening = fakerEveningShift.Generate();
+
+                    await _context.Shifts.AddAsync(fakerMorning);
+                    await _context.Shifts.AddAsync(fakerAfternoon);
+                    await _context.Shifts.AddAsync(fakerEvening);
                 }
 
                 await _context.SaveChangesAsync();

@@ -12,6 +12,8 @@ namespace MilkTeaManagement.Domain.Entities
 
         public string Avatar { get; set; }
 
+        public decimal? HourlySalary { get; set; } = 0;
+
         public EGender? Gender { get; set; }
 
         public DateTimeOffset? DOB { get; set; }

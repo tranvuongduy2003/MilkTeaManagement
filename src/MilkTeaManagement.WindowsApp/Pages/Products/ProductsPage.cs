@@ -10,7 +10,7 @@ using MilkTeaManagement.WindowsApp.Helpers;
 
 namespace MilkTeaManagement.WindowsApp.Pages.Products
 {
-    public partial class ProductsPage : UserControl
+    public partial class ProductsPage : Page
     {
         private readonly IProductsRepository _productsRepository;
         private readonly ICategoriesRepository _categoriesRepository;
@@ -31,7 +31,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Products
             ProductsTable.CellDoubleClick += OnUpdateProduct;
         }
 
-        public async void OnLoad()
+        public override async void OnLoad()
         {
             var categories = await _categoriesRepository.FindAll().ToListAsync();
             Categories = categories;

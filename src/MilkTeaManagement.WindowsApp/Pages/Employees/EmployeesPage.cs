@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MilkTeaManagement.Domain.Entities;
 using MilkTeaManagement.WindowsApp.Forms.Employees;
-using MilkTeaManagement.WindowsApp.UserControls.Employees;
+using MilkTeaManagement.WindowsApp.Helpers;
 
 namespace MilkTeaManagement.WindowsApp.Pages.Employees
 {
-    public partial class EmployeesPage : UserControl
+    public partial class EmployeesPage : Page
     {
         private readonly UserManager<User> _userManager;
 
@@ -19,7 +19,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Employees
             EmployeesTable.CellDoubleClick += OnLoadEmployeeInformation;
         }
 
-        public async void OnLoad()
+        public override async void OnLoad()
         {
             var employees = await _userManager.Users.ToListAsync();
             await LoadEmployeesList(employees);
@@ -40,6 +40,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Employees
                     EmployeesTable.Rows[index].Cells["FullName"].Value = employee.FullName;
                     EmployeesTable.Rows[index].Cells["Email"].Value = employee.Email;
                     EmployeesTable.Rows[index].Cells["PhoneNumber"].Value = employee.PhoneNumber;
+                    EmployeesTable.Rows[index].Cells["Salary"].Value = $"{ConvertCurrency.ToVND((decimal)employee.HourlySalary)}/h";
                     EmployeesTable.Rows[index].Cells["Gender"].Value = employee.Gender;
                     EmployeesTable.Rows[index].Cells["DOB"].Value = employee.DOB;
                     EmployeesTable.Rows[index].Cells["Status"].Value = employee.Status;
@@ -52,14 +53,15 @@ namespace MilkTeaManagement.WindowsApp.Pages.Employees
         {
             if (e.RowIndex >= 0)
             {
-                InformationPanel infoPanel = Program.ServiceProvider.GetRequiredService<InformationPanel>();
-                var selectedRow = EmployeesTable.Rows[e.RowIndex];
-                var id = selectedRow.Cells["Id"].Value.ToString();
-
-                infoPanel.Margin = new Padding(0);
-                infoPanel.Location = new Point(0, 0);
-                informationPanel.Controls.Add(infoPanel);
-                infoPanel.OnLoad(id);
+                var selectedCell = EmployeesTable.SelectedCells[0];
+                if (selectedCell.RowIndex >= 0)
+                {
+                    var selectedRow = EmployeesTable.Rows[selectedCell.RowIndex];
+                    var id = selectedRow.Cells["Id"].Value.ToString();
+                    DetailEmployeeForm detailEmployeeForm = Program.ServiceProvider.GetService<DetailEmployeeForm>();
+                    detailEmployeeForm.OnLoad(id);
+                    detailEmployeeForm.ShowDialog();
+                }
             }
         }
 
@@ -84,11 +86,11 @@ namespace MilkTeaManagement.WindowsApp.Pages.Employees
             var selectedCell = EmployeesTable.SelectedCells[0];
             if (selectedCell.RowIndex >= 0)
             {
-                UpdateEmployeeForm updateEmployeeForm = Program.ServiceProvider.GetRequiredService<UpdateEmployeeForm>();
+                DetailEmployeeForm detailEmployeeForm = Program.ServiceProvider.GetRequiredService<DetailEmployeeForm>();
                 var selectedRow = EmployeesTable.Rows[selectedCell.RowIndex];
                 var id = selectedRow.Cells["Id"].Value.ToString();
-                updateEmployeeForm.OnLoadEmployee(id);
-                if (updateEmployeeForm.ShowDialog() == DialogResult.OK)
+                detailEmployeeForm.OnLoad(id);
+                if (detailEmployeeForm.ShowDialog() == DialogResult.OK)
                 {
                     this.OnLoad();
                 }
