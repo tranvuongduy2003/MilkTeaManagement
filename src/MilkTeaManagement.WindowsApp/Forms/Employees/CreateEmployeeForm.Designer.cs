@@ -280,7 +280,7 @@
             UserNameTextbox.Margin = new Padding(0);
             UserNameTextbox.Name = "UserNameTextbox";
             UserNameTextbox.PlaceholderText = "   User Name";
-            UserNameTextbox.ReadOnly = true;
+            UserNameTextbox.ReadOnly = false;
             UserNameTextbox.Size = new Size(660, 40);
             UserNameTextbox.TabIndex = 34;
             // 
