@@ -128,6 +128,7 @@
             TotalPrice.Name = "TotalPrice";
             TotalPrice.ReadOnly = true;
             TotalPrice.Width = 250;
+            TotalPrice.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             // 
             // Discount
             // 
@@ -135,6 +136,7 @@
             Discount.MinimumWidth = 8;
             Discount.Name = "Discount";
             Discount.ReadOnly = true;
+            Discount.Visible = false;
             Discount.Width = 250;
             // 
             // CustomerPhone
@@ -144,6 +146,7 @@
             CustomerPhone.Name = "CustomerPhone";
             CustomerPhone.ReadOnly = true;
             CustomerPhone.Width = 300;
+            CustomerPhone.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             // 
             // EmployeeId
             // 
@@ -164,6 +167,7 @@
             EmployeeName.MinimumWidth = 8;
             EmployeeName.Name = "EmployeeName";
             EmployeeName.ReadOnly = true;
+            EmployeeName.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             // 
             // CreatedAt
             // 
@@ -175,6 +179,8 @@
             CreatedAt.Name = "CreatedAt";
             CreatedAt.ReadOnly = true;
             CreatedAt.Width = 400;
+            CreatedAt.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            PaymentsTable.Columns["CreatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
             // 
             // PaymentsPage
             // 
