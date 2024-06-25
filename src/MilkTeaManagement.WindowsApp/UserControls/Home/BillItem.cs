@@ -20,6 +20,11 @@ namespace MilkTeaManagement.WindowsApp.UserControls.Home
 
         public async void OnLoad(Product product)
         {
+            if (product.DiscountPrice != null && product.DiscountPrice > 0)
+            {
+                product.Price = product.DiscountPrice ?? 0;
+            };
+
             OrderItem = new OrderItem
             {
                 ProductId = product.Id,

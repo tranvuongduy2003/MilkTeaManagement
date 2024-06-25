@@ -38,6 +38,9 @@
             SearchTextBox = new TextBox();
             CategoriesComboBox = new ComboBox();
             ProductsTable = new DataGridView();
+            create = new Button();
+            update = new Button();
+            delete = new Button();
             Id = new DataGridViewTextBoxColumn();
             ProductPrice = new DataGridViewTextBoxColumn();
             Description = new DataGridViewTextBoxColumn();
@@ -47,10 +50,8 @@
             Status = new DataGridViewTextBoxColumn();
             Category = new DataGridViewTextBoxColumn();
             Price = new DataGridViewTextBoxColumn();
+            DiscountPrice = new DataGridViewTextBoxColumn();
             CreatedAt = new DataGridViewTextBoxColumn();
-            create = new Button();
-            update = new Button();
-            delete = new Button();
             ((System.ComponentModel.ISupportInitialize)ProductsTable).BeginInit();
             SuspendLayout();
             // 
@@ -109,7 +110,7 @@
             ProductsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             ProductsTable.ColumnHeadersHeight = 50;
             ProductsTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            ProductsTable.Columns.AddRange(new DataGridViewColumn[] { Id, ProductPrice, Description, ProductCategoryId, Poster, ProductName, Status, Category, Price, CreatedAt });
+            ProductsTable.Columns.AddRange(new DataGridViewColumn[] { Id, ProductPrice, Description, ProductCategoryId, Poster, ProductName, Status, Category, Price, DiscountPrice, CreatedAt });
             ProductsTable.Location = new Point(30, 186);
             ProductsTable.Margin = new Padding(0);
             ProductsTable.Name = "ProductsTable";
@@ -118,6 +119,48 @@
             ProductsTable.RowTemplate.Height = 50;
             ProductsTable.Size = new Size(1760, 835);
             ProductsTable.TabIndex = 13;
+            // 
+            // create
+            // 
+            create.BackColor = Color.CornflowerBlue;
+            create.Font = new Font("Poppins", 12F);
+            create.ForeColor = Color.White;
+            create.Location = new Point(1636, 117);
+            create.Margin = new Padding(0);
+            create.Name = "create";
+            create.Size = new Size(160, 49);
+            create.TabIndex = 14;
+            create.Text = "Create";
+            create.UseVisualStyleBackColor = false;
+            create.Click += create_Click;
+            // 
+            // update
+            // 
+            update.BackColor = Color.FromArgb(192, 192, 0);
+            update.Font = new Font("Poppins", 12F);
+            update.ForeColor = Color.White;
+            update.Location = new Point(1467, 117);
+            update.Margin = new Padding(0);
+            update.Name = "update";
+            update.Size = new Size(160, 49);
+            update.TabIndex = 15;
+            update.Text = "Update";
+            update.UseVisualStyleBackColor = false;
+            update.Click += update_Click;
+            // 
+            // delete
+            // 
+            delete.BackColor = Color.Crimson;
+            delete.Font = new Font("Poppins", 12F);
+            delete.ForeColor = Color.White;
+            delete.Location = new Point(1296, 117);
+            delete.Margin = new Padding(0);
+            delete.Name = "delete";
+            delete.Size = new Size(160, 49);
+            delete.TabIndex = 16;
+            delete.Text = "Delete";
+            delete.UseVisualStyleBackColor = false;
+            delete.Click += delete_Click;
             // 
             // Id
             // 
@@ -177,14 +220,14 @@
             // 
             // Status
             // 
-            dataGridViewCellStyle3.Font = new Font("Poppins", 9F);
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Font = new Font("Poppins", 9F);
             Status.DefaultCellStyle = dataGridViewCellStyle3;
             Status.HeaderText = "Status";
             Status.MinimumWidth = 8;
             Status.Name = "Status";
             Status.ReadOnly = true;
-            Status.Width = 200;
+            Status.Width = 250;
             // 
             // Category
             // 
@@ -195,7 +238,7 @@
             Category.MinimumWidth = 8;
             Category.Name = "Category";
             Category.ReadOnly = true;
-            Category.Width = 250;
+            Category.Width = 300;
             // 
             // Price
             // 
@@ -206,7 +249,15 @@
             Price.MinimumWidth = 8;
             Price.Name = "Price";
             Price.ReadOnly = true;
-            Price.Width = 200;
+            Price.Width = 250;
+            // 
+            // DiscountPrice
+            // 
+            DiscountPrice.HeaderText = "Discount Price";
+            DiscountPrice.MinimumWidth = 8;
+            DiscountPrice.Name = "DiscountPrice";
+            DiscountPrice.ReadOnly = true;
+            DiscountPrice.Width = 250;
             // 
             // CreatedAt
             // 
@@ -219,49 +270,6 @@
             CreatedAt.ReadOnly = true;
             CreatedAt.Visible = false;
             CreatedAt.Width = 350;
-            ProductsTable.Columns["CreatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            // 
-            // create
-            // 
-            create.BackColor = Color.CornflowerBlue;
-            create.Font = new Font("Poppins", 12F);
-            create.ForeColor = Color.White;
-            create.Location = new Point(1636, 117);
-            create.Margin = new Padding(0);
-            create.Name = "create";
-            create.Size = new Size(160, 49);
-            create.TabIndex = 14;
-            create.Text = "Create";
-            create.UseVisualStyleBackColor = false;
-            create.Click += create_Click;
-            // 
-            // update
-            // 
-            update.BackColor = Color.FromArgb(192, 192, 0);
-            update.Font = new Font("Poppins", 12F);
-            update.ForeColor = Color.White;
-            update.Location = new Point(1467, 117);
-            update.Margin = new Padding(0);
-            update.Name = "update";
-            update.Size = new Size(160, 49);
-            update.TabIndex = 15;
-            update.Text = "Update";
-            update.UseVisualStyleBackColor = false;
-            update.Click += update_Click;
-            // 
-            // delete
-            // 
-            delete.BackColor = Color.Crimson;
-            delete.Font = new Font("Poppins", 12F);
-            delete.ForeColor = Color.White;
-            delete.Location = new Point(1296, 117);
-            delete.Margin = new Padding(0);
-            delete.Name = "delete";
-            delete.Size = new Size(160, 49);
-            delete.TabIndex = 16;
-            delete.Text = "Delete";
-            delete.UseVisualStyleBackColor = false;
-            delete.Click += delete_Click;
             // 
             // ProductsPage
             // 
@@ -301,6 +309,7 @@
         private DataGridViewTextBoxColumn Status;
         private DataGridViewTextBoxColumn Category;
         private DataGridViewTextBoxColumn Price;
+        private DataGridViewTextBoxColumn DiscountPrice;
         private DataGridViewTextBoxColumn CreatedAt;
     }
 }
