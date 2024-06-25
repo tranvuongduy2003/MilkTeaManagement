@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using MilkTeaManagement.Application.Common.Models.Filter;
+﻿using MilkTeaManagement.Application.Common.Models.Filter;
 using MilkTeaManagement.Application.Common.Models.Orders;
 using MilkTeaManagement.Application.Contracts;
 using MilkTeaManagement.Domain.Entities;
@@ -13,20 +12,18 @@ namespace MilkTeaManagement.WindowsApp.Pages.Home
         private readonly ICategoriesRepository _categoriesRepository;
         private readonly IProductsRepository _productsRepository;
         private readonly IOrdersRepository _ordersRepository;
-        private readonly SignInManager<User> _signInManager;
 
         private List<OrderItem> OrderItems = new List<OrderItem>();
         private string SearchText { get; set; } = string.Empty;
         private string CategoryId { get; set; } = string.Empty;
         private int DiscountPercentValue { get; set; } = 0;
 
-        public HomePage(ICategoriesRepository categoriesRepository, IProductsRepository productsRepository, IOrdersRepository ordersRepository, SignInManager<User> signInManager)
+        public HomePage(ICategoriesRepository categoriesRepository, IProductsRepository productsRepository, IOrdersRepository ordersRepository)
         {
             InitializeComponent();
             _categoriesRepository = categoriesRepository;
             _productsRepository = productsRepository;
             _ordersRepository = ordersRepository;
-            this._signInManager = signInManager;
         }
 
         public override async void OnLoad()

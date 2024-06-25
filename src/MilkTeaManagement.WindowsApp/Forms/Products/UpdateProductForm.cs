@@ -34,18 +34,19 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
                 this.CategoriesComboBox.Items.Add(category.Name);
         }
 
-        public async void OnLoadProduct(Product product)
+        public async void OnLoadProduct(string productId)
         {
+            var product = await _productsRepository.GetByIdAsync(productId);
             var categories = await _categoriesRepository.FindAll().ToListAsync();
             Categories = categories;
             this.CategoriesComboBox.Items.Clear();
             foreach (var category in categories)
                 this.CategoriesComboBox.Items.Add(category.Name);
             var selectedCategory = Categories.Find(c => c.Id == product.CategoryId);
-            CategoriesComboBox.SelectedItem = selectedCategory.Name;
-            //CategoriesComboBox.SelectedText = selectedCategory.Name;
+            CategoriesComboBox.Text = selectedCategory.Name;
             NameTextbox.Text = product.Name;
             PriceTextbox.Text = product.Price.ToString();
+            DiscountPriceTextBox.Text = (product.DiscountPrice ?? 0).ToString();
             DescriptionTextbox.Text = product.Description;
             Poster.ImageLocation = product.Poster;
             Poster.SizeMode = PictureBoxSizeMode.Zoom;
@@ -78,6 +79,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
                 var name = NameTextbox.Text;
                 var price = PriceTextbox.Text;
                 var description = DescriptionTextbox.Text;
+                var discount = DiscountPriceTextBox.Text;
 
                 string error = "";
 
@@ -104,6 +106,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
                     Name = name,
                     Poster = uploadedFile.Blob.Uri,
                     Price = decimal.Parse(price),
+                    DiscountPrice = discount.IsNullOrEmpty() ? null : decimal.Parse(discount),
                     Description = description,
                     CategoryId = CategoryId,
                 };

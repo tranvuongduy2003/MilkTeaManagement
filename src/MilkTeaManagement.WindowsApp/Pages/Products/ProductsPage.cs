@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using MilkTeaManagement.Application.Common.Models.Filter;
 using MilkTeaManagement.Application.Contracts;
 using MilkTeaManagement.Domain.Entities;
-using MilkTeaManagement.Domain.Enums;
 using MilkTeaManagement.WindowsApp.Forms;
 using MilkTeaManagement.WindowsApp.Forms.Products;
 using MilkTeaManagement.WindowsApp.Helpers;
@@ -78,6 +77,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Products
                     ProductsTable.Rows[index].Cells["Status"].Value = product.Status;
                     ProductsTable.Rows[index].Cells["Category"].Value = product.Category?.Name ?? "";
                     ProductsTable.Rows[index].Cells["Price"].Value = ConvertCurrency.ToVND(product.Price);
+                    ProductsTable.Rows[index].Cells["DiscountPrice"].Value = product.DiscountPrice != null && product.DiscountPrice > 0 ? ConvertCurrency.ToVND((decimal)product.DiscountPrice) : "0 VNĐ";
                     ProductsTable.Rows[index].Cells["CreatedAt"].Value = product.CreatedDate;
                     ProductsTable.Rows[index].Cells["ProductPrice"].Value = product.Price;
                 }
@@ -109,18 +109,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Products
             {
                 UpdateProductForm updateProductForm = Program.ServiceProvider.GetRequiredService<UpdateProductForm>();
                 var selectedRow = ProductsTable.Rows[selectedCell.RowIndex];
-                var product = new Product
-                {
-                    Id = selectedRow.Cells["Id"].Value.ToString(),
-                    CategoryId = selectedRow.Cells["ProductCategoryId"].Value.ToString(),
-                    Description = selectedRow.Cells["Description"].Value.ToString(),
-                    Poster = selectedRow.Cells["Poster"].Value.ToString(),
-                    Name = selectedRow.Cells["ProductName"].Value.ToString(),
-                    Status = selectedRow.Cells["Status"].Value == nameof(EProductStatus.AVAILABLE) ? EProductStatus.AVAILABLE : EProductStatus.UNAVAILABLE,
-                    Price = decimal.Parse(selectedRow.Cells["ProductPrice"].Value.ToString()),
-
-                };
-                updateProductForm.OnLoadProduct(product);
+                updateProductForm.OnLoadProduct(selectedRow.Cells["Id"].Value.ToString());
 
                 if (updateProductForm.ShowDialog() == DialogResult.OK)
                 {
@@ -169,18 +158,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Products
             {
                 UpdateProductForm updateProductForm = Program.ServiceProvider.GetRequiredService<UpdateProductForm>();
                 var selectedRow = ProductsTable.Rows[e.RowIndex];
-                var product = new Product
-                {
-                    Id = selectedRow.Cells["Id"].Value.ToString(),
-                    CategoryId = selectedRow.Cells["ProductCategoryId"].Value.ToString(),
-                    Description = selectedRow.Cells["Description"].Value.ToString(),
-                    Poster = selectedRow.Cells["Poster"].Value.ToString(),
-                    Name = selectedRow.Cells["ProductName"].Value.ToString(),
-                    Status = selectedRow.Cells["Status"].Value == nameof(EProductStatus.AVAILABLE) ? EProductStatus.AVAILABLE : EProductStatus.UNAVAILABLE,
-                    Price = decimal.Parse(selectedRow.Cells["ProductPrice"].Value.ToString()),
-
-                };
-                updateProductForm.OnLoadProduct(product);
+                updateProductForm.OnLoadProduct(selectedRow.Cells["Id"].Value.ToString());
 
                 if (updateProductForm.ShowDialog() == DialogResult.OK)
                 {
