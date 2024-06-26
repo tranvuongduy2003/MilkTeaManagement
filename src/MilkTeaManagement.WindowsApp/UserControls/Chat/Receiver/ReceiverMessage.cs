@@ -5,6 +5,8 @@
         public ReceiverMessage()
         {
             InitializeComponent();
+
+            Avatar.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         public void OnLoad(string message)

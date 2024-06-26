@@ -31,6 +31,8 @@ namespace MilkTeaManagement.WindowsApp.UserControls.Chat
             _userManager = userManager;
             _messagesRepository = messagesRepository;
             _mapper = mapper;
+
+            Avatar.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         public async void OnLoad(ConversationDto conversation)

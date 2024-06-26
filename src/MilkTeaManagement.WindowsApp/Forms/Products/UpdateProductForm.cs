@@ -23,6 +23,8 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
             _azureBlobService = azureBlobService;
             _productsRepository = productsRepository;
             _categoriesRepository = categoriesRepository;
+
+            Poster.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         public async void OnLoad()

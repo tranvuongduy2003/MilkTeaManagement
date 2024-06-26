@@ -26,6 +26,8 @@ namespace MilkTeaManagement.WindowsApp.Forms.Employees
             _userManager = userManager;
             _ordersRepository = ordersRepository;
             _azureBlobService = azureBlobService;
+
+            Avatar.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         public async void OnLoad(string id)

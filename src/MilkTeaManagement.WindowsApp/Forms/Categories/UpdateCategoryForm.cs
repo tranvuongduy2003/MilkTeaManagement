@@ -1,18 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using MilkTeaManagement.Application.Common.Interfaces;
 using MilkTeaManagement.Application.Contracts;
 using MilkTeaManagement.Domain.Entities;
-using MilkTeaManagement.Infrastructure.Repositories;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace MilkTeaManagement.WindowsApp.Forms.Categories
 {
@@ -30,6 +19,8 @@ namespace MilkTeaManagement.WindowsApp.Forms.Categories
 
             _azureBlobService = azureBlobService;
             _categoriesRepository = categoriesRepository;
+
+            Poster.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         private void btnClose_Click(object sender, EventArgs e)

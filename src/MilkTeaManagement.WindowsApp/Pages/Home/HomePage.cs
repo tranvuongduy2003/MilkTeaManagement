@@ -25,6 +25,8 @@ namespace MilkTeaManagement.WindowsApp.Pages.Home
             _categoriesRepository = categoriesRepository;
             _productsRepository = productsRepository;
             _ordersRepository = ordersRepository;
+
+            this.Avatar.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         public override async void OnLoad()
