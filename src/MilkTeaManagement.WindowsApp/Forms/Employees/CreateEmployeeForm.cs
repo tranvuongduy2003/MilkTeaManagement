@@ -18,6 +18,8 @@ namespace MilkTeaManagement.WindowsApp.Forms.Employees
             InitializeComponent();
             _azureBlobService = azureBlobService;
             _userManager = userManager;
+
+            Avatar.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         private void closeButton_Click(object sender, EventArgs e)

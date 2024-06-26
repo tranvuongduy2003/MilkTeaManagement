@@ -7,6 +7,7 @@ namespace MilkTeaManagement.WindowsApp.UserControls.Common
         public CircularPictureBox()
         {
             BackgroundImageLayout = ImageLayout.Stretch;
+            SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         protected override void OnPaint(PaintEventArgs e)

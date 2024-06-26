@@ -20,6 +20,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Profile
             InitializeComponent();
             _azureBlobService = azureBlobService;
             _userManager = userManager;
+            Avatar.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         public override async void OnLoad()
@@ -27,7 +28,6 @@ namespace MilkTeaManagement.WindowsApp.Pages.Profile
             var user = await _userManager.FindByIdAsync(Program.UserIdentity.Id);
             var roles = await _userManager.GetRolesAsync(user);
 
-            Avatar.SizeMode = PictureBoxSizeMode.Zoom;
             Avatar.ImageLocation = user.Avatar;
             FullNameTextbox.Text = user.FullName;
             UserNameTextbox.Text = user.UserName;
