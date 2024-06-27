@@ -59,7 +59,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Employees
                     var selectedRow = EmployeesTable.Rows[selectedCell.RowIndex];
                     var id = selectedRow.Cells["Id"].Value.ToString();
                     DetailEmployeeForm detailEmployeeForm = Program.ServiceProvider.GetService<DetailEmployeeForm>();
-                    detailEmployeeForm.OnLoad(id);
+                    await detailEmployeeForm.OnLoad(id);
                     detailEmployeeForm.ShowDialog();
                 }
             }
@@ -75,7 +75,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Employees
             }
         }
 
-        private void update_Click(object sender, EventArgs e)
+        private async void update_Click(object sender, EventArgs e)
         {
             if (EmployeesTable.SelectedCells.Count == 0)
             {
@@ -89,7 +89,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Employees
                 DetailEmployeeForm detailEmployeeForm = Program.ServiceProvider.GetRequiredService<DetailEmployeeForm>();
                 var selectedRow = EmployeesTable.Rows[selectedCell.RowIndex];
                 var id = selectedRow.Cells["Id"].Value.ToString();
-                detailEmployeeForm.OnLoad(id);
+                await detailEmployeeForm.OnLoad(id);
                 if (detailEmployeeForm.ShowDialog() == DialogResult.OK)
                 {
                     this.OnLoad();

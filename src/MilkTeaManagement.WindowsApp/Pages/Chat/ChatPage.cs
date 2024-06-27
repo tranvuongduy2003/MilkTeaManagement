@@ -34,7 +34,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Chat
         private async void OnClickUserBox(ConversationDto conversation)
         {
             ChatViewPanel chatViewPanel = Program.ServiceProvider.GetRequiredService<ChatViewPanel>();
-            chatViewPanel.OnLoad(conversation);
+            await chatViewPanel.OnLoad(conversation);
             ChatView.Controls.Clear();
             ChatView.Controls.Add(chatViewPanel);
 

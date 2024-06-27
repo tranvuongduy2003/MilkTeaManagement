@@ -39,7 +39,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Employees
             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                Avatar.BackgroundImage = new Bitmap(openFileDialog.FileName);
+                Avatar.ImageLocation = openFileDialog.FileName;
                 AvatarFilePath = openFileDialog.FileName;
             }
         }

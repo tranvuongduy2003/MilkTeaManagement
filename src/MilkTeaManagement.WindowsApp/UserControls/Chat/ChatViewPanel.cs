@@ -35,7 +35,7 @@ namespace MilkTeaManagement.WindowsApp.UserControls.Chat
             Avatar.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
-        public async void OnLoad(ConversationDto conversation)
+        public async Task OnLoad(ConversationDto conversation)
         {
             Conversation = conversation;
             Avatar.ImageLocation = conversation.Avatar;
@@ -142,6 +142,8 @@ namespace MilkTeaManagement.WindowsApp.UserControls.Chat
 
         private void AddMessage(int index)
         {
+            if (Messages.Count <= 0)
+                return;
             Control messageControl = new Control();
             if (Messages[index - 1].SenderId != Messages[index].SenderId)
             {
@@ -177,6 +179,8 @@ namespace MilkTeaManagement.WindowsApp.UserControls.Chat
 
         private void AddImageMessage(int index)
         {
+            if (Messages.Count <= 0)
+                return;
             Control messageControl = new Control();
             if (Messages[index - 1].SenderId != Messages[index].SenderId)
             {
@@ -212,6 +216,8 @@ namespace MilkTeaManagement.WindowsApp.UserControls.Chat
 
         private void AddVideoMessage(int index)
         {
+            if (Messages.Count <= 0)
+                return;
             Control messageControl = new Control();
             if (Messages[index - 1].SenderId != Messages[index].SenderId)
             {
@@ -247,6 +253,8 @@ namespace MilkTeaManagement.WindowsApp.UserControls.Chat
 
         private void AddFirstMessage()
         {
+            if (Messages.Count <= 0)
+                return;
             Control messageControl = new Control();
             if (Messages[0].SenderId == Program.UserIdentity.Id)
             {
@@ -264,6 +272,8 @@ namespace MilkTeaManagement.WindowsApp.UserControls.Chat
 
         private void AddFirstImageMessage()
         {
+            if (Messages.Count <= 0)
+                return;
             Control messageControl = new Control();
             if (Messages[0].SenderId == Program.UserIdentity.Id)
             {
@@ -281,6 +291,8 @@ namespace MilkTeaManagement.WindowsApp.UserControls.Chat
 
         private void AddFirstVideoMessage()
         {
+            if (Messages.Count <= 0)
+                return;
             Control messageControl = new Control();
             if (Messages[0].SenderId == Program.UserIdentity.Id)
             {
@@ -298,6 +310,8 @@ namespace MilkTeaManagement.WindowsApp.UserControls.Chat
 
         private void RenderMessage(MessageDto message, int index)
         {
+            if (Messages.Count <= 0)
+                return;
             if (!message.Content.IsNullOrEmpty())
                 AddMessage(index);
             else if (!message.Image.IsNullOrEmpty())
@@ -308,6 +322,8 @@ namespace MilkTeaManagement.WindowsApp.UserControls.Chat
 
         private void RenderFirstMessage()
         {
+            if (Messages.Count <= 0)
+                return;
             if (!Messages[0].Content.IsNullOrEmpty())
                 AddFirstMessage();
             else if (!Messages[0].Image.IsNullOrEmpty())
