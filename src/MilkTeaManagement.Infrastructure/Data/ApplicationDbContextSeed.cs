@@ -182,31 +182,49 @@ namespace MilkTeaManagement.Infrastructure.Data
 
         private async Task SeedConversations()
         {
-            if (_userManager.Users.Any() && !_context.Conversations.Any())
+            var users = _userManager.Users.AsNoTracking().ToList();
+            foreach (var user in users)
             {
-                var users = _userManager.Users.AsNoTracking().ToList();
-
-                for (int i = 0; i < users.Count; i++)
+                if (!_context.Conversations.Any(c => c.UserTwoId.Equals(user.Id) || c.UserOneId.Equals(user.Id)))
                 {
-                    for (int j = i + 1; j < users.Count; j++)
+                    var restUsers = _userManager.Users.AsNoTracking().Where(u => !u.Id.Equals(user.Id)).ToList();
+                    foreach (var restUser in restUsers)
                     {
                         await _context.Conversations.AddAsync(new Conversation
                         {
-                            UserOneId = users[i].Id,
-                            UserTwoId = users[j].Id,
+                            UserOneId = restUser.Id,
+                            UserTwoId = user.Id,
                         });
                         await _context.SaveChangesAsync();
                     }
                 }
-
-                await _context.Conversations.AddAsync(new Conversation
-                {
-                    UserOneId = Guid.NewGuid().ToString(),
-                    UserTwoId = Guid.NewGuid().ToString(),
-                });
-
-                await _context.SaveChangesAsync();
             }
+
+            //if (_userManager.Users.Any() && !_context.Conversations.Any())
+            //{
+            //    var users = _userManager.Users.AsNoTracking().ToList();
+
+            //    for (int i = 0; i < users.Count; i++)
+            //    {
+            //        for (int j = i + 1; j < users.Count; j++)
+            //        {
+            //            await _context.Conversations.AddAsync(new Conversation
+            //            {
+            //                UserOneId = users[i].Id,
+            //                UserTwoId = users[j].Id,
+            //            });
+            //            await _context.SaveChangesAsync();
+            //        }
+            //    }
+
+            //    await _context.Conversations.AddAsync(new Conversation
+            //    {
+            //        UserOneId = Guid.NewGuid().ToString(),
+            //        UserTwoId = Guid.NewGuid().ToString(),
+            //    });
+
+            //    await _context.SaveChangesAsync();
+            //}
         }
 
         private async Task SeedMessages()

@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             informationPanel = new Panel();
+            label1 = new Label();
+            SalaryTextBox = new TextBox();
+            pictureBox9 = new PictureBox();
             Update = new Button();
             pictureBox8 = new PictureBox();
             pictureBox7 = new PictureBox();
@@ -60,10 +63,8 @@
             closeButton = new PictureBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             close = new PictureBox();
-            pictureBox9 = new PictureBox();
-            SalaryTextBox = new TextBox();
-            label1 = new Label();
             informationPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
@@ -78,7 +79,6 @@
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)close).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox9).BeginInit();
             SuspendLayout();
             // 
             // informationPanel
@@ -111,6 +111,40 @@
             informationPanel.Name = "informationPanel";
             informationPanel.Size = new Size(600, 1050);
             informationPanel.TabIndex = 0;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Poppins", 11F);
+            label1.Location = new Point(320, 560);
+            label1.Margin = new Padding(0);
+            label1.Name = "label1";
+            label1.Size = new Size(99, 39);
+            label1.TabIndex = 3;
+            label1.Text = "VNĐ / h";
+            // 
+            // SalaryTextBox
+            // 
+            SalaryTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            SalaryTextBox.BorderStyle = BorderStyle.FixedSingle;
+            SalaryTextBox.Font = new Font("Poppins", 11F);
+            SalaryTextBox.Location = new Point(80, 560);
+            SalaryTextBox.Margin = new Padding(0);
+            SalaryTextBox.Name = "SalaryTextBox";
+            SalaryTextBox.PlaceholderText = "   Hourly Salary";
+            SalaryTextBox.Size = new Size(234, 40);
+            SalaryTextBox.TabIndex = 70;
+            // 
+            // pictureBox9
+            // 
+            pictureBox9.BackgroundImage = Properties.Resources.salary;
+            pictureBox9.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox9.Location = new Point(40, 565);
+            pictureBox9.Margin = new Padding(0);
+            pictureBox9.Name = "pictureBox9";
+            pictureBox9.Size = new Size(30, 30);
+            pictureBox9.TabIndex = 69;
+            pictureBox9.TabStop = false;
             // 
             // Update
             // 
@@ -368,8 +402,10 @@
             Avatar.Margin = new Padding(0);
             Avatar.Name = "Avatar";
             Avatar.Size = new Size(100, 100);
+            Avatar.SizeMode = PictureBoxSizeMode.Zoom;
             Avatar.TabIndex = 0;
             Avatar.TabStop = false;
+            Avatar.Click += Avatar_Click;
             // 
             // panel2
             // 
@@ -470,40 +506,6 @@
             close.TabIndex = 12;
             close.TabStop = false;
             // 
-            // pictureBox9
-            // 
-            pictureBox9.BackgroundImage = Properties.Resources.salary;
-            pictureBox9.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox9.Location = new Point(40, 565);
-            pictureBox9.Margin = new Padding(0);
-            pictureBox9.Name = "pictureBox9";
-            pictureBox9.Size = new Size(30, 30);
-            pictureBox9.TabIndex = 69;
-            pictureBox9.TabStop = false;
-            // 
-            // SalaryTextBox
-            // 
-            SalaryTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            SalaryTextBox.BorderStyle = BorderStyle.FixedSingle;
-            SalaryTextBox.Font = new Font("Poppins", 11F);
-            SalaryTextBox.Location = new Point(80, 560);
-            SalaryTextBox.Margin = new Padding(0);
-            SalaryTextBox.Name = "SalaryTextBox";
-            SalaryTextBox.PlaceholderText = "   Hourly Salary";
-            SalaryTextBox.Size = new Size(234, 40);
-            SalaryTextBox.TabIndex = 70;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Poppins", 11F);
-            label1.Location = new Point(320, 560);
-            label1.Margin = new Padding(0);
-            label1.Name = "label1";
-            label1.Size = new Size(99, 39);
-            label1.TabIndex = 3;
-            label1.Text = "VNĐ / h";
-            // 
             // DetailEmployeeForm
             // 
             AutoScaleDimensions = new SizeF(144F, 144F);
@@ -520,6 +522,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             informationPanel.ResumeLayout(false);
             informationPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox9).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
@@ -536,7 +539,6 @@
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)closeButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)close).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox9).EndInit();
             ResumeLayout(false);
         }
 

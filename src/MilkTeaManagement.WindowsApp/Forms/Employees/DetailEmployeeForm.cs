@@ -30,7 +30,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Employees
             Avatar.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
-        public async void OnLoad(string id)
+        public async Task OnLoad(string id)
         {
             var employee = await _userManager.FindByIdAsync(id);
             var roles = await _userManager.GetRolesAsync(employee);
@@ -108,18 +108,17 @@ namespace MilkTeaManagement.WindowsApp.Forms.Employees
                 }
 
                 var uploadedFile = await _azureBlobService.UploadAsync(AvatarFilePath);
-                var user = new User
-                {
-                    Id = Program.UserIdentity.Id,
-                    FullName = fullName,
-                    Avatar = uploadedFile.Blob.Uri,
-                    UserName = userName,
-                    Email = email,
-                    PhoneNumber = phoneNumber,
-                    Gender = Enum.Parse<EGender>(gender),
-                    Status = Enum.Parse<EUserStatus>(status)
-                };
-                await _userManager.CreateAsync(user, "User@123");
+                var user = await _userManager.FindByIdAsync(Employee.Id);
+
+                user.FullName = fullName;
+                user.Avatar = uploadedFile.Blob.Uri;
+                user.UserName = userName;
+                user.Email = email;
+                user.PhoneNumber = phoneNumber;
+                user.Gender = Enum.Parse<EGender>(gender);
+                user.Status = Enum.Parse<EUserStatus>(status);
+
+                await _userManager.UpdateAsync(user);
                 await _userManager.AddToRoleAsync(user, role);
 
                 MessageBox.Show("Update employee successfully!", "Success!", MessageBoxButtons.OK);
@@ -146,5 +145,16 @@ namespace MilkTeaManagement.WindowsApp.Forms.Employees
         private void CheckoutHistoryButton_Click(object sender, EventArgs e) => LoadCheckoutHistory(Employee);
 
         private void WorkDayButton_Click(object sender, EventArgs e) => LoadWorkDays(Employee);
+
+        private void Avatar_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Avatar.ImageLocation = openFileDialog.FileName;
+                AvatarFilePath = openFileDialog.FileName;
+            }
+        }
     }
 }

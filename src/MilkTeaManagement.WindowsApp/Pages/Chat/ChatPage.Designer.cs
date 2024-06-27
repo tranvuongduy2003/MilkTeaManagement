@@ -35,7 +35,7 @@
             // ConversationsPanel
             // 
             ConversationsPanel.AutoScroll = true;
-            ConversationsPanel.BackColor = Color.DarkGray;
+            ConversationsPanel.BackColor = Color.Silver;
             ConversationsPanel.Location = new Point(0, 0);
             ConversationsPanel.Margin = new Padding(0);
             ConversationsPanel.Name = "ConversationsPanel";
