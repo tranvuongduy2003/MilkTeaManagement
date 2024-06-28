@@ -54,6 +54,17 @@ namespace MilkTeaManagement.Infrastructure.Repositories
             }
         }
 
+        public async Task<List<OrderItem>> GetOrderItemsByOrderIdAsync(string orderId)
+        {
+            var orderItems = await _dbContext.OrderItems
+                .AsNoTracking()
+                .Where(orderItem => orderItem.OrderId == orderId)
+                .Include(orderItem => orderItem.Product)
+                .ToListAsync();
+
+            return orderItems;
+        }
+        
         public async Task<List<OrderDto>> GetOrdersByEmployeeIdAsync(string id, string? search)
         {
             try

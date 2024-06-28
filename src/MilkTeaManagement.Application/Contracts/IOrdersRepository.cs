@@ -11,6 +11,8 @@ namespace MilkTeaManagement.Application.Contracts
 
         Task<List<OrderDto>> GetOrdersByFilterAsync(string? search);
 
+        Task<List<OrderItem>> GetOrderItemsByOrderIdAsync(string orderId);
+
         Task<List<OrderDto>> GetOrdersByEmployeeIdAsync(string id, string? search);
     }
 }

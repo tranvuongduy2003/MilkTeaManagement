@@ -152,7 +152,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Home
                 var request = new CheckoutRequest
                 {
                     CustomerPhone = this.CustomerPhone.Text,
-                    Discount = (float)(DiscountPercentValue / 100),
+                    Discount = (float?)DiscountPercentValue / 100,
                     EmployeeId = Program.UserIdentity.Id,
                     TotalPrice = total,
                     OrderItems = OrderItems,

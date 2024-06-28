@@ -1,6 +1,9 @@
 ﻿using MilkTeaManagement.Application.Common.Models.Payments;
 using MilkTeaManagement.Application.Contracts;
+using MilkTeaManagement.Domain.Entities;
+using MilkTeaManagement.WindowsApp.Forms.Payments;
 using MilkTeaManagement.WindowsApp.Helpers;
+using System.Data;
 
 namespace MilkTeaManagement.WindowsApp.Pages.Payments
 {
@@ -77,6 +80,39 @@ namespace MilkTeaManagement.WindowsApp.Pages.Payments
 
                     MessageBox.Show("Delete new order successfully!", "Success!", MessageBoxButtons.OK);
                     this.OnLoad();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        private async void btnPrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (PaymentsTable.SelectedCells.Count == 0)
+                {
+                    MessageBox.Show("Please select an order to print!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var selectedCell = PaymentsTable.SelectedCells[0];
+                if (selectedCell.RowIndex >= 0)
+                {
+                    var selectedRow = PaymentsTable.Rows[selectedCell.RowIndex];
+
+                    var order = await _ordersRepository.GetByIdAsync(selectedRow.Cells["Id"].Value.ToString());
+
+                    if (order == null)
+                        throw new Exception("Order is not existed");
+
+                    var orderItems = await _ordersRepository.GetOrderItemsByOrderIdAsync(order.Id);
+
+                    PrintBillForm printBillForm = new PrintBillForm(order, orderItems);
+                    printBillForm.ShowDialog();
                 }
             }
             catch (Exception ex)

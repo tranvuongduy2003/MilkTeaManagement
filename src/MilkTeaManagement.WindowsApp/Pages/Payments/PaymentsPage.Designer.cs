@@ -42,6 +42,7 @@
             EmployeeId = new DataGridViewTextBoxColumn();
             EmployeeName = new DataGridViewTextBoxColumn();
             CreatedAt = new DataGridViewTextBoxColumn();
+            btnPrint = new Button();
             ((System.ComponentModel.ISupportInitialize)PaymentsTable).BeginInit();
             SuspendLayout();
             // 
@@ -182,11 +183,25 @@
             CreatedAt.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             PaymentsTable.Columns["CreatedAt"].DefaultCellStyle.Format = "dd/MM/yyyy";
             // 
+            // btnPrint
+            // 
+            btnPrint.BackColor = Color.MediumSeaGreen;
+            btnPrint.Font = new Font("Microsoft Sans Serif", 12F);
+            btnPrint.ForeColor = Color.White;
+            btnPrint.Location = new Point(1205, 98);
+            btnPrint.Margin = new Padding(0);
+            btnPrint.Name = "btnPrint";
+            btnPrint.Size = new Size(133, 41);
+            btnPrint.TabIndex = 17;
+            btnPrint.Text = "Print";
+            btnPrint.UseVisualStyleBackColor = false;
+            btnPrint.Click += btnPrint_Click;
             // PaymentsPage
             // 
             AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(64, 64, 64);
+            Controls.Add(btnPrint);
             Controls.Add(delete);
             Controls.Add(PaymentsTable);
             Controls.Add(SearchTextBox);
@@ -212,5 +227,6 @@
         private DataGridViewTextBoxColumn EmployeeId;
         private DataGridViewTextBoxColumn EmployeeName;
         private DataGridViewTextBoxColumn CreatedAt;
+        private Button btnPrint;
     }
 }
