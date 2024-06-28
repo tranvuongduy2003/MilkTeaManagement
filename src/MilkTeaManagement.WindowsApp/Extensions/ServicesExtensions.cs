@@ -54,19 +54,19 @@ namespace MilkTeaManagement.WindowsApp.Extensions
             services.AddSingleton<UserIdentity>(Program.UserIdentity);
 
             // Main form
-            services.AddTransient<Main>();
-            services.AddTransient<LoginPage>();
-            services.AddTransient<RegisterPage>();
-            services.AddTransient<ResetPasswordPage>();
+            services.AddSingleton<Main>();
+            services.AddSingleton<LoginPage>();
+            services.AddSingleton<RegisterPage>();
+            services.AddSingleton<ResetPasswordPage>();
 
             // Pages
-            services.AddTransient<HomePage>();
-            services.AddTransient<CategoriesPage>();
-            services.AddTransient<ProductsPage>();
-            services.AddTransient<EmployeesPage>();
-            services.AddTransient<PaymentsPage>();
-            services.AddTransient<ChatPage>();
-            services.AddTransient<ProfilePage>();
+            services.AddScoped<HomePage>();
+            services.AddScoped<CategoriesPage>();
+            services.AddScoped<ProductsPage>();
+            services.AddScoped<EmployeesPage>();
+            services.AddScoped<PaymentsPage>();
+            services.AddScoped<ChatPage>();
+            services.AddScoped<ProfilePage>();
 
             // User Controls
             services.AddScoped<CreateProductForm>();
@@ -74,8 +74,9 @@ namespace MilkTeaManagement.WindowsApp.Extensions
             services.AddScoped<CreateCategoryForm>();
             services.AddScoped<UpdateCategoryForm>();
             services.AddScoped<CreateEmployeeForm>();
-            services.AddScoped<UpdateEmployeeForm>();
-            services.AddScoped<InformationPanel>();
+            services.AddScoped<DetailEmployeeForm>();
+            services.AddScoped<CheckoutHistory>();
+            services.AddScoped<WorkDays>();
             services.AddScoped<BillItem>();
             services.AddScoped<ChatViewPanel>();
 

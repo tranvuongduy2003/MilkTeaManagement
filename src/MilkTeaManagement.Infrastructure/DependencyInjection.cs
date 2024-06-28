@@ -105,6 +105,7 @@ namespace MilkTeaManagement.Infrastructure
                 .AddTransient<IOrdersRepository, OrdersRepository>()
                 .AddTransient<IProductsRepository, ProductsRepository>()
                 .AddTransient<IConversationsRepository, ConversationsRepository>()
-                .AddTransient<IMessagesRepository, MessagesRepository>();
+                .AddTransient<IMessagesRepository, MessagesRepository>()
+                .AddTransient<IShiftsRepository, ShiftsRepository>();
     }
 }

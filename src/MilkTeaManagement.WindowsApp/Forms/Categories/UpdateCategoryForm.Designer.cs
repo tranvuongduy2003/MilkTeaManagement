@@ -60,7 +60,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Silver;
+            panel1.BackColor = Color.Gainsboro;
             panel1.Controls.Add(btnClose);
             panel1.Controls.Add(flowLayoutPanel1);
             panel1.Controls.Add(close);
@@ -185,7 +185,7 @@
             // 
             AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            BackColor = Color.FromArgb(64, 64, 64);
+            BackColor = Color.DarkSlateBlue;
             ClientSize = new Size(1024, 720);
             Controls.Add(btnDelete);
             Controls.Add(btnUpdate);
@@ -196,7 +196,7 @@
             Controls.Add(label6);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "UpdateCategoryForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "UpdateCategoryForm";

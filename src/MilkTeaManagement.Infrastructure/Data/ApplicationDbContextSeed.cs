@@ -50,6 +50,7 @@ namespace MilkTeaManagement.Infrastructure.Data
                 await SeedProducts();
                 await SeedConversations();
                 await SeedMessages();
+                await SeedShifts();
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -181,31 +182,49 @@ namespace MilkTeaManagement.Infrastructure.Data
 
         private async Task SeedConversations()
         {
-            if (_userManager.Users.Any() && !_context.Conversations.Any())
+            var users = _userManager.Users.AsNoTracking().ToList();
+            foreach (var user in users)
             {
-                var users = _userManager.Users.AsNoTracking().ToList();
-
-                for (int i = 0; i < users.Count; i++)
+                if (!_context.Conversations.Any(c => c.UserTwoId.Equals(user.Id) || c.UserOneId.Equals(user.Id)))
                 {
-                    for (int j = i + 1; j < users.Count; j++)
+                    var restUsers = _userManager.Users.AsNoTracking().Where(u => !u.Id.Equals(user.Id)).ToList();
+                    foreach (var restUser in restUsers)
                     {
                         await _context.Conversations.AddAsync(new Conversation
                         {
-                            UserOneId = users[i].Id,
-                            UserTwoId = users[j].Id,
+                            UserOneId = restUser.Id,
+                            UserTwoId = user.Id,
                         });
                         await _context.SaveChangesAsync();
                     }
                 }
-
-                await _context.Conversations.AddAsync(new Conversation
-                {
-                    UserOneId = Guid.NewGuid().ToString(),
-                    UserTwoId = Guid.NewGuid().ToString(),
-                });
-
-                await _context.SaveChangesAsync();
             }
+
+            //if (_userManager.Users.Any() && !_context.Conversations.Any())
+            //{
+            //    var users = _userManager.Users.AsNoTracking().ToList();
+
+            //    for (int i = 0; i < users.Count; i++)
+            //    {
+            //        for (int j = i + 1; j < users.Count; j++)
+            //        {
+            //            await _context.Conversations.AddAsync(new Conversation
+            //            {
+            //                UserOneId = users[i].Id,
+            //                UserTwoId = users[j].Id,
+            //            });
+            //            await _context.SaveChangesAsync();
+            //        }
+            //    }
+
+            //    await _context.Conversations.AddAsync(new Conversation
+            //    {
+            //        UserOneId = Guid.NewGuid().ToString(),
+            //        UserTwoId = Guid.NewGuid().ToString(),
+            //    });
+
+            //    await _context.SaveChangesAsync();
+            //}
         }
 
         private async Task SeedMessages()
@@ -227,6 +246,60 @@ namespace MilkTeaManagement.Infrastructure.Data
                         message.ReceiverId = message.SenderId == conversation.UserOneId ? conversation.UserTwoId : conversation.UserOneId;
                         await _context.Messages.AddAsync(message);
                     }
+                }
+
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        private async Task SeedShifts()
+        {
+            if (_userManager.Users.Any() && !_context.Shifts.Any())
+            {
+                var users = _userManager.Users.AsNoTracking().ToList();
+
+                foreach (var user in users)
+                {
+                    var fakerMorningShift = new Faker<Shift>()
+                        .RuleFor(m => m.EmployeeId, _ => user.Id)
+                        .RuleFor(m => m.Time, _ => EDayTime.Morning)
+                        .RuleFor(m => m.Mo, f => f.Random.Bool())
+                        .RuleFor(m => m.Tu, f => f.Random.Bool())
+                        .RuleFor(m => m.We, f => f.Random.Bool())
+                        .RuleFor(m => m.Th, f => f.Random.Bool())
+                        .RuleFor(m => m.Fr, f => f.Random.Bool())
+                        .RuleFor(m => m.Sa, f => f.Random.Bool())
+                        .RuleFor(m => m.Su, f => f.Random.Bool());
+
+                    var fakerAfternoonShift = new Faker<Shift>()
+                        .RuleFor(m => m.EmployeeId, _ => user.Id)
+                        .RuleFor(m => m.Time, _ => EDayTime.Afternoon)
+                        .RuleFor(m => m.Mo, f => f.Random.Bool())
+                        .RuleFor(m => m.Tu, f => f.Random.Bool())
+                        .RuleFor(m => m.We, f => f.Random.Bool())
+                        .RuleFor(m => m.Th, f => f.Random.Bool())
+                        .RuleFor(m => m.Fr, f => f.Random.Bool())
+                        .RuleFor(m => m.Sa, f => f.Random.Bool())
+                        .RuleFor(m => m.Su, f => f.Random.Bool());
+
+                    var fakerEveningShift = new Faker<Shift>()
+                        .RuleFor(m => m.EmployeeId, _ => user.Id)
+                        .RuleFor(m => m.Time, _ => EDayTime.Evening)
+                        .RuleFor(m => m.Mo, f => f.Random.Bool())
+                        .RuleFor(m => m.Tu, f => f.Random.Bool())
+                        .RuleFor(m => m.We, f => f.Random.Bool())
+                        .RuleFor(m => m.Th, f => f.Random.Bool())
+                        .RuleFor(m => m.Fr, f => f.Random.Bool())
+                        .RuleFor(m => m.Sa, f => f.Random.Bool())
+                        .RuleFor(m => m.Su, f => f.Random.Bool());
+
+                    var fakerMorning = fakerMorningShift.Generate();
+                    var fakerAfternoon = fakerAfternoonShift.Generate();
+                    var fakerEvening = fakerEveningShift.Generate();
+
+                    await _context.Shifts.AddAsync(fakerMorning);
+                    await _context.Shifts.AddAsync(fakerAfternoon);
+                    await _context.Shifts.AddAsync(fakerEvening);
                 }
 
                 await _context.SaveChangesAsync();

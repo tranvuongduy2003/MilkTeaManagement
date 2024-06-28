@@ -1,35 +1,35 @@
-﻿using Microsoft.AspNetCore.Identity;
-using MilkTeaManagement.Application.Common.Models.Filter;
+﻿using MilkTeaManagement.Application.Common.Models.Filter;
 using MilkTeaManagement.Application.Common.Models.Orders;
 using MilkTeaManagement.Application.Contracts;
 using MilkTeaManagement.Domain.Entities;
 using MilkTeaManagement.WindowsApp.Helpers;
 using MilkTeaManagement.WindowsApp.UserControls.Home;
+using System.Text;
 
 namespace MilkTeaManagement.WindowsApp.Pages.Home
 {
-    public partial class HomePage : UserControl
+    public partial class HomePage : Page
     {
         private readonly ICategoriesRepository _categoriesRepository;
         private readonly IProductsRepository _productsRepository;
         private readonly IOrdersRepository _ordersRepository;
-        private readonly SignInManager<User> _signInManager;
 
         private List<OrderItem> OrderItems = new List<OrderItem>();
         private string SearchText { get; set; } = string.Empty;
         private string CategoryId { get; set; } = string.Empty;
         private int DiscountPercentValue { get; set; } = 0;
 
-        public HomePage(ICategoriesRepository categoriesRepository, IProductsRepository productsRepository, IOrdersRepository ordersRepository, SignInManager<User> signInManager)
+        public HomePage(ICategoriesRepository categoriesRepository, IProductsRepository productsRepository, IOrdersRepository ordersRepository)
         {
             InitializeComponent();
             _categoriesRepository = categoriesRepository;
             _productsRepository = productsRepository;
             _ordersRepository = ordersRepository;
-            this._signInManager = signInManager;
+
+            this.Avatar.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
-        public async void OnLoad()
+        public override async void OnLoad()
         {
             this.Role.Text = Program.UserIdentity.Role;
             this.Avatar.ImageLocation = Program.UserIdentity.Avatar;
@@ -158,9 +158,11 @@ namespace MilkTeaManagement.WindowsApp.Pages.Home
                     OrderItems = OrderItems,
                 };
 
-                await _ordersRepository.CheckoutAsync(request);
+                var order = await _ordersRepository.CheckoutAsync(request);
 
                 MessageBox.Show("Checkout successfully!", "Success!", MessageBoxButtons.OK);
+
+                PrintDocument(order);
 
                 invoicePanel.Controls.Clear();
                 this.SubTotal.Text = "0 VNĐ";
@@ -174,6 +176,41 @@ namespace MilkTeaManagement.WindowsApp.Pages.Home
                 MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+        }
+
+        private async void PrintDocument(Order order)
+        {
+            var templateContent = File.ReadAllText("D:\\.NET\\MilkTeaManagement\\src\\MilkTeaManagement.Application\\Templates\\BillTemplate.html");
+
+            templateContent = templateContent.Replace("[invoice_number]", order.Id);
+            templateContent = templateContent.Replace("[created_at]", DateTime.Parse(order.CreatedDate.ToString()).ToShortDateString());
+            templateContent = templateContent.Replace("[cashier_name]", Program.UserIdentity.FullName);
+            templateContent = templateContent.Replace("[cashier_email]", Program.UserIdentity.Email);
+            templateContent = templateContent.Replace("[subtotal]", this.SubTotal.Text);
+            templateContent = templateContent.Replace("[discount]", this.Discount.Text);
+            templateContent = templateContent.Replace("[total]", this.Total.Text);
+
+            var orderItems = invoicePanel.Controls
+                .Find(nameof(BillItem), true)
+                .Select(c => (c as BillItem).OrderItem)
+                .ToList();
+            var itemsString = new StringBuilder();
+            for (int i = 0; i < orderItems.Count - 1; i++)
+            {
+                itemsString.Append($"<tr class=\"item\">\r\n<td>{orderItems[i].Product.Name} x {orderItems[i].Quantity}</td>\r\n\r\n<td>{ConvertCurrency.ToVND(orderItems[i].SubTotalPrice)}</td>\r\n</tr>");
+            }
+            itemsString.Append($"<tr class=\"item last\">\r\n<td>{orderItems[orderItems.Count - 1].Product.Name} * {orderItems[orderItems.Count - 1].Quantity}</td>\r\n\r\n<td>{ConvertCurrency.ToVND(orderItems[orderItems.Count - 1].SubTotalPrice)}</td>\r\n</tr>");
+            templateContent = templateContent.Replace("[items]", itemsString.ToString());
+
+            WebBrowser webBrowser = new WebBrowser();
+            webBrowser.DocumentText = templateContent;
+            webBrowser.DocumentCompleted += WebBrowser_DocumentCompleted;
+        }
+
+        private void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            WebBrowser webBrowser = sender as WebBrowser;
+            webBrowser.ShowPrintDialog();
         }
     }
 }

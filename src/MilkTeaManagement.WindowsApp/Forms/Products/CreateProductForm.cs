@@ -24,6 +24,8 @@ namespace MilkTeaManagement.WindowsApp.Forms
             _productsRepository = productsRepository;
             _categoriesRepository = categoriesRepository;
 
+            Poster.SizeMode = PictureBoxSizeMode.Zoom;
+
             //this.OnLoad();
         }
 

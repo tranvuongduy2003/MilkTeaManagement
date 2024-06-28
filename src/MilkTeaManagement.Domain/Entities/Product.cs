@@ -13,6 +13,8 @@ namespace MilkTeaManagement.Domain.Entities
 
         public decimal Price { get; set; }
 
+        public decimal? DiscountPrice { get; set; }
+
         public string Description { get; set; }
 
         public EProductStatus Status { get; set; }

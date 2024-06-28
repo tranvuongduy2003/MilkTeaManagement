@@ -4,10 +4,11 @@ using Microsoft.OpenApi.Extensions;
 using MilkTeaManagement.Application.Common.Interfaces;
 using MilkTeaManagement.Domain.Entities;
 using MilkTeaManagement.Domain.Enums;
+using MilkTeaManagement.WindowsApp.Helpers;
 
 namespace MilkTeaManagement.WindowsApp.Pages.Profile
 {
-    public partial class ProfilePage : UserControl
+    public partial class ProfilePage : Page
     {
         private readonly IAzureBlobService _azureBlobService;
         private readonly UserManager<User> _userManager;
@@ -19,14 +20,14 @@ namespace MilkTeaManagement.WindowsApp.Pages.Profile
             InitializeComponent();
             _azureBlobService = azureBlobService;
             _userManager = userManager;
+            Avatar.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
-        public async void OnLoad()
+        public override async void OnLoad()
         {
             var user = await _userManager.FindByIdAsync(Program.UserIdentity.Id);
             var roles = await _userManager.GetRolesAsync(user);
 
-            Avatar.SizeMode = PictureBoxSizeMode.Zoom;
             Avatar.ImageLocation = user.Avatar;
             FullNameTextbox.Text = user.FullName;
             UserNameTextbox.Text = user.UserName;

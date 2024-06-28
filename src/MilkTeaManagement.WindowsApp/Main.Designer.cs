@@ -203,14 +203,14 @@
         private FlowLayoutPanel flowLayoutPanel1;
         private PictureBox close;
         private Panel contentPanel;
-        private UserControls.Sidebar.SidebarItem product;
-        private UserControls.Sidebar.SidebarItem home;
         private Panel sidebarPanel;
-        private UserControls.Sidebar.SidebarItem category;
-        private UserControls.Sidebar.SidebarItem employee;
-        private UserControls.Sidebar.SidebarItem chat;
-        private UserControls.Sidebar.SidebarItem payments;
-        private UserControls.Sidebar.SidebarItem profile;
-        private UserControls.Sidebar.SidebarItem logout;
+        public UserControls.Sidebar.SidebarItem product;
+        public UserControls.Sidebar.SidebarItem home;
+        public UserControls.Sidebar.SidebarItem category;
+        public UserControls.Sidebar.SidebarItem employee;
+        public UserControls.Sidebar.SidebarItem chat;
+        public UserControls.Sidebar.SidebarItem payments;
+        public UserControls.Sidebar.SidebarItem profile;
+        public UserControls.Sidebar.SidebarItem logout;
     }
 }

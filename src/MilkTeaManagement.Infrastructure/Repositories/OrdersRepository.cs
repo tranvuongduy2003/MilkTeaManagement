@@ -64,6 +64,44 @@ namespace MilkTeaManagement.Infrastructure.Repositories
 
             return orderItems;
         }
+        
+        public async Task<List<OrderDto>> GetOrdersByEmployeeIdAsync(string id, string? search)
+        {
+            try
+            {
+                var employee = await _dbContext.Users.FindAsync(id);
+                if (employee == null)
+                    throw new Exception("Employee does not exist!");
+
+                var orders = await _dbContext.Orders
+                    .AsNoTracking()
+                    .Where(order =>
+                        (order.EmployeeId == employee.Id) &&
+                        (search.IsNullOrEmpty()
+                        ? true
+                        : order.CustomerPhone.Contains(search)))
+                    .OrderByDescending(order => order.CreatedDate)
+                    .Select((order) => new OrderDto
+                    {
+                        Id = order.Id,
+                        CustomerPhone = order.CustomerPhone,
+                        Discount = order.Discount == null || order.Discount == 0.0 ? (decimal)0.0 : (order.TotalPrice / (decimal)order.Discount),
+                        Tax = order.Tax,
+                        EmployeeId = order.EmployeeId,
+                        EmployeeName = employee.FullName,
+                        TotalPrice = order.TotalPrice,
+                        UpdatedDate = order.UpdatedDate,
+                        CreatedDate = order.CreatedDate,
+                    })
+                    .ToListAsync();
+
+                return orders;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public async Task<List<OrderDto>> GetOrdersByFilterAsync(string? search)
         {

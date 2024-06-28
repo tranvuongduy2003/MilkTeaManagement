@@ -4,10 +4,11 @@ using MilkTeaManagement.Application.Common.Models.Filter;
 using MilkTeaManagement.Application.Contracts;
 using MilkTeaManagement.Domain.Entities;
 using MilkTeaManagement.WindowsApp.Forms.Categories;
+using MilkTeaManagement.WindowsApp.Helpers;
 
 namespace MilkTeaManagement.WindowsApp.Pages.Categories
 {
-    public partial class CategoriesPage : UserControl
+    public partial class CategoriesPage : Page
     {
         private readonly ICategoriesRepository _categoriesRepository;
 
@@ -20,7 +21,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Categories
             CategoriesTable.CellDoubleClick += OnUpdateCategory;
         }
 
-        public async void OnLoad()
+        public override async void OnLoad()
         {
             string searchText = SearchTextBox.Text;
 

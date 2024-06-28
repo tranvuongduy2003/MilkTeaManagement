@@ -9,6 +9,7 @@ namespace MilkTeaManagement.WindowsApp.UserControls.Chat
         public UserBoxControl()
         {
             InitializeComponent();
+            this.avatar.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         public void OnLoad(ConversationDto conversation)

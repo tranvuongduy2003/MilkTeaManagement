@@ -50,6 +50,8 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
             label6 = new Label();
             Update = new Button();
             delete = new Button();
+            DiscountPriceTextBox = new TextBox();
+            label7 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)close).BeginInit();
@@ -58,7 +60,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Silver;
+            panel1.BackColor = Color.Gainsboro;
             panel1.Controls.Add(closeButton);
             panel1.Controls.Add(flowLayoutPanel1);
             panel1.Controls.Add(close);
@@ -201,7 +203,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
             label5.AutoSize = true;
             label5.Font = new Font("Poppins", 11F);
             label5.ForeColor = Color.White;
-            label5.Location = new Point(398, 456);
+            label5.Location = new Point(398, 556);
             label5.Margin = new Padding(0);
             label5.Name = "label5";
             label5.Size = new Size(145, 39);
@@ -211,7 +213,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
             // DescriptionTextbox
             // 
             DescriptionTextbox.Font = new Font("Poppins", 10F);
-            DescriptionTextbox.Location = new Point(398, 498);
+            DescriptionTextbox.Location = new Point(398, 598);
             DescriptionTextbox.Margin = new Padding(0);
             DescriptionTextbox.Name = "DescriptionTextbox";
             DescriptionTextbox.Size = new Size(587, 171);
@@ -237,7 +239,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
             Update.BackColor = Color.FromArgb(192, 192, 0);
             Update.Font = new Font("Poppins", 12F);
             Update.ForeColor = Color.White;
-            Update.Location = new Point(605, 700);
+            Update.Location = new Point(605, 812);
             Update.Margin = new Padding(0);
             Update.Name = "Update";
             Update.Size = new Size(380, 52);
@@ -252,7 +254,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
             delete.BackColor = Color.Crimson;
             delete.Font = new Font("Poppins", 12F);
             delete.ForeColor = Color.White;
-            delete.Location = new Point(36, 700);
+            delete.Location = new Point(36, 812);
             delete.Margin = new Padding(0);
             delete.Name = "delete";
             delete.Size = new Size(380, 52);
@@ -261,12 +263,38 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
             delete.UseVisualStyleBackColor = false;
             delete.Click += delete_Click;
             // 
+            // DiscountPriceTextBox
+            // 
+            DiscountPriceTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            DiscountPriceTextBox.BorderStyle = BorderStyle.FixedSingle;
+            DiscountPriceTextBox.Font = new Font("Poppins", 11F);
+            DiscountPriceTextBox.Location = new Point(398, 495);
+            DiscountPriceTextBox.Margin = new Padding(0);
+            DiscountPriceTextBox.Name = "DiscountPriceTextBox";
+            DiscountPriceTextBox.PlaceholderText = "   Product discount price";
+            DiscountPriceTextBox.Size = new Size(587, 40);
+            DiscountPriceTextBox.TabIndex = 23;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Poppins", 11F);
+            label7.ForeColor = Color.White;
+            label7.Location = new Point(398, 456);
+            label7.Margin = new Padding(0);
+            label7.Name = "label7";
+            label7.Size = new Size(176, 39);
+            label7.TabIndex = 22;
+            label7.Text = "Discount Price:";
+            // 
             // UpdateProductForm
             // 
             AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(1024, 788);
+            BackColor = Color.DarkSlateBlue;
+            ClientSize = new Size(1024, 899);
+            Controls.Add(DiscountPriceTextBox);
+            Controls.Add(label7);
             Controls.Add(delete);
             Controls.Add(Update);
             Controls.Add(label6);
@@ -312,5 +340,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Products
         private Label label6;
         private Button Update;
         private Button delete;
+        private TextBox DiscountPriceTextBox;
+        private Label label7;
     }
 }

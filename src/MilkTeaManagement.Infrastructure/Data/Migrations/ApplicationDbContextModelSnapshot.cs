@@ -377,6 +377,9 @@ namespace MilkTeaManagement.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal?>("DiscountPrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -399,6 +402,49 @@ namespace MilkTeaManagement.Infrastructure.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("MilkTeaManagement.Domain.Entities.Shift", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("EmployeeId")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<bool>("Fr")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Mo")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Sa")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Su")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Th")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Time")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Tu")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("We")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Shifts");
                 });
 
             modelBuilder.Entity("MilkTeaManagement.Domain.Entities.User", b =>
@@ -438,6 +484,9 @@ namespace MilkTeaManagement.Infrastructure.Data.Migrations
 
                     b.Property<int?>("Gender")
                         .HasColumnType("int");
+
+                    b.Property<decimal?>("HourlySalary")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -622,6 +671,17 @@ namespace MilkTeaManagement.Infrastructure.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("MilkTeaManagement.Domain.Entities.Shift", b =>
+                {
+                    b.HasOne("MilkTeaManagement.Domain.Entities.User", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("MilkTeaManagement.Domain.Entities.Conversation", b =>

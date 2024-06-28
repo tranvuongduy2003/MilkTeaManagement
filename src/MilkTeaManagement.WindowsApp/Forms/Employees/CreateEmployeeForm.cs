@@ -18,6 +18,8 @@ namespace MilkTeaManagement.WindowsApp.Forms.Employees
             InitializeComponent();
             _azureBlobService = azureBlobService;
             _userManager = userManager;
+
+            Avatar.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         private void closeButton_Click(object sender, EventArgs e)
@@ -37,7 +39,7 @@ namespace MilkTeaManagement.WindowsApp.Forms.Employees
             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                Avatar.BackgroundImage = new Bitmap(openFileDialog.FileName);
+                Avatar.ImageLocation = openFileDialog.FileName;
                 AvatarFilePath = openFileDialog.FileName;
             }
         }

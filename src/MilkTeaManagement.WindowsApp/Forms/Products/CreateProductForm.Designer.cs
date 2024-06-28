@@ -44,6 +44,8 @@ namespace MilkTeaManagement.WindowsApp.Forms
             DescriptionTextbox = new RichTextBox();
             label6 = new Label();
             Create = new Button();
+            DiscountPriceTextBox = new TextBox();
+            label7 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)close).BeginInit();
@@ -52,7 +54,7 @@ namespace MilkTeaManagement.WindowsApp.Forms
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Silver;
+            panel1.BackColor = Color.Gainsboro;
             panel1.Controls.Add(closeButton);
             panel1.Controls.Add(flowLayoutPanel1);
             panel1.Controls.Add(close);
@@ -196,7 +198,7 @@ namespace MilkTeaManagement.WindowsApp.Forms
             label5.AutoSize = true;
             label5.Font = new Font("Poppins", 11F);
             label5.ForeColor = Color.White;
-            label5.Location = new Point(398, 456);
+            label5.Location = new Point(398, 556);
             label5.Margin = new Padding(0);
             label5.Name = "label5";
             label5.Size = new Size(145, 39);
@@ -206,7 +208,7 @@ namespace MilkTeaManagement.WindowsApp.Forms
             // DescriptionTextbox
             // 
             DescriptionTextbox.Font = new Font("Poppins", 10F);
-            DescriptionTextbox.Location = new Point(398, 498);
+            DescriptionTextbox.Location = new Point(398, 598);
             DescriptionTextbox.Margin = new Padding(0);
             DescriptionTextbox.Name = "DescriptionTextbox";
             DescriptionTextbox.Size = new Size(587, 171);
@@ -232,7 +234,7 @@ namespace MilkTeaManagement.WindowsApp.Forms
             Create.BackColor = Color.SteelBlue;
             Create.Font = new Font("Poppins", 12F);
             Create.ForeColor = Color.White;
-            Create.Location = new Point(322, 700);
+            Create.Location = new Point(322, 812);
             Create.Margin = new Padding(0);
             Create.Name = "Create";
             Create.Size = new Size(380, 52);
@@ -241,12 +243,38 @@ namespace MilkTeaManagement.WindowsApp.Forms
             Create.UseVisualStyleBackColor = false;
             Create.Click += create_Click;
             // 
+            // DiscountPriceTextBox
+            // 
+            DiscountPriceTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            DiscountPriceTextBox.BorderStyle = BorderStyle.FixedSingle;
+            DiscountPriceTextBox.Font = new Font("Poppins", 11F);
+            DiscountPriceTextBox.Location = new Point(398, 495);
+            DiscountPriceTextBox.Margin = new Padding(0);
+            DiscountPriceTextBox.Name = "DiscountPriceTextBox";
+            DiscountPriceTextBox.PlaceholderText = "   Product discount price";
+            DiscountPriceTextBox.Size = new Size(587, 40);
+            DiscountPriceTextBox.TabIndex = 25;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Poppins", 11F);
+            label7.ForeColor = Color.White;
+            label7.Location = new Point(398, 456);
+            label7.Margin = new Padding(0);
+            label7.Name = "label7";
+            label7.Size = new Size(176, 39);
+            label7.TabIndex = 24;
+            label7.Text = "Discount Price:";
+            // 
             // CreateProductForm
             // 
             AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(1024, 788);
+            BackColor = Color.DarkSlateBlue;
+            ClientSize = new Size(1024, 899);
+            Controls.Add(DiscountPriceTextBox);
+            Controls.Add(label7);
             Controls.Add(Create);
             Controls.Add(label6);
             Controls.Add(DescriptionTextbox);
@@ -290,5 +318,7 @@ namespace MilkTeaManagement.WindowsApp.Forms
         private RichTextBox DescriptionTextbox;
         private Label label6;
         private Button Create;
+        private TextBox DiscountPriceTextBox;
+        private Label label7;
     }
 }

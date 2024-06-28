@@ -33,6 +33,8 @@
             ProductDescription = new Label();
             ProductPrice = new Label();
             AddToBillButton = new Button();
+            RealPrice = new Label();
+            line = new Panel();
             ((System.ComponentModel.ISupportInitialize)ProductImage).BeginInit();
             SuspendLayout();
             // 
@@ -75,12 +77,12 @@
             // 
             ProductPrice.AllowDrop = true;
             ProductPrice.AutoSize = true;
-            ProductPrice.Font = new Font("Poppins Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ProductPrice.Font = new Font("Poppins Medium", 11F, FontStyle.Bold);
             ProductPrice.ForeColor = Color.White;
             ProductPrice.Location = new Point(200, 158);
             ProductPrice.Margin = new Padding(0);
             ProductPrice.Name = "ProductPrice";
-            ProductPrice.Size = new Size(174, 42);
+            ProductPrice.Size = new Size(164, 39);
             ProductPrice.TabIndex = 1;
             ProductPrice.Text = "100,000 VNĐ";
             // 
@@ -97,11 +99,35 @@
             AddToBillButton.Text = "Add to bill";
             AddToBillButton.UseVisualStyleBackColor = false;
             // 
+            // RealPrice
+            // 
+            RealPrice.AllowDrop = true;
+            RealPrice.AutoSize = true;
+            RealPrice.Font = new Font("Poppins Medium", 11F, FontStyle.Bold);
+            RealPrice.ForeColor = Color.Transparent;
+            RealPrice.Location = new Point(371, 158);
+            RealPrice.Margin = new Padding(0);
+            RealPrice.Name = "RealPrice";
+            RealPrice.Size = new Size(164, 39);
+            RealPrice.TabIndex = 3;
+            RealPrice.Text = "100,000 VNĐ";
+            // 
+            // line
+            // 
+            line.BackColor = Color.White;
+            line.Location = new Point(200, 175);
+            line.Margin = new Padding(0);
+            line.Name = "line";
+            line.Size = new Size(164, 2);
+            line.TabIndex = 4;
+            // 
             // ProductItem
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlDarkDark;
+            Controls.Add(line);
+            Controls.Add(RealPrice);
             Controls.Add(AddToBillButton);
             Controls.Add(ProductPrice);
             Controls.Add(ProductDescription);
@@ -122,5 +148,7 @@
         private Label ProductDescription;
         private Label ProductPrice;
         private Button AddToBillButton;
+        private Label RealPrice;
+        private Panel line;
     }
 }

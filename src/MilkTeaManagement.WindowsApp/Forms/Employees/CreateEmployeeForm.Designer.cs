@@ -60,7 +60,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Silver;
+            panel1.BackColor = Color.Gainsboro;
             panel1.Controls.Add(closeButton);
             panel1.Controls.Add(flowLayoutPanel1);
             panel1.Controls.Add(close);
@@ -280,7 +280,6 @@
             UserNameTextbox.Margin = new Padding(0);
             UserNameTextbox.Name = "UserNameTextbox";
             UserNameTextbox.PlaceholderText = "   User Name";
-            UserNameTextbox.ReadOnly = false;
             UserNameTextbox.Size = new Size(660, 40);
             UserNameTextbox.TabIndex = 34;
             // 
@@ -346,7 +345,7 @@
             // 
             AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            BackColor = Color.FromArgb(64, 64, 64);
+            BackColor = Color.DarkSlateBlue;
             ClientSize = new Size(1024, 1051);
             Controls.Add(StatusComboBox);
             Controls.Add(RoleComboBox);

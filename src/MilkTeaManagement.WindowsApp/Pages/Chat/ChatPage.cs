@@ -2,11 +2,12 @@
 using Microsoft.Extensions.DependencyInjection;
 using MilkTeaManagement.Application.Common.Models.Chat;
 using MilkTeaManagement.Application.Contracts;
+using MilkTeaManagement.WindowsApp.Helpers;
 using MilkTeaManagement.WindowsApp.UserControls.Chat;
 
 namespace MilkTeaManagement.WindowsApp.Pages.Chat
 {
-    public partial class ChatPage : UserControl
+    public partial class ChatPage : Page
     {
         private readonly IConversationsRepository _conversationsRepository;
 
@@ -16,7 +17,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Chat
             _conversationsRepository = conversationsRepository;
         }
 
-        public async void OnLoad()
+        public override async void OnLoad()
         {
             var conversations = await _conversationsRepository.GetConversationsBySenderId(Program.UserIdentity.Id);
 
@@ -33,7 +34,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Chat
         private async void OnClickUserBox(ConversationDto conversation)
         {
             ChatViewPanel chatViewPanel = Program.ServiceProvider.GetRequiredService<ChatViewPanel>();
-            chatViewPanel.OnLoad(conversation);
+            await chatViewPanel.OnLoad(conversation);
             ChatView.Controls.Clear();
             ChatView.Controls.Add(chatViewPanel);
 
