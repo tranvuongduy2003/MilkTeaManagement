@@ -188,14 +188,15 @@
             btnPrint.BackColor = Color.MediumSeaGreen;
             btnPrint.Font = new Font("Microsoft Sans Serif", 12F);
             btnPrint.ForeColor = Color.White;
-            btnPrint.Location = new Point(1205, 98);
+            btnPrint.Location = new Point(1212, 98);
             btnPrint.Margin = new Padding(0);
             btnPrint.Name = "btnPrint";
-            btnPrint.Size = new Size(133, 41);
+            btnPrint.Size = new Size(134, 41);
             btnPrint.TabIndex = 17;
             btnPrint.Text = "Print";
             btnPrint.UseVisualStyleBackColor = false;
             btnPrint.Click += btnPrint_Click;
+            // 
             // PaymentsPage
             // 
             AutoScaleDimensions = new SizeF(144F, 144F);
