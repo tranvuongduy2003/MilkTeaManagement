@@ -140,7 +140,7 @@
             EmployeesTable.AllowUserToResizeColumns = false;
             EmployeesTable.AllowUserToResizeRows = false;
             EmployeesTable.BackgroundColor = SystemColors.Control;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
             dataGridViewCellStyle1.Font = new Font("Poppins Medium", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
@@ -192,6 +192,7 @@
             PhoneNumber.Name = "PhoneNumber";
             PhoneNumber.ReadOnly = true;
             PhoneNumber.Width = 250;
+            PhoneNumber.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             // 
             // UserName
             // 
@@ -221,6 +222,7 @@
             Salary.Name = "Salary";
             Salary.ReadOnly = true;
             Salary.Width = 250;
+            Salary.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             // 
             // DOB
             // 
@@ -249,6 +251,7 @@
             Role.Name = "Role";
             Role.ReadOnly = true;
             Role.Width = 250;
+            Role.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             // 
             // EmployeesPage
             // 
