@@ -183,7 +183,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Home
             var templateContent = File.ReadAllText("D:\\.NET\\MilkTeaManagement\\src\\MilkTeaManagement.Application\\Templates\\BillTemplate.html");
 
             templateContent = templateContent.Replace("[invoice_number]", order.Id);
-            templateContent = templateContent.Replace("[created_at]", DateTime.Parse(order.CreatedDate.ToString()).ToShortDateString());
+            templateContent = templateContent.Replace("[created_at]", order.CreatedDate.ToString("dd/MM/yyyy"));
             templateContent = templateContent.Replace("[cashier_name]", Program.UserIdentity.FullName);
             templateContent = templateContent.Replace("[cashier_email]", Program.UserIdentity.Email);
             templateContent = templateContent.Replace("[subtotal]", this.SubTotal.Text);
@@ -199,7 +199,7 @@ namespace MilkTeaManagement.WindowsApp.Pages.Home
             {
                 itemsString.Append($"<tr class=\"item\">\r\n<td>{orderItems[i].Product.Name} x {orderItems[i].Quantity}</td>\r\n\r\n<td>{ConvertCurrency.ToVND(orderItems[i].SubTotalPrice)}</td>\r\n</tr>");
             }
-            itemsString.Append($"<tr class=\"item last\">\r\n<td>{orderItems[orderItems.Count - 1].Product.Name} * {orderItems[orderItems.Count - 1].Quantity}</td>\r\n\r\n<td>{ConvertCurrency.ToVND(orderItems[orderItems.Count - 1].SubTotalPrice)}</td>\r\n</tr>");
+            itemsString.Append($"<tr class=\"item last\">\r\n<td>{orderItems[orderItems.Count - 1].Product.Name} x {orderItems[orderItems.Count - 1].Quantity}</td>\r\n\r\n<td>{ConvertCurrency.ToVND(orderItems[orderItems.Count - 1].SubTotalPrice)}</td>\r\n</tr>");
             templateContent = templateContent.Replace("[items]", itemsString.ToString());
 
             WebBrowser webBrowser = new WebBrowser();
