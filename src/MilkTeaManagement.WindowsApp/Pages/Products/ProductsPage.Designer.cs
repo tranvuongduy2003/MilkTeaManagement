@@ -258,6 +258,7 @@
             DiscountPrice.Name = "DiscountPrice";
             DiscountPrice.ReadOnly = true;
             DiscountPrice.Width = 250;
+            DiscountPrice.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             // 
             // CreatedAt
             // 
