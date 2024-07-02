@@ -1,6 +1,8 @@
 ﻿using Infrastructure.Common;
+using MailKit.Search;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using MilkTeaManagement.Application.Common.Models.Dashboard;
 using MilkTeaManagement.Application.Common.Models.Orders;
 using MilkTeaManagement.Application.Common.Models.Payments;
 using MilkTeaManagement.Application.Common.SeedWork;
@@ -47,6 +49,38 @@ namespace MilkTeaManagement.Infrastructure.Repositories
                 await _dbContext.SaveChangesAsync();
 
                 return order;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<List<OrderItem>> GetAllOrderItems()
+        {
+            var orderItems = await _dbContext.OrderItems
+                .AsNoTracking()
+                .Include(orderItem => orderItem.Product)
+                .ToListAsync();
+
+            return orderItems;
+        }
+
+        public async Task<List<OrderDBDTO>> GetAllOrders()
+        {
+            try
+            {
+                var orders = await _dbContext.Orders
+                    .AsNoTracking()
+                    .Select(o => new OrderDBDTO
+                    {
+                        Id = o.Id,
+                        TotalPrice = o.TotalPrice,
+                        CreatedDate = o.CreatedDate.DateTime
+                    })
+                    .ToListAsync();
+
+                return orders;
             }
             catch (Exception ex)
             {
