@@ -85,6 +85,7 @@
             TotalPrice.Name = "TotalPrice";
             TotalPrice.ReadOnly = true;
             TotalPrice.Width = 250;
+            TotalPrice.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             // 
             // Discount
             // 
@@ -93,6 +94,8 @@
             Discount.Name = "Discount";
             Discount.ReadOnly = true;
             Discount.Width = 250;
+            Discount.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            Discount.Visible = false;
             // 
             // CustomerPhone
             // 
@@ -101,6 +104,7 @@
             CustomerPhone.MinimumWidth = 8;
             CustomerPhone.Name = "CustomerPhone";
             CustomerPhone.ReadOnly = true;
+            CustomerPhone.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             // 
             // EmployeeId
             // 
@@ -121,6 +125,8 @@
             CreatedAt.Name = "CreatedAt";
             CreatedAt.ReadOnly = true;
             CreatedAt.Width = 300;
+            CreatedAt.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            CreatedAt.DefaultCellStyle.Format = "dd/MM/yyyy";
             // 
             // delete
             // 

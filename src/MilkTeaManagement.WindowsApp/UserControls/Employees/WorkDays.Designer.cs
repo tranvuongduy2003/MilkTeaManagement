@@ -50,7 +50,7 @@
             WorkDaysDataGridView.BackgroundColor = Color.White;
             WorkDaysDataGridView.BorderStyle = BorderStyle.None;
             WorkDaysDataGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
             dataGridViewCellStyle1.Font = new Font("Poppins", 11F);
             dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
