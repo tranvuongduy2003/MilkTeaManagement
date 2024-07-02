@@ -6,6 +6,7 @@ using MilkTeaManagement.WindowsApp.Helpers;
 using MilkTeaManagement.WindowsApp.Pages.Auth;
 using MilkTeaManagement.WindowsApp.Pages.Categories;
 using MilkTeaManagement.WindowsApp.Pages.Chat;
+using MilkTeaManagement.WindowsApp.Pages.Dashboard;
 using MilkTeaManagement.WindowsApp.Pages.Employees;
 using MilkTeaManagement.WindowsApp.Pages.Home;
 using MilkTeaManagement.WindowsApp.Pages.Payments;
@@ -49,6 +50,8 @@ namespace MilkTeaManagement.WindowsApp
             payments.label1.Text = "Payments";
             chat.pictureBox1.BackgroundImage = Properties.Resources.bubble_chat;
             chat.label1.Text = "Chat";
+            dashboard.pictureBox1.BackgroundImage = Properties.Resources.dashboard;
+            dashboard.label1.Text = "Dashboard";
 
             profile.pictureBox1.BackgroundImage = Properties.Resources.profile_user;
             profile.label1.Text = "Profile";
@@ -61,12 +64,14 @@ namespace MilkTeaManagement.WindowsApp
                 product.Hide();
                 employee.Hide();
                 payments.Hide();
+                dashboard.Hide();
                 chat.Location = new Point(0, home.Location.Y + home.Height);
             }
             else if (Program.UserIdentity.Role == nameof(EUserRole.Manager))
             {
                 category.Hide();
                 product.Hide();
+                dashboard.Hide();
                 employee.Location = new Point(0, home.Location.Y + home.Height);
                 payments.Location = new Point(0, employee.Location.Y + employee.Height);
                 chat.Location = new Point(0, payments.Location.Y + payments.Height);
@@ -117,12 +122,15 @@ namespace MilkTeaManagement.WindowsApp
 
         private void profile_Click(object sender, EventArgs e) => LoadPage<ProfilePage>(sender, e);
 
+        private void dashboard_Click(object sender, EventArgs e) => LoadPage<DashboardPage>(sender, e);
+        
         private async void logout_Click(object sender, EventArgs e)
         {
             this.Hide();
             await OnCloseHubConnection();
             LoginPage loginForm = Program.ServiceProvider.GetRequiredService<LoginPage>();
             loginForm.Show();
+            loginForm.FocusUserNameTextBox();
         }
 
         private async void close_Click(object sender, EventArgs e)

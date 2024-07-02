@@ -35,6 +35,7 @@
             product = new UserControls.Sidebar.SidebarItem();
             home = new UserControls.Sidebar.SidebarItem();
             sidebarPanel = new Panel();
+            dashboard = new UserControls.Sidebar.SidebarItem();
             profile = new UserControls.Sidebar.SidebarItem();
             logout = new UserControls.Sidebar.SidebarItem();
             payments = new UserControls.Sidebar.SidebarItem();
@@ -109,6 +110,7 @@
             // sidebarPanel
             // 
             sidebarPanel.BackColor = Color.FromArgb(192, 192, 255);
+            sidebarPanel.Controls.Add(dashboard);
             sidebarPanel.Controls.Add(profile);
             sidebarPanel.Controls.Add(logout);
             sidebarPanel.Controls.Add(payments);
@@ -122,6 +124,15 @@
             sidebarPanel.Name = "sidebarPanel";
             sidebarPanel.Size = new Size(100, 1050);
             sidebarPanel.TabIndex = 3;
+            // 
+            // dashboard
+            // 
+            dashboard.Location = new Point(0, 500);
+            dashboard.Margin = new Padding(0);
+            dashboard.Name = "dashboard";
+            dashboard.Size = new Size(83, 83);
+            dashboard.TabIndex = 8;
+            dashboard.Click += dashboard_Click;
             // 
             // profile
             // 
@@ -212,5 +223,6 @@
         public UserControls.Sidebar.SidebarItem payments;
         public UserControls.Sidebar.SidebarItem profile;
         public UserControls.Sidebar.SidebarItem logout;
+        public UserControls.Sidebar.SidebarItem dashboard;
     }
 }

@@ -11,6 +11,7 @@ using MilkTeaManagement.WindowsApp.Forms.Products;
 using MilkTeaManagement.WindowsApp.Pages.Auth;
 using MilkTeaManagement.WindowsApp.Pages.Categories;
 using MilkTeaManagement.WindowsApp.Pages.Chat;
+using MilkTeaManagement.WindowsApp.Pages.Dashboard;
 using MilkTeaManagement.WindowsApp.Pages.Employees;
 using MilkTeaManagement.WindowsApp.Pages.Home;
 using MilkTeaManagement.WindowsApp.Pages.Payments;
@@ -67,6 +68,7 @@ namespace MilkTeaManagement.WindowsApp.Extensions
             services.AddScoped<PaymentsPage>();
             services.AddScoped<ChatPage>();
             services.AddScoped<ProfilePage>();
+            services.AddScoped<DashboardPage>();
 
             // User Controls
             services.AddScoped<CreateProductForm>();

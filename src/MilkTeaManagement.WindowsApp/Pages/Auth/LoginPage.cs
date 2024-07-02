@@ -78,10 +78,20 @@ namespace MilkTeaManagement.WindowsApp.Pages.Auth
                 //TODO: Notify login successfully -> Hidden Login form -> Show Main form
                 MessageBox.Show("Login successfully!");
                 this.Hide();
+
+                // Clear username and password textbox
+                userNameTextBox.Clear();
+                passwordTextBox.Clear();
+
                 Main main = new Main();
                 main.Show();
                 return;
             }
+        }
+
+        public void FocusUserNameTextBox()
+        {
+            userNameTextBox.Focus();
         }
 
         private void label5_Click(object sender, EventArgs e)
